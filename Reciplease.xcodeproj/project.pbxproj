@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */; };
 		E4AF0F282892BA5C009C26F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */; };
-		E4AF0F2A2892BA5C009C26F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F292892BA5C009C26F0 /* ViewController.swift */; };
-		E4AF0F2D2892BA5C009C26F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AF0F2B2892BA5C009C26F0 /* Main.storyboard */; };
 		E4AF0F302892BA5C009C26F0 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F2E2892BA5C009C26F0 /* Reciplease.xcdatamodeld */; };
 		E4AF0F322892BA5E009C26F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4AF0F312892BA5E009C26F0 /* Assets.xcassets */; };
 		E4AF0F352892BA5E009C26F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */; };
@@ -20,6 +18,9 @@
 		E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */; };
 		E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */; };
 		E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */; };
+		E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */; };
+		E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */; };
+		E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +44,6 @@
 		E4AF0F222892BA5C009C26F0 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E4AF0F292892BA5C009C26F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E4AF0F2C2892BA5C009C26F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4AF0F2F2892BA5C009C26F0 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		E4AF0F312892BA5E009C26F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4AF0F342892BA5E009C26F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +56,9 @@
 		E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
+		E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
+		E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ../View/TabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +140,6 @@
 		E4AF0F582892BB8E009C26F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF0F2B2892BA5C009C26F0 /* Main.storyboard */,
 				E4AF0F312892BA5E009C26F0 /* Assets.xcassets */,
 				E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */,
 			);
@@ -148,9 +149,7 @@
 		E4AF0F592892BB97009C26F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */,
-				E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */,
-				E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */,
+				E4AF0F612892BDC2009C26F0 /* NetworkService */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,9 +157,21 @@
 		E4AF0F5A2892BBA5009C26F0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF0F292892BA5C009C26F0 /* ViewController.swift */,
+				E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */,
+				E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */,
+				E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		E4AF0F612892BDC2009C26F0 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */,
+				E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */,
+				E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,7 +279,6 @@
 			files = (
 				E4AF0F352892BA5E009C26F0 /* LaunchScreen.storyboard in Resources */,
 				E4AF0F322892BA5E009C26F0 /* Assets.xcassets in Resources */,
-				E4AF0F2D2892BA5C009C26F0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,10 +305,12 @@
 			files = (
 				E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */,
 				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
+				E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */,
 				E4AF0F302892BA5C009C26F0 /* Reciplease.xcdatamodeld in Sources */,
 				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
-				E4AF0F2A2892BA5C009C26F0 /* ViewController.swift in Sources */,
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
+				E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */,
+				E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */,
 				E4AF0F282892BA5C009C26F0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,14 +348,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E4AF0F2B2892BA5C009C26F0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4AF0F2C2892BA5C009C26F0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -481,7 +485,7 @@
 				INFOPLIST_FILE = Reciplease/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -510,7 +514,7 @@
 				INFOPLIST_FILE = Reciplease/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
