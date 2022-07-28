@@ -101,12 +101,11 @@
 		E4AF0F242892BA5C009C26F0 /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
+				E4AF0F582892BB8E009C26F0 /* View */,
+				E4AF0F5A2892BBA5009C26F0 /* Controller */,
+				E4AF0F592892BB97009C26F0 /* Model */,
 				E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */,
 				E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */,
-				E4AF0F292892BA5C009C26F0 /* ViewController.swift */,
-				E4AF0F2B2892BA5C009C26F0 /* Main.storyboard */,
-				E4AF0F312892BA5E009C26F0 /* Assets.xcassets */,
-				E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */,
 				E4AF0F362892BA5E009C26F0 /* Info.plist */,
 				E4AF0F2E2892BA5C009C26F0 /* Reciplease.xcdatamodeld */,
 			);
@@ -128,6 +127,31 @@
 				E4AF0F4B2892BA5E009C26F0 /* RecipleaseUITestsLaunchTests.swift */,
 			);
 			path = RecipleaseUITests;
+			sourceTree = "<group>";
+		};
+		E4AF0F582892BB8E009C26F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF0F2B2892BA5C009C26F0 /* Main.storyboard */,
+				E4AF0F312892BA5E009C26F0 /* Assets.xcassets */,
+				E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E4AF0F592892BB97009C26F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E4AF0F5A2892BBA5009C26F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF0F292892BA5C009C26F0 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +229,6 @@
 					};
 					E4AF0F442892BA5E009C26F0 = {
 						CreatedOnToolsVersion = 13.4.1;
-						TestTargetID = E4AF0F212892BA5C009C26F0;
 					};
 				};
 			};
@@ -447,6 +470,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -475,6 +499,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,10 +566,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yannrzd.RecipleaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Reciplease;
 			};
 			name = Debug;
 		};
@@ -559,10 +584,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yannrzd.RecipleaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Reciplease;
 			};
 			name = Release;
 		};
