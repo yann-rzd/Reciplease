@@ -17,6 +17,9 @@
 		E4AF0F402892BA5E009C26F0 /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F3F2892BA5E009C26F0 /* RecipleaseTests.swift */; };
 		E4AF0F4A2892BA5E009C26F0 /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F492892BA5E009C26F0 /* RecipleaseUITests.swift */; };
 		E4AF0F4C2892BA5E009C26F0 /* RecipleaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F4B2892BA5E009C26F0 /* RecipleaseUITestsLaunchTests.swift */; };
+		E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */; };
+		E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */; };
+		E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		E4AF0F452892BA5E009C26F0 /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AF0F492892BA5E009C26F0 /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		E4AF0F4B2892BA5E009C26F0 /* RecipleaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,9 @@
 		E4AF0F592892BB97009C26F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E4AF0F5B2892BC3F009C26F0 /* NetworkService.swift */,
+				E4AF0F5D2892BC7E009C26F0 /* NetworkServiceProtocol.swift */,
+				E4AF0F5F2892BC93009C26F0 /* NetworkServiceError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,7 +293,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */,
+				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
 				E4AF0F302892BA5C009C26F0 /* Reciplease.xcdatamodeld in Sources */,
+				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
 				E4AF0F2A2892BA5C009C26F0 /* ViewController.swift in Sources */,
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
 				E4AF0F282892BA5C009C26F0 /* SceneDelegate.swift in Sources */,
