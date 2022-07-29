@@ -47,3 +47,14 @@ class TabBarViewController: UITabBarController {
     }
 
 }
+
+extension UIColor {
+    class var mainBackgroundColor: UIColor {
+        if let color = UIColor(named: "mainBackgroundColor") {
+            return color
+        }
+        fatalError("Could not find weatherCellsBackground color")
+    }
+}
+
+
