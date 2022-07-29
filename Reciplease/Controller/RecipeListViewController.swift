@@ -15,6 +15,6 @@ class RecipeListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = testTitle
+        self.title = "Reciplease"
     }
 }

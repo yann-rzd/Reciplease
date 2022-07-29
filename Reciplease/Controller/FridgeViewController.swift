@@ -11,6 +11,7 @@ class FridgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Reciplease"
         setupViews()
     }
     
@@ -150,7 +151,7 @@ extension UITextField {
     func addUnderLine () {
         let bottomLine = CALayer()
         
-        bottomLine.frame = CGRect(x: 0, y: self.frame.height + 30, width: self.frame.width + 200, height: 1) // Automatic width underlined ?
+        bottomLine.frame = CGRect(x: 0, y: self.frame.height + 30, width: self.frame.width + 280, height: 1) // Automatic width underlined ?
         bottomLine.backgroundColor = UIColor.lightGray.cgColor
         self.borderStyle = UITextField.BorderStyle.none
         self.layer.addSublayer(bottomLine)
