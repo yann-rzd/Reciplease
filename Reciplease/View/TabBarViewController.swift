@@ -9,12 +9,20 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        UITabBar.appearance().barTintColor = .systemBackground
-        tabBar.tintColor = .label
+        view.backgroundColor = UIColor.mainBackgroundColor
+        UITabBar.appearance().backgroundColor = UIColor.mainBackgroundColor
+        UITabBar.appearance().barTintColor = .gray
+        UINavigationBar.appearance().backgroundColor = UIColor.mainBackgroundColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        tabBar.tintColor = .white
+        
         
         setupViewContollers()
     }

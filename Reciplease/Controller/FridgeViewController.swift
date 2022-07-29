@@ -11,7 +11,6 @@ class FridgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupViews()
     }
     
@@ -44,7 +43,7 @@ class FridgeViewController: UIViewController {
         return label
     }()
     
-    private var IngredientAdderTextField: UITextField = {
+    private var ingredientAdderTextField: UITextField = {
         let textField = UITextField()
         
         textField.placeholder = "Lemon, Cheese, Sausages..."
@@ -67,6 +66,9 @@ class FridgeViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         button.tintColor = .green
         
+//        button.frame.size = CGSize(width: 40.0, height: 20.0)
+
+        
         button.addTarget(FridgeViewController.self, action: #selector(addIngredient), for: .touchUpInside)
         return button
     }()
@@ -77,8 +79,9 @@ class FridgeViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 5
+        stackView.spacing = 1
         stackView.alignment = .firstBaseline
+
         return stackView
     }()
     
@@ -89,6 +92,9 @@ class FridgeViewController: UIViewController {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 20
+        stackView.backgroundColor = .white
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
     }()
     
@@ -113,7 +119,7 @@ class FridgeViewController: UIViewController {
     }
     
     private func setupIngredientAdderContainer() {
-        indicateAndAddIngredientStackView.addArrangedSubview(IngredientAdderTextField)
+        indicateAndAddIngredientStackView.addArrangedSubview(ingredientAdderTextField)
         indicateAndAddIngredientStackView.addArrangedSubview(addIngredientButton)
         mainContainerIngredientAdderStackView.addArrangedSubview(whatsInYourFridgeLabel)
         mainContainerIngredientAdderStackView.addArrangedSubview(indicateAndAddIngredientStackView)
@@ -121,9 +127,9 @@ class FridgeViewController: UIViewController {
         view.addSubview(mainContainerIngredientAdderStackView)
         
         NSLayoutConstraint.activate([
-            mainContainerIngredientAdderStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            mainContainerIngredientAdderStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            mainContainerIngredientAdderStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+            mainContainerIngredientAdderStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainContainerIngredientAdderStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mainContainerIngredientAdderStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
@@ -144,7 +150,7 @@ extension UITextField {
     func addUnderLine () {
         let bottomLine = CALayer()
         
-        bottomLine.frame = CGRect(x: 0, y: self.frame.height + 30, width: self.frame.width + 277, height: 1) // Automatic width underlined ?
+        bottomLine.frame = CGRect(x: 0, y: self.frame.height + 30, width: self.frame.width + 200, height: 1) // Automatic width underlined ?
         bottomLine.backgroundColor = UIColor.lightGray.cgColor
         self.borderStyle = UITextField.BorderStyle.none
         self.layer.addSublayer(bottomLine)
