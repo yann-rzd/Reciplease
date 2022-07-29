@@ -23,6 +23,10 @@ class FridgeViewController: UIViewController {
         
     }
     
+    @objc func clearIngredients() {
+        
+    }
+    
     @objc func searchForRecipes() {
         let recipeListViewController = RecipeListViewController()
         recipeListViewController.testTitle = "Search Results"
@@ -66,11 +70,29 @@ class FridgeViewController: UIViewController {
         button.titleLabel?.text = "Add"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         button.tintColor = .green
-        
-//        button.frame.size = CGSize(width: 40.0, height: 20.0)
-
-        
         button.addTarget(FridgeViewController.self, action: #selector(addIngredient), for: .touchUpInside)
+        return button
+    }()
+    
+    private var yourIngredientsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Your ingredients :"
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 20)
+        return label
+    }()
+    
+    private var clearIngredientsButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        button.configuration = .tinted()
+        button.setTitle("Clear", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.text = "Clear"
+        button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
+        button.tintColor = .gray
+        button.addTarget(FridgeViewController.self, action: #selector(clearIngredients), for: .touchUpInside)
         return button
     }()
     
@@ -83,6 +105,18 @@ class FridgeViewController: UIViewController {
         stackView.spacing = 1
         stackView.alignment = .firstBaseline
 
+        return stackView
+    }()
+    
+    private let ingredientsLabelAndClearButtonStackView : UIStackView = {
+       let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 1
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
     }()
     
@@ -115,6 +149,7 @@ class FridgeViewController: UIViewController {
     
     private func setupViews() {
         setupIngredientAdderContainer()
+        setupingredientsLabelAndClearButton()
 //        setupSearchButton()
         
     }
@@ -131,6 +166,20 @@ class FridgeViewController: UIViewController {
             mainContainerIngredientAdderStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainContainerIngredientAdderStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mainContainerIngredientAdderStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        ])
+    }
+    
+    private func setupingredientsLabelAndClearButton() {
+        ingredientsLabelAndClearButtonStackView.addArrangedSubview(yourIngredientsLabel)
+        ingredientsLabelAndClearButtonStackView.addArrangedSubview(clearIngredientsButton)
+        
+        view.addSubview(ingredientsLabelAndClearButtonStackView)
+        
+        NSLayoutConstraint.activate([
+            ingredientsLabelAndClearButtonStackView.topAnchor.constraint(equalTo: mainContainerIngredientAdderStackView.bottomAnchor),
+            
+            ingredientsLabelAndClearButtonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ingredientsLabelAndClearButtonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
