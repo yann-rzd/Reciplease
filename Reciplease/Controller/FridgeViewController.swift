@@ -87,7 +87,7 @@ class FridgeViewController: UIViewController {
         let button = UIButton(type: .system)
         
         button.configuration = .tinted()
-        button.setTitle("Clear", for: .normal)
+        button.setTitle("Clear all", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.text = "Clear"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
