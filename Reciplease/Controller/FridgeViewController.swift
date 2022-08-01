@@ -46,7 +46,7 @@ class FridgeViewController: UIViewController {
     }
     
     @objc func clearIngredients() {
-        
+        fridgeService.clearIngredientsList()
     }
     
     @objc func searchForRecipes() {
@@ -116,7 +116,7 @@ class FridgeViewController: UIViewController {
         button.titleLabel?.text = "Clear"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         button.tintColor = .gray
-        button.addTarget(FridgeViewController.self, action: #selector(clearIngredients), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clearIngredients), for: .touchUpInside)
         return button
     }()
     

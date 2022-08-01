@@ -10,6 +10,8 @@
 		E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */; };
 		E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB02897E0AE00A36993 /* FridgeService.swift */; };
 		E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB22897E34200A36993 /* FridgeServiceError.swift */; };
+		E4613DB62898099100A36993 /* RecipeUrlProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB52898099100A36993 /* RecipeUrlProvider.swift */; };
+		E4613DB82898113D00A36993 /* RecipeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB72898113D00A36993 /* RecipeResponse.swift */; };
 		E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */; };
 		E4AF0F282892BA5C009C26F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */; };
 		E4AF0F302892BA5C009C26F0 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F2E2892BA5C009C26F0 /* Reciplease.xcdatamodeld */; };
@@ -47,6 +49,8 @@
 		E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		E4613DB02897E0AE00A36993 /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
 		E4613DB22897E34200A36993 /* FridgeServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceError.swift; sourceTree = "<group>"; };
+		E4613DB52898099100A36993 /* RecipeUrlProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeUrlProvider.swift; sourceTree = "<group>"; };
+		E4613DB72898113D00A36993 /* RecipeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponse.swift; sourceTree = "<group>"; };
 		E4AF0F222892BA5C009C26F0 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				E4613DB02897E0AE00A36993 /* FridgeService.swift */,
 				E4613DB22897E34200A36993 /* FridgeServiceError.swift */,
+				E4613DB52898099100A36993 /* RecipeUrlProvider.swift */,
+				E4613DB72898113D00A36993 /* RecipeResponse.swift */,
 			);
 			path = FridgeService;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 			files = (
 				E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */,
 				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
+				E4613DB62898099100A36993 /* RecipeUrlProvider.swift in Sources */,
 				E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */,
 				E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */,
 				E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */,
@@ -329,6 +336,7 @@
 				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
 				E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */,
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
+				E4613DB82898113D00A36993 /* RecipeResponse.swift in Sources */,
 				E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */,
 				E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */,
 				E4AF0F282892BA5C009C26F0 /* SceneDelegate.swift in Sources */,

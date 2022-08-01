@@ -9,6 +9,15 @@ import Foundation
 
 final class FridgeService {
     
+    init(
+        networkService: NetworkServiceProtocol = NetworkService.shared,
+        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared
+    ) {
+        self.networkService = networkService
+        self.recipeUrlProvider = recipeUrlProvider
+    }
+    
+    
     // MARK: - INTERNAL: properties
     
     static let shared = FridgeService()
@@ -42,11 +51,19 @@ final class FridgeService {
         addedIngredients.append(ingredient)
     }
     
+    func clearIngredientsList() {
+        addedIngredients.removeAll()
+    }
+    
     func emptyIngredientText() {
-        ingredientText = ""
+        ingredientText.removeAll()
     }
     
     // MARK: - PRIVATE: properties
+    
+    private let networkService: NetworkServiceProtocol
+    private let recipeUrlProvider: RecipeUrlProviderProtocol
+    
     
     // MARK: - PRIVATE: functions
 }
