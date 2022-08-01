@@ -15,17 +15,23 @@ class FridgeViewController: UIViewController {
         ingredientTableView.dataSource = self
         ingredientTableView.delegate = self
         setupViews()
+        setupBindinds()
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-////        ingredientTableView.frame = view.bounds
-////        ingredientTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 3
-//    }
     
     // MARK: - INTERNAL: properties
     
+
+    
+    
     // MARK: - INTERNAL: functions
+    
+    func setupBindinds() {
+        fridgeService.ingredientTextDidChange = { [weak self] ingredientToAdd in
+            DispatchQueue.main.async {
+                self?.ingredientAdderTextField.text = ingredientToAdd
+            }
+        }
+    }
     
     @objc func addIngredient() {
         
@@ -43,6 +49,8 @@ class FridgeViewController: UIViewController {
     
     
     // MARK: - PRIVATE: properties
+    
+    private let fridgeService = FridgeService.shared
     
     private var whatsInYourFridgeLabel: UILabel = {
         let label = UILabel()
@@ -87,7 +95,7 @@ class FridgeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Your ingredients :"
         label.textColor = .white
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 22)
         return label
     }()
     

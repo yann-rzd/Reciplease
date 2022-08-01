@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */; };
+		E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB02897E0AE00A36993 /* FridgeService.swift */; };
+		E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB22897E34200A36993 /* FridgeServiceError.swift */; };
 		E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */; };
 		E4AF0F282892BA5C009C26F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */; };
 		E4AF0F302892BA5C009C26F0 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F2E2892BA5C009C26F0 /* Reciplease.xcdatamodeld */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientTableViewCell.swift; sourceTree = "<group>"; };
+		E4613DB02897E0AE00A36993 /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
+		E4613DB22897E34200A36993 /* FridgeServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceError.swift; sourceTree = "<group>"; };
 		E4AF0F222892BA5C009C26F0 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4613DB42897E34900A36993 /* FridgeService */ = {
+			isa = PBXGroup;
+			children = (
+				E4613DB02897E0AE00A36993 /* FridgeService.swift */,
+				E4613DB22897E34200A36993 /* FridgeServiceError.swift */,
+			);
+			path = FridgeService;
+			sourceTree = "<group>";
+		};
 		E4AF0F192892BA5C009C26F0 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				E4AF0F612892BDC2009C26F0 /* NetworkService */,
+				E4613DB42897E34900A36993 /* FridgeService */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,10 +322,12 @@
 			files = (
 				E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */,
 				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
+				E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */,
 				E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */,
 				E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */,
 				E4AF0F302892BA5C009C26F0 /* Reciplease.xcdatamodeld in Sources */,
 				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
+				E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */,
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
 				E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */,
 				E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */,
