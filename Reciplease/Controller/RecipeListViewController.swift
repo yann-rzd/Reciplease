@@ -18,6 +18,12 @@ final class RecipeListViewController: UIViewController {
         setupView()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        recipeTableView.frame = view.bounds
+        recipeTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 4
+    }
+    
     private let recipeTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CustomRecipeTableViewCell.self, forCellReuseIdentifier: CustomRecipeTableViewCell.identifier)
@@ -50,8 +56,9 @@ extension RecipeListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomRecipeTableViewCell.identifier, for: indexPath) as? CustomRecipeTableViewCell else {
             return UITableViewCell()
         }
+        cell.backgroundView = UIImageView(image: UIImage(named: "defaultRecipeImage")!)
 
-        return CustomRecipeTableViewCell()
+        return cell
     }
 
 }

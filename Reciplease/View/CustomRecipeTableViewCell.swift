@@ -28,8 +28,6 @@ final class CustomRecipeTableViewCell: UITableViewCell {
     
     // MARK: - PRIVATE: properties
     
-    private let backgroundImage = UIImageView(image: UIImage(named: "defaultRecipeImage"))
-    
     private var recipeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +35,6 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 22)
-        label.backgroundColor = UIColor.green
         return label
     }()
     
@@ -62,9 +59,10 @@ final class CustomRecipeTableViewCell: UITableViewCell {
     }()
     
     private var thumbUpImage: UIImageView = {
-       let image = UIImageView()
-        image.image = UIImage(named: "hand.thumbsup.fill")
-        image.frame = CGRect(x: 10, y: 10, width: 10, height: 10)
+        let image = UIImageView()
+        image.image = UIImage(systemName: "hand.thumbsup.fill")
+        image.tintColor = .white
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -80,15 +78,9 @@ final class CustomRecipeTableViewCell: UITableViewCell {
     
     private var recipeDurationImage: UIImageView = {
        let image = UIImageView()
-        image.image = UIImage(named: "clock.arrow.circlepath")
-        image.frame = CGRect(x: 10, y: 10, width: 10, height: 10)
-        return image
-    }()
-    
-    private var recipeDescriptionImage: UIImageView = {
-       let image = UIImageView()
-        image.image = UIImage(named: "defaultRecipeImage")
-        image.frame = CGRect(x: 10, y: 10, width: 10, height: 10)
+        image.image = UIImage(systemName: "clock.arrow.circlepath")
+        image.tintColor = .white
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
 
@@ -98,7 +90,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
-        stackView.spacing = 2
+        stackView.spacing = 5
         stackView.backgroundColor = UIColor.mainBackgroundColor
         return stackView
     }()
@@ -109,7 +101,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
-        stackView.spacing = 2
+        stackView.spacing = 5
         stackView.backgroundColor = UIColor.mainBackgroundColor
         return stackView
     }()
@@ -120,10 +112,13 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
-        stackView.spacing = 2
-        stackView.backgroundColor = UIColor.red
+        stackView.spacing = 5
+        stackView.backgroundColor = UIColor.mainBackgroundColor
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        stackView.layer.borderWidth = 2
+        stackView.layer.cornerRadius = 10
+        stackView.layer.borderColor = UIColor.white.cgColor
         return stackView
     }()
     
@@ -134,27 +129,16 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.spacing = 5
-        stackView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        stackView.backgroundColor = UIColor.white.withAlphaComponent(0)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
     }()
-    
-    private let mainStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 5
-        stackView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        return stackView
-    }()
+
     
     // MARK: - PRIVATE: functions
     
     private func commonInit() -> Void {
-
         //Recipe indicators container
         recommendationRecipeStackView.addArrangedSubview(recommendationNumberLabel)
         recommendationRecipeStackView.addArrangedSubview(thumbUpImage)
@@ -169,19 +153,17 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         nameAndDescriptionRecipeStackView.addArrangedSubview(recipeLabel)
         nameAndDescriptionRecipeStackView.addArrangedSubview(ingredientsLabel)
         
-        //Main stackview
-        mainStackView.addArrangedSubview(indicatorsRecipeStackView)
-        mainStackView.addArrangedSubview(nameAndDescriptionRecipeStackView)
+        contentView.addSubview(indicatorsRecipeStackView)
+        contentView.addSubview(nameAndDescriptionRecipeStackView)
         
-        contentView.addSubview(mainStackView)
-        
-//        NSLayoutConstraint.activate([
-//            mainStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            mainStackView.topAnchor.constraint(equalTo: self.topAnchor),
-//            mainStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//            mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-//            
-//        ])
+        NSLayoutConstraint.activate([
+            indicatorsRecipeStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            indicatorsRecipeStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            nameAndDescriptionRecipeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            nameAndDescriptionRecipeStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+
+
+        ])
     }
 
 }
