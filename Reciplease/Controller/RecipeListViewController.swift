@@ -15,7 +15,7 @@ final class RecipeListViewController: UIViewController {
         
         recipeTableView.dataSource = self
         recipeTableView.delegate = self
-        view.addSubview(recipeTableView)
+        setupView()
     }
     
     private let recipeTableView: UITableView = {
@@ -24,9 +24,24 @@ final class RecipeListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    func setupView() {
+        view.addSubview(recipeTableView)
+        NSLayoutConstraint.activate([
+            recipeTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipeTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            
+        ])
+    }
 }
 
 extension RecipeListViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+          return 1
+       }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -36,7 +51,7 @@ extension RecipeListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        return cell
+        return CustomRecipeTableViewCell()
     }
 
 }

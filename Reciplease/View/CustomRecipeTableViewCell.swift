@@ -37,6 +37,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 22)
+        label.backgroundColor = UIColor.green
         return label
     }()
     
@@ -120,7 +121,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.spacing = 2
-        stackView.backgroundColor = UIColor.mainBackgroundColor
+        stackView.backgroundColor = UIColor.red
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
@@ -146,14 +147,14 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.spacing = 5
-        stackView.backgroundColor = UIColor.red
+        stackView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         return stackView
     }()
     
     // MARK: - PRIVATE: functions
     
     private func commonInit() -> Void {
-        contentView.backgroundColor = UIColor.red
+
         //Recipe indicators container
         recommendationRecipeStackView.addArrangedSubview(recommendationNumberLabel)
         recommendationRecipeStackView.addArrangedSubview(thumbUpImage)
@@ -174,13 +175,13 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         
         contentView.addSubview(mainStackView)
         
-        NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            mainStackView.topAnchor.constraint(equalTo: self.topAnchor),
-            mainStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-            
-        ])
+//        NSLayoutConstraint.activate([
+//            mainStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+//            mainStackView.topAnchor.constraint(equalTo: self.topAnchor),
+//            mainStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+//            mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+//            
+//        ])
     }
 
 }
