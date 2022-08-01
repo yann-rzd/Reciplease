@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomIngredientTableViewCell: UITableViewCell {
+final class CustomIngredientTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,7 +45,7 @@ class CustomIngredientTableViewCell: UITableViewCell {
     
     // MARK: - PRIVATE: functions
     
-    private func commonInit() {
+    private func commonInit() -> Void {
         contentView.backgroundColor = UIColor.mainBackgroundColor
         contentView.addSubview(ingredientLabel)
         
@@ -54,7 +54,6 @@ class CustomIngredientTableViewCell: UITableViewCell {
             ingredientLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
-
 }
 
 extension UIColor {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FridgeViewController: UIViewController {
+final class FridgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,9 +212,7 @@ class FridgeViewController: UIViewController {
         ]
         
         toolBar.sizeToFit()
-        
         ingredientAdderTextField.inputAccessoryView = toolBar
-        
     }
     
     private func setupIngredientAdderContainer() {
@@ -258,11 +256,8 @@ class FridgeViewController: UIViewController {
             searchForRecipesButton.topAnchor.constraint(equalTo: mainIngredientsListStackView.bottomAnchor, constant: 20),
             searchForRecipesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             searchForRecipesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
-            
         ])
     }
-    
-    
 }
 
 extension FridgeViewController: UITableViewDataSource {
@@ -274,8 +269,8 @@ extension FridgeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientTableViewCell.identifier, for: indexPath) as? CustomIngredientTableViewCell else {
             return UITableViewCell()
         }
+        
         let addedIngredient = fridgeService.addedIngredients[indexPath.row]
-//        fridgeService.add(ingredient: addedIngredient)
         cell.ingredientName = addedIngredient
         return cell
     }
@@ -283,8 +278,8 @@ extension FridgeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
 }
+
 
 extension FridgeViewController: UITableViewDelegate {
 
