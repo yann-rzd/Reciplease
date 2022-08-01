@@ -27,12 +27,35 @@ class CustomIngredientTableViewCell: UITableViewCell {
     
     // MARK: - PRIVATE: properties
     
-    
+    private var ingredientLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "- Tomatoes"
+        label.textColor = .white
+        label.tintColor = .white
+        label.font = .systemFont(ofSize: 20)
+        return label
+    }()
     
     // MARK: - PRIVATE: functions
     
     private func commonInit() {
+        contentView.backgroundColor = UIColor.mainBackgroundColor
+        contentView.addSubview(ingredientLabel)
         
+        NSLayoutConstraint.activate([
+            ingredientLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            ingredientLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
     }
 
+}
+
+extension UIColor {
+    class var ingredientCellBackgroundColor: UIColor {
+        if let color = UIColor(named: "mainBackgroundColor") {
+            return color
+        }
+        fatalError("Could not find weatherCellsBackground color")
+    }
 }

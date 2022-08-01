@@ -12,8 +12,16 @@ class FridgeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reciplease"
+        ingredientTableView.dataSource = self
+        ingredientTableView.delegate = self
         setupViews()
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+////        ingredientTableView.frame = view.bounds
+////        ingredientTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 3
+//    }
     
     // MARK: - INTERNAL: properties
     
@@ -114,13 +122,13 @@ class FridgeViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 1
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        stackView.spacing = 5
+//        stackView.isLayoutMarginsRelativeArrangement = true
+//        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
     }()
     
-    private let mainContainerIngredientAdderStackView: UIStackView = {
+    private let ingredientAdderStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -133,16 +141,37 @@ class FridgeViewController: UIViewController {
         return stackView
     }()
     
-//    private lazy var searchForRecipesButton: UIButton = {
-//        let button = UIButton()
-//
-//        button.setTitle("SEARCH", for: .normal)
-//        button.setTitleColor(.blue, for: .normal)
-//        button.addTarget(self, action: #selector(searchForRecipes), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//
-//        return button
-//    }()
+    private let mainIngredientsListStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        stackView.backgroundColor = UIColor.mainBackgroundColor
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        return stackView
+    }()
+    
+    private let ingredientTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(CustomIngredientTableViewCell.self, forCellReuseIdentifier: CustomIngredientTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private lazy var searchForRecipesButton: UIButton = {
+        let button = UIButton()
+
+        button.setTitle("Search for recipes", for: .normal)
+        button.backgroundColor = UIColor.greenButtonColor
+        button.frame.size.height = 60
+        button.addTarget(self, action: #selector(searchForRecipes), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        return button
+    }()
     
     
     // MARK: - PRIVATE: functions
@@ -150,49 +179,78 @@ class FridgeViewController: UIViewController {
     private func setupViews() {
         setupIngredientAdderContainer()
         setupingredientsLabelAndClearButton()
-//        setupSearchButton()
+        setupSearchButton()
         
     }
     
     private func setupIngredientAdderContainer() {
         indicateAndAddIngredientStackView.addArrangedSubview(ingredientAdderTextField)
         indicateAndAddIngredientStackView.addArrangedSubview(addIngredientButton)
-        mainContainerIngredientAdderStackView.addArrangedSubview(whatsInYourFridgeLabel)
-        mainContainerIngredientAdderStackView.addArrangedSubview(indicateAndAddIngredientStackView)
+        ingredientAdderStackView.addArrangedSubview(whatsInYourFridgeLabel)
+        ingredientAdderStackView.addArrangedSubview(indicateAndAddIngredientStackView)
         
-        view.addSubview(mainContainerIngredientAdderStackView)
+        view.addSubview(ingredientAdderStackView)
         
         NSLayoutConstraint.activate([
-            mainContainerIngredientAdderStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainContainerIngredientAdderStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mainContainerIngredientAdderStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+            ingredientAdderStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            ingredientAdderStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ingredientAdderStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
     private func setupingredientsLabelAndClearButton() {
+        ingredientTableView.backgroundColor = UIColor.mainBackgroundColor
         ingredientsLabelAndClearButtonStackView.addArrangedSubview(yourIngredientsLabel)
         ingredientsLabelAndClearButtonStackView.addArrangedSubview(clearIngredientsButton)
+        mainIngredientsListStackView.addArrangedSubview(ingredientsLabelAndClearButtonStackView)
+        mainIngredientsListStackView.addArrangedSubview(ingredientTableView)
         
-        view.addSubview(ingredientsLabelAndClearButtonStackView)
+        view.addSubview(mainIngredientsListStackView)
         
         NSLayoutConstraint.activate([
-            ingredientsLabelAndClearButtonStackView.topAnchor.constraint(equalTo: mainContainerIngredientAdderStackView.bottomAnchor),
-            
-            ingredientsLabelAndClearButtonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            ingredientsLabelAndClearButtonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+            mainIngredientsListStackView.topAnchor.constraint(equalTo: ingredientAdderStackView.bottomAnchor),
+            mainIngredientsListStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mainIngredientsListStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mainIngredientsListStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
         ])
     }
     
-//    private func setupSearchButton() {
-//        view.addSubview(searchForRecipesButton)
-//
-//        NSLayoutConstraint.activate([
-//            searchForRecipesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            searchForRecipesButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
-//    }
+    private func setupSearchButton() {
+        view.addSubview(searchForRecipesButton)
+
+        NSLayoutConstraint.activate([
+            searchForRecipesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchForRecipesButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            searchForRecipesButton.topAnchor.constraint(equalTo: mainIngredientsListStackView.bottomAnchor, constant: 20),
+            searchForRecipesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            searchForRecipesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            
+        ])
+    }
     
     
+}
+
+extension FridgeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientTableViewCell.identifier, for: indexPath) as? CustomIngredientTableViewCell else {
+            return UITableViewCell()
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+}
+
+extension FridgeViewController: UITableViewDelegate {
+
 }
 
 extension UITextField {
@@ -207,4 +265,13 @@ extension UITextField {
         
     }
     
+}
+
+extension UIColor {
+    class var greenButtonColor: UIColor {
+        if let color = UIColor(named: "greenButtonColor") {
+            return color
+        }
+        fatalError("Could not find weatherCellsBackground color")
+    }
 }
