@@ -15,6 +15,7 @@ class FridgeViewController: UIViewController {
         ingredientTableView.dataSource = self
         ingredientTableView.delegate = self
         setupViews()
+        setupToolBar()
         setupBindinds()
     }
     
@@ -185,6 +186,34 @@ class FridgeViewController: UIViewController {
         setupIngredientAdderContainer()
         setupingredientsLabelAndClearButton()
         setupSearchButton()
+        
+    }
+    
+    private func setupToolBar() {
+        let toolBar = UIToolbar()
+        
+        let clearButton = UIBarButtonItem(
+            title: "CLEAR",
+            primaryAction: UIAction(handler: { [weak self] _ in self?.fridgeService.emptyIngredientText() } )
+        )
+        
+        clearButton.tintColor = .gray
+        
+        let doneButton = UIBarButtonItem(
+            title: "DONE",
+            primaryAction: UIAction(handler: { [weak self] _ in self?.view.endEditing(true) } )
+        )
+        
+        toolBar.items = [
+            clearButton,
+            .flexibleSpace(),
+            doneButton
+           
+        ]
+        
+        toolBar.sizeToFit()
+        
+        ingredientAdderTextField.inputAccessoryView = toolBar
         
     }
     

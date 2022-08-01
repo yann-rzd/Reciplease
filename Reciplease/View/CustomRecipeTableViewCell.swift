@@ -28,6 +28,17 @@ class CustomRecipeTableViewCell: UITableViewCell {
     
     // MARK: - PRIVATE: properties
     
+    private var recipeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Pizza"
+        label.textColor = .white
+        label.tintColor = .white
+        label.font = .systemFont(ofSize: 22)
+        return label
+    }()
+    
+    
     // MARK: - PRIVATE: functions
     
     private func commonInit() {
