@@ -24,6 +24,12 @@ class CustomIngredientTableViewCell: UITableViewCell {
     
     static let identifier = "CustomIngredientTableViewCell"
     
+    var ingredientName: String? {
+        didSet {
+            ingredientLabel.text = "- \(ingredientName ?? "")"
+        }
+    }
+    
     
     // MARK: - PRIVATE: properties
     

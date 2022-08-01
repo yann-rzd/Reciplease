@@ -26,6 +26,12 @@ class FridgeViewController: UIViewController {
     // MARK: - INTERNAL: functions
     
     func setupBindinds() {
+        fridgeService.ingredientsDidChange = { [weak self] in
+            DispatchQueue.main.async {
+                self?.ingredientTableView.reloadData()
+            }
+        }
+        
         fridgeService.ingredientTextDidChange = { [weak self] ingredientToAdd in
             DispatchQueue.main.async {
                 self?.ingredientAdderTextField.text = ingredientToAdd
@@ -34,7 +40,9 @@ class FridgeViewController: UIViewController {
     }
     
     @objc func addIngredient() {
-        
+        guard let ingredient = ingredientAdderTextField.text else { return }
+        fridgeService.add(ingredient: ingredient)
+        fridgeService.emptyIngredientText()
     }
     
     @objc func clearIngredients() {
@@ -86,7 +94,7 @@ class FridgeViewController: UIViewController {
         button.titleLabel?.text = "Add"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         button.tintColor = .green
-        button.addTarget(FridgeViewController.self, action: #selector(addIngredient), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
         return button
     }()
     
@@ -241,13 +249,16 @@ class FridgeViewController: UIViewController {
 
 extension FridgeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return fridgeService.addedIngredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientTableViewCell.identifier, for: indexPath) as? CustomIngredientTableViewCell else {
             return UITableViewCell()
         }
+        let addedIngredient = fridgeService.addedIngredients[indexPath.row]
+//        fridgeService.add(ingredient: addedIngredient)
+        cell.ingredientName = addedIngredient
         return cell
     }
     
