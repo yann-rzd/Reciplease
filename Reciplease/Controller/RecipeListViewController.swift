@@ -8,13 +8,17 @@
 import UIKit
 
 class RecipeListViewController: UIViewController {
-    
-    
-    var testTitle: String = "Favorites"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "Reciplease"
     }
+    
+    private let ingredientTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(CustomRecipeTableViewCell.self, forCellReuseIdentifier: CustomRecipeTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
 }

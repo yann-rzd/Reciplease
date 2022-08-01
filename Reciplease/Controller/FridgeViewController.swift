@@ -51,8 +51,8 @@ class FridgeViewController: UIViewController {
     
     @objc func searchForRecipes() {
         let recipeListViewController = RecipeListViewController()
-        recipeListViewController.testTitle = "Search Results"
         navigationController?.pushViewController(recipeListViewController, animated: true)
+        navigationItem.backButtonTitle = "Back"
     }
     
     
@@ -62,32 +62,26 @@ class FridgeViewController: UIViewController {
     
     private var whatsInYourFridgeLabel: UILabel = {
         let label = UILabel()
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "What's in your fridge ?"
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
-        
-        
         return label
     }()
     
     private var ingredientAdderTextField: UITextField = {
         let textField = UITextField()
-        
         textField.placeholder = "Lemon, Cheese, Sausages..."
         textField.font = .systemFont(ofSize: 18)
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addUnderLine()
-        
         return textField
     }()
     
     private var addIngredientButton: UIButton = {
         let button = UIButton(type: .system)
-        
         button.configuration = .tinted()
         button.setTitle("Add", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +103,6 @@ class FridgeViewController: UIViewController {
     
     private var clearIngredientsButton: UIButton = {
         let button = UIButton(type: .system)
-        
         button.configuration = .tinted()
         button.setTitle("Clear all", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +121,6 @@ class FridgeViewController: UIViewController {
         stackView.distribution = .fill
         stackView.spacing = 1
         stackView.alignment = .firstBaseline
-
         return stackView
     }()
     
@@ -139,8 +131,6 @@ class FridgeViewController: UIViewController {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 5
-//        stackView.isLayoutMarginsRelativeArrangement = true
-//        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
     }()
     
@@ -179,7 +169,6 @@ class FridgeViewController: UIViewController {
     
     private lazy var searchForRecipesButton: UIButton = {
         let button = UIButton()
-
         button.setTitle("Search for recipes", for: .normal)
         button.backgroundColor = UIColor.greenButtonColor
         button.frame.size.height = 60
