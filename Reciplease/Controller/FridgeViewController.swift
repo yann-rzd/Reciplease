@@ -294,9 +294,7 @@ extension UITextField {
         bottomLine.backgroundColor = UIColor.lightGray.cgColor
         self.borderStyle = UITextField.BorderStyle.none
         self.layer.addSublayer(bottomLine)
-        
     }
-    
 }
 
 extension UIColor {

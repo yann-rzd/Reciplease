@@ -20,8 +20,8 @@ final class RecipeListViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        recipeTableView.frame = view.bounds
-        recipeTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 4
+//        recipeTableView.frame = view.bounds
+        recipeTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 5
     }
     
     private let recipeTableView: UITableView = {

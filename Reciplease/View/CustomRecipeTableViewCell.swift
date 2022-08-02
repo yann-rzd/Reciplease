@@ -54,7 +54,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         label.text = "126"
         label.textColor = .white
         label.tintColor = .white
-        label.font = .systemFont(ofSize: 10)
+        label.font = .systemFont(ofSize: 12)
         return label
     }()
     
@@ -72,7 +72,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         label.text = "15m"
         label.textColor = .white
         label.tintColor = .white
-        label.font = .systemFont(ofSize: 10)
+        label.font = .systemFont(ofSize: 12)
         return label
     }()
     
@@ -130,8 +130,6 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.distribution = .equalSpacing
         stackView.spacing = 5
         stackView.backgroundColor = UIColor.white.withAlphaComponent(0)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return stackView
     }()
 
@@ -142,26 +140,27 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         //Recipe indicators container
         recommendationRecipeStackView.addArrangedSubview(recommendationNumberLabel)
         recommendationRecipeStackView.addArrangedSubview(thumbUpImage)
-        
+
         durationRecipeStackView.addArrangedSubview(recipeDurationLabel)
         durationRecipeStackView.addArrangedSubview(recipeDurationImage)
-        
+
         indicatorsRecipeStackView.addArrangedSubview(recommendationRecipeStackView)
         indicatorsRecipeStackView.addArrangedSubview(durationRecipeStackView)
-        
+
         //Recipe name and ingredient container
         nameAndDescriptionRecipeStackView.addArrangedSubview(recipeLabel)
         nameAndDescriptionRecipeStackView.addArrangedSubview(ingredientsLabel)
-        
+
         contentView.addSubview(indicatorsRecipeStackView)
         contentView.addSubview(nameAndDescriptionRecipeStackView)
-        
+//
         NSLayoutConstraint.activate([
             indicatorsRecipeStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             indicatorsRecipeStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             nameAndDescriptionRecipeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             nameAndDescriptionRecipeStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
 
+            
 
         ])
     }
