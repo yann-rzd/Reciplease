@@ -23,6 +23,16 @@ final class CustomRecipeTableViewCell: UITableViewCell {
     
     static let identifier = "CustomRecipeTableViewCell"
     
+    var recipeModel: RecipeElements? {
+        didSet {
+            guard let recipeModel = recipeModel else { return }
+            recipeLabel.text = recipeModel.label
+            ingredientsLabel.text = recipeModel.ingredients
+            recommendationNumberLabel.text = String(describing: recipeModel.yield)
+            recipeDurationLabel.text = String(describing: recipeModel.time) + "m"
+        }
+    }
+    
     
     // MARK: - INTERNAL: functions
     
