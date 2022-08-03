@@ -67,7 +67,7 @@ final class FridgeService {
     }
     
     func fetchRecipes() {
-        fetch { [weak self] result in
+        fetch() { [weak self] result in
             switch result {
             case .failure(let error):
                 self?.didProduceError?(error)
@@ -93,7 +93,7 @@ final class FridgeService {
             completionHandler(.failure(.failedToFetchRecipes))
             return
         }
-        
+
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "GET"
