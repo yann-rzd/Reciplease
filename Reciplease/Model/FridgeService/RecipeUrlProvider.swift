@@ -27,13 +27,7 @@ final class RecipeUrlProvider: RecipeUrlProviderProtocol {
             .init(name: "imageSize", value: "REGULAR"),
             .init(name: "q", value: ingredients.joined(separator: " "))
         ]
-        
-//        for ingredient in ingredients {
-//            urlComponents.queryItems?.append(.init(name: "q", value: ingredient))
-//        }
-        
-        print("📪📪📪 === \(urlComponents)")
-        print("🔑🔑🔑 === \(urlComponents.url)")
+
         return urlComponents.url
     }
 }

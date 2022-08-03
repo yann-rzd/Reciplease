@@ -105,7 +105,6 @@ final class FridgeService {
                 self?.didProduceError?(.failedToFetchRecipes)
                 return
             case .success(let recipeResponse):
-                print("🤓 == \(recipeResponse)")
                 
                 for hit in recipeResponse.hits {
                     let recipeLabel = hit.recipe.label

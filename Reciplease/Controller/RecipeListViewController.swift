@@ -77,9 +77,12 @@ extension RecipeListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomRecipeTableViewCell.identifier, for: indexPath) as? CustomRecipeTableViewCell else {
             return UITableViewCell()
         }
-        
-        cell.backgroundView = UIImageView(image: UIImage(named: "defaultRecipeImage")!)
+
         let selectedRecipe = fridgeService.recipes[indexPath.row]
+        let cellImageName = selectedRecipe.image
+        let imageURL = NSURL(string: cellImageName ?? "")
+        let imagedData = NSData(contentsOf: imageURL! as URL)!
+        cell.backgroundView = UIImageView(image: UIImage(data: imagedData as Data)!)
         cell.recipeModel = selectedRecipe
         
         return cell
