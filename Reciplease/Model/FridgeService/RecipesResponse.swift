@@ -21,10 +21,10 @@ struct Recipe: Decodable {
     let label: String
     let image: String?
     let url: String
-    let yield: Int
+    let yield: Double
     let ingredientLines: [String]
     let ingredients: [RecipeDetails]
-    let totalTime: Int?
+    let totalTime: Double?
 }
 
 // MARK: - Recipe details

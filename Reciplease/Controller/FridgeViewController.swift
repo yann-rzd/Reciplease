@@ -51,6 +51,7 @@ final class FridgeViewController: UIViewController {
     }
     
     @objc func searchForRecipes() {
+        fridgeService.fetchRecipes()
         let recipeListViewController = RecipeListViewController()
         navigationController?.pushViewController(recipeListViewController, animated: true)
         navigationItem.backButtonTitle = "Back"

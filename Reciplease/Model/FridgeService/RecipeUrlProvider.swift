@@ -24,7 +24,7 @@ final class RecipeUrlProvider: RecipeUrlProviderProtocol {
             .init(name: "type", value: "public"),
             .init(name: "app_id", value: "58aba0ee"),
             .init(name: "app_key", value: "fc4abb1b6c8a1687268a85e0bd262a2b"),
-            .init(name: "imageSize", value: "SMALL")
+            .init(name: "imageSize", value: "REGULAR")
         ]
         
         for ingredient in ingredients {
