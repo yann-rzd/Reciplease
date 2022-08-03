@@ -98,6 +98,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4218EB8289A73B200770960 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF0F362892BA5E009C26F0 /* Info.plist */,
+				E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */,
+				E4AF0F312892BA5E009C26F0 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E4613DB42897E34900A36993 /* FridgeService */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,12 +142,12 @@
 		E4AF0F242892BA5C009C26F0 /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
+				E4218EB8289A73B200770960 /* Supporting Files */,
 				E4AF0F582892BB8E009C26F0 /* View */,
 				E4AF0F5A2892BBA5009C26F0 /* Controller */,
 				E4AF0F592892BB97009C26F0 /* Model */,
 				E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */,
 				E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */,
-				E4AF0F362892BA5E009C26F0 /* Info.plist */,
 				E4AF0F2E2892BA5C009C26F0 /* Reciplease.xcdatamodeld */,
 			);
 			path = Reciplease;
@@ -163,8 +173,6 @@
 		E4AF0F582892BB8E009C26F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF0F312892BA5E009C26F0 /* Assets.xcassets */,
-				E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */,
 				E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */,
 				E4613DB92898144900A36993 /* CustomRecipeTableViewCell.swift */,
 			);
