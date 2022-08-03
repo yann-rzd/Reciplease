@@ -130,8 +130,8 @@
 				E4613DB02897E0AE00A36993 /* FridgeService.swift */,
 				E4613DB22897E34200A36993 /* FridgeServiceError.swift */,
 				E4613DB52898099100A36993 /* RecipeUrlProvider.swift */,
-				E4613DB72898113D00A36993 /* RecipesResponse.swift */,
 				E4218EC1289AAD9500770960 /* RecipeElements.swift */,
+				E4613DB72898113D00A36993 /* RecipesResponse.swift */,
 			);
 			path = FridgeService;
 			sourceTree = "<group>";

@@ -109,32 +109,32 @@ final class FridgeService {
                 let recipeImage = recipeResponse.hits.first?.recipe.image
                 let recipeUrl = recipeResponse.hits.first?.recipe.url
                 let recipeYield = recipeResponse.hits.first?.recipe.yield
-                let recipeIngredientLines = recipeResponse.hits.first?.recipe.ingredients.description
-                let recipeIngredients = recipeResponse.hits.first?.recipe.ingredients
+                let recipeIngredientLines = recipeResponse.hits.first?.recipe.ingredientLines.joined(separator: ", ")
+//                let recipeIngredients = recipeResponse.hits.first?.recipe.ingredients
                 let recipeTotalTime = recipeResponse.hits.first?.recipe.totalTime
                 
-                let recipeDetailsText = recipeIngredients?.first?.text
-                let recipeDetailsQuantity = recipeIngredients?.first?.quantity
-                let recipeDetailsMeasure = recipeIngredients?.first?.measure
-                let recipeDetailsFood = recipeIngredients?.first?.food
-                let recipeDetailsWeight = recipeIngredients?.first?.weight
-                let recipeDetailsFoodCategory = recipeIngredients?.first?.foodCategory
-                let recipeDetailsImage = recipeIngredients?.first?.image
+//                let recipeDetailsText = recipeIngredients?.first?.text
+//                let recipeDetailsQuantity = recipeIngredients?.first?.quantity
+//                let recipeDetailsMeasure = recipeIngredients?.first?.measure
+//                let recipeDetailsFood = recipeIngredients?.first?.food
+//                let recipeDetailsWeight = recipeIngredients?.first?.weight
+//                let recipeDetailsFoodCategory = recipeIngredients?.first?.foodCategory
+//                let recipeDetailsImage = recipeIngredients?.first?.image
                 
                 let recipe = RecipeElements(
                     label: recipeLabel,
                     image: recipeImage,
                     url: recipeUrl,
-                    yield: recipeYield,
+                    yield: recipeYield ?? 0,
                     ingredients: recipeIngredientLines,
-                    time: recipeTotalTime,
-                    recipeDetailsText: recipeDetailsText,
-                    recipeDetailsQuantity: recipeDetailsQuantity,
-                    recipeDetailsMeasure: recipeDetailsMeasure,
-                    recipeDetailsFood: recipeDetailsFood,
-                    recipeDetailsWeight: recipeDetailsWeight,
-                    recipeDetailsFoodCategory: recipeDetailsFoodCategory,
-                    recipeDetailsImage: recipeDetailsImage
+                    time: recipeTotalTime ?? 0
+//                    recipeDetailsText: recipeDetailsText,
+//                    recipeDetailsQuantity: recipeDetailsQuantity,
+//                    recipeDetailsMeasure: recipeDetailsMeasure,
+//                    recipeDetailsFood: recipeDetailsFood,
+//                    recipeDetailsWeight: recipeDetailsWeight,
+//                    recipeDetailsFoodCategory: recipeDetailsFoodCategory,
+//                    recipeDetailsImage: recipeDetailsImage
                 )
 
                 completionHandler(.success(recipe))
