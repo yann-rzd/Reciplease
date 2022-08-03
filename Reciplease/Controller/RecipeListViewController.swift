@@ -83,6 +83,8 @@ extension RecipeListViewController: UITableViewDataSource {
         let imageURL = NSURL(string: cellImageName ?? "")
         let imagedData = NSData(contentsOf: imageURL! as URL)!
         cell.backgroundView = UIImageView(image: UIImage(data: imagedData as Data)!)
+        
+        
         cell.recipeModel = selectedRecipe
         
         return cell
