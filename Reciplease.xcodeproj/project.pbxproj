@@ -107,6 +107,7 @@
 		E4218EB8289A73B200770960 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E4AF0F362892BA5E009C26F0 /* Info.plist */,
 				E4AF0F312892BA5E009C26F0 /* Assets.xcassets */,
 				E4AF0F332892BA5E009C26F0 /* LaunchScreen.storyboard */,
 			);
@@ -138,7 +139,6 @@
 		E4AF0F192892BA5C009C26F0 = {
 			isa = PBXGroup;
 			children = (
-				E4AF0F362892BA5E009C26F0 /* Info.plist */,
 				E4AF0F242892BA5C009C26F0 /* Reciplease */,
 				E4AF0F3E2892BA5E009C26F0 /* RecipleaseTests */,
 				E4AF0F482892BA5E009C26F0 /* RecipleaseUITests */,
@@ -542,7 +542,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BPYC96MR8N;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_FILE = "Reciplease/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
@@ -571,7 +571,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BPYC96MR8N;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_FILE = "Reciplease/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
