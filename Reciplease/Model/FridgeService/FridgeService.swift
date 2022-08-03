@@ -105,39 +105,32 @@ final class FridgeService {
                 self?.didProduceError?(.failedToFetchRecipes)
                 return
             case .success(let recipeResponse):
-                let recipeLabel = recipeResponse.hits.first?.recipe.label
-                let recipeImage = recipeResponse.hits.first?.recipe.image
-                let recipeUrl = recipeResponse.hits.first?.recipe.url
-                let recipeYield = recipeResponse.hits.first?.recipe.yield
-                let recipeIngredientLines = recipeResponse.hits.first?.recipe.ingredients.first?.food
-//                let recipeIngredients = recipeResponse.hits.first?.recipe.ingredients
-                let recipeTotalTime = recipeResponse.hits.first?.recipe.totalTime
+                print("🤓 == \(recipeResponse)")
                 
-//                let recipeDetailsText = recipeIngredients?.first?.text
-//                let recipeDetailsQuantity = recipeIngredients?.first?.quantity
-//                let recipeDetailsMeasure = recipeIngredients?.first?.measure
-//                let recipeDetailsFood = recipeIngredients?.first?.food
-//                let recipeDetailsWeight = recipeIngredients?.first?.weight
-//                let recipeDetailsFoodCategory = recipeIngredients?.first?.foodCategory
-//                let recipeDetailsImage = recipeIngredients?.first?.image
+                for hit in recipeResponse.hits {
+                    let recipeLabel = hit.recipe.label
+                    let recipeImage = hit.recipe.image
+                    let recipeUrl = hit.recipe.url
+                    let recipeYield = hit.recipe.yield
+                    let recipeTotalTime = hit.recipe.totalTime
+                    var foodList: [String] = []
+                    
+                    for food in hit.recipe.ingredients {
+                        let food = food.food
+                        foodList.append(food)
+                    }
+                    
+                    let recipe = RecipeElements(
+                        label: recipeLabel,
+                        image: recipeImage,
+                        url: recipeUrl,
+                        yield: recipeYield ,
+                        ingredients: foodList.joined(separator: ", "),
+                        time: recipeTotalTime
+                    )
+                    completionHandler(.success(recipe))
+                }
                 
-                let recipe = RecipeElements(
-                    label: recipeLabel,
-                    image: recipeImage,
-                    url: recipeUrl,
-                    yield: recipeYield ?? 0,
-                    ingredients: recipeIngredientLines,
-                    time: recipeTotalTime ?? 0
-//                    recipeDetailsText: recipeDetailsText,
-//                    recipeDetailsQuantity: recipeDetailsQuantity,
-//                    recipeDetailsMeasure: recipeDetailsMeasure,
-//                    recipeDetailsFood: recipeDetailsFood,
-//                    recipeDetailsWeight: recipeDetailsWeight,
-//                    recipeDetailsFoodCategory: recipeDetailsFoodCategory,
-//                    recipeDetailsImage: recipeDetailsImage
-                )
-
-                completionHandler(.success(recipe))
                 return
             }
             
