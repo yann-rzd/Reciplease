@@ -109,7 +109,7 @@ final class FridgeService {
                 let recipeImage = recipeResponse.hits.first?.recipe.image
                 let recipeUrl = recipeResponse.hits.first?.recipe.url
                 let recipeYield = recipeResponse.hits.first?.recipe.yield
-                let recipeIngredientLines = recipeResponse.hits.first?.recipe.ingredientLines.joined(separator: ", ")
+                let recipeIngredientLines = recipeResponse.hits.first?.recipe.ingredients.first?.food
 //                let recipeIngredients = recipeResponse.hits.first?.recipe.ingredients
                 let recipeTotalTime = recipeResponse.hits.first?.recipe.totalTime
                 

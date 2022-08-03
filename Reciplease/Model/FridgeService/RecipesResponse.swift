@@ -23,18 +23,11 @@ struct Recipe: Codable {
     let url: String
     let yield: Int
     let ingredientLines: [String]
-//    let ingredients: [RecipeDetails]
+    let ingredients: [RecipeDetails]
     let totalTime: Int
 }
 
 // MARK: - Recipe details
 struct RecipeDetails: Codable {
-    let text: String
-    let quantity: Double
-    let measure: String
     let food: String
-    let weight: Double
-    let foodCategory: String
-    let foodId: String
-    let image: String?
 }
