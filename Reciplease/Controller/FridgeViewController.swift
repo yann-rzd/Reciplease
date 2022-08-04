@@ -22,7 +22,6 @@ final class FridgeViewController: UIViewController {
     
     // MARK: - INTERNAL: properties
     
-
     
     
     // MARK: - INTERNAL: functions
