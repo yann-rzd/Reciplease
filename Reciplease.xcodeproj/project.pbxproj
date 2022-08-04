@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4203AD4289C12380093B0AD /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD3289C12380093B0AD /* RecipeService.swift */; };
 		E4218EBC289A749600770960 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBA289A749600770960 /* Reciplease.xcdatamodeld */; };
 		E4218EBE289A751D00770960 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBD289A751D00770960 /* CoreDataStack.swift */; };
-		E4218EC0289A764300770960 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBF289A764300770960 /* Favorite.swift */; };
+		E4218EC0289A764300770960 /* RecipeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBF289A764300770960 /* RecipeEntity.swift */; };
 		E4218EC2289AAD9500770960 /* RecipeElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4218EC1289AAD9500770960 /* RecipeElements.swift */; };
 		E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */; };
 		E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB02897E0AE00A36993 /* FridgeService.swift */; };
@@ -52,9 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E4203AD3289C12380093B0AD /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		E4218EBB289A749600770960 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		E4218EBD289A751D00770960 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		E4218EBF289A764300770960 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		E4218EBF289A764300770960 /* RecipeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEntity.swift; sourceTree = "<group>"; };
 		E4218EC1289AAD9500770960 /* RecipeElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeElements.swift; sourceTree = "<group>"; };
 		E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		E4613DB02897E0AE00A36993 /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
@@ -123,7 +125,7 @@
 			children = (
 				E4218EBA289A749600770960 /* Reciplease.xcdatamodeld */,
 				E4218EBD289A751D00770960 /* CoreDataStack.swift */,
-				E4218EBF289A764300770960 /* Favorite.swift */,
+				E4218EBF289A764300770960 /* RecipeEntity.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -136,6 +138,7 @@
 				E4613DB52898099100A36993 /* RecipeUrlProvider.swift */,
 				E4218EC1289AAD9500770960 /* RecipeElements.swift */,
 				E4613DB72898113D00A36993 /* RecipesResponse.swift */,
+				E4203AD3289C12380093B0AD /* RecipeService.swift */,
 			);
 			path = FridgeService;
 			sourceTree = "<group>";
@@ -374,8 +377,9 @@
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
 				E4613DB82898113D00A36993 /* RecipesResponse.swift in Sources */,
 				E4613DBA2898144900A36993 /* CustomRecipeTableViewCell.swift in Sources */,
-				E4218EC0289A764300770960 /* Favorite.swift in Sources */,
+				E4218EC0289A764300770960 /* RecipeEntity.swift in Sources */,
 				E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */,
+				E4203AD4289C12380093B0AD /* RecipeService.swift in Sources */,
 				E4218EBC289A749600770960 /* Reciplease.xcdatamodeld in Sources */,
 				E4218EC2289AAD9500770960 /* RecipeElements.swift in Sources */,
 				E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */,

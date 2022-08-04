@@ -38,6 +38,21 @@ final class FridgeViewController: UIViewController {
                 self?.ingredientAdderTextField.text = ingredientToAdd
             }
         }
+        
+        fridgeService.didProduceError = { [weak self] myError in
+            let alertController = UIAlertController(
+                title: "Error",
+                message: myError.errorDescription,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(okAction)
+            self?.present(alertController, animated: true)
+        }
+        
+        fridgeService.canAddIngredientDidChange = { [weak self] canAddIngredient in
+            self?.addIngredientButton.tintColor = canAddIngredient ? .green : .gray
+        }
     }
     
     @objc func addIngredient() {
@@ -51,7 +66,7 @@ final class FridgeViewController: UIViewController {
     }
     
     @objc func searchForRecipes() {
-        fridgeService.fetchRecipes()
+        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
         let recipeListViewController = RecipeListViewController()
         navigationController?.pushViewController(recipeListViewController, animated: true)
         navigationItem.backButtonTitle = "Back"
@@ -61,6 +76,7 @@ final class FridgeViewController: UIViewController {
     // MARK: - PRIVATE: properties
     
     private let fridgeService = FridgeService.shared
+    private let recipeService = RecipeService.shared
     
     private var whatsInYourFridgeLabel: UILabel = {
         let label = UILabel()
@@ -271,7 +287,7 @@ extension FridgeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let addedIngredient = fridgeService.addedIngredients[indexPath.row]
+        let addedIngredient = fridgeService.addedIngredients[indexPath.row].capitalized
         cell.ingredientName = addedIngredient
         return cell
     }
@@ -281,6 +297,10 @@ extension FridgeViewController: UITableViewDataSource {
     }
 }
 
+
+extension FridgeViewController: UITextFieldDelegate {
+   
+}
 
 extension FridgeViewController: UITableViewDelegate {
 

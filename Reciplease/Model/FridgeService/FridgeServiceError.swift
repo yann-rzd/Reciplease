@@ -11,7 +11,7 @@ enum FridgeServiceError: LocalizedError {
     case failedToFetchRecipes
     case failedToAddNewIngredientAlreadyThere
     
-    var errorDescription: String {
+    var errorDescription: String? {
         switch self {
         case .failedToFetchRecipes:
             return  "Failed to fetch recipes."

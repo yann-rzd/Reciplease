@@ -31,7 +31,7 @@ final class RecipeListViewController: UIViewController {
     
     // MARK: - PRIVATE: properties
     
-    private let fridgeService = FridgeService.shared
+    private let recipeService = RecipeService.shared
     
     private let recipeTableView: UITableView = {
         let tableView = UITableView()
@@ -53,7 +53,7 @@ final class RecipeListViewController: UIViewController {
     }
     
     private func setupBindings() {
-        fridgeService.recipesDidChange = { [weak self] in
+        recipeService.recipesDidChange = { [weak self] in
             DispatchQueue.main.async {
                 self?.recipeTableView.reloadData()
             }
@@ -70,7 +70,7 @@ extension RecipeListViewController: UITableViewDataSource {
        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fridgeService.recipes.count
+        return recipeService.recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,13 +78,15 @@ extension RecipeListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let selectedRecipe = fridgeService.recipes[indexPath.row]
+        let selectedRecipe = recipeService.recipes[indexPath.row]
         let cellImageName = selectedRecipe.image
         let imageURL = NSURL(string: cellImageName ?? "")
         let imagedData = NSData(contentsOf: imageURL! as URL)!
         cell.backgroundView = UIImageView(image: UIImage(data: imagedData as Data)!)
         cell.backgroundView?.contentMode = .scaleAspectFill
         cell.backgroundView?.clipsToBounds = true
+        cell.selectionStyle = .none
+        
         
         cell.recipeModel = selectedRecipe
         

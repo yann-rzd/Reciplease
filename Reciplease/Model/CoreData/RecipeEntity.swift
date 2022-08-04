@@ -8,4 +8,4 @@
 import Foundation
 import CoreData
 
-class Favorite: NSManagedObject {}
+class RecipeEntity: NSManagedObject {}
