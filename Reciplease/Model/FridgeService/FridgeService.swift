@@ -8,10 +8,7 @@ import Foundation
 
 final class FridgeService {
     
-    
-    init() {
-        
-    }
+    init() {}
     
     // MARK: - INTERNAL: properties
     
@@ -32,14 +29,9 @@ final class FridgeService {
     var ingredientText = "" {
         didSet {
             ingredientTextDidChange?(ingredientText)
-            canAddIngredientDidChange?(!ingredientText.isEmpty)
+            canAddIngredientDidChange?(ingredientText.isEmpty)
         }
     }
-    
-
-    
-    
-    
     
     // MARK: - INTERNAL: functions
     

@@ -14,6 +14,7 @@ final class FridgeViewController: UIViewController {
         self.title = "Reciplease"
         ingredientTableView.dataSource = self
         ingredientTableView.delegate = self
+        ingredientAdderTextField.delegate = self
         setupViews()
         setupToolBar()
         setupBindinds()
@@ -51,7 +52,8 @@ final class FridgeViewController: UIViewController {
         }
         
         fridgeService.canAddIngredientDidChange = { [weak self] canAddIngredient in
-            self?.addIngredientButton.tintColor = canAddIngredient ? .green : .gray
+            self?.addIngredientButton.tintColor = !canAddIngredient ? .green : .gray
+            self?.addIngredientButton.isEnabled = !canAddIngredient ? true : false
         }
     }
     
@@ -105,7 +107,8 @@ final class FridgeViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.text = "Add"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
-        button.tintColor = .green
+        button.tintColor = .gray
+        button.isEnabled = false
         button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
         return button
     }()
@@ -299,7 +302,28 @@ extension FridgeViewController: UITableViewDataSource {
 
 
 extension FridgeViewController: UITextFieldDelegate {
-   
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard let textFieldText = textField.text,
+              let rangeIn = Range(range, in: textFieldText)
+        else {
+            return false
+        }
+        
+        if string == "" && textFieldText.count == 1 {
+            fridgeService.ingredientText = ""
+            return false
+        }
+        
+        let valueToConvertText = textFieldText.replacingCharacters(in: rangeIn, with: string)
+    
+        fridgeService.ingredientText = valueToConvertText
+        
+        return false
+    }
 }
 
 extension FridgeViewController: UITableViewDelegate {
