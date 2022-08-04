@@ -15,6 +15,7 @@ final class FridgeService {
     static let shared = FridgeService()
     
     var canAddIngredientDidChange: ((Bool) -> Void)?
+    var canClearIngredientsDidChange: ((Bool) -> Void)?
     var didProduceError: ((FridgeServiceError) -> Void)?
     var ingredientsDidChange: (() -> Void)?
     var ingredientTextDidChange: ((String) -> Void)?
@@ -23,6 +24,7 @@ final class FridgeService {
     var addedIngredients: [String] = [] {
         didSet {
             ingredientsDidChange?()
+            canClearIngredientsDidChange?(addedIngredients.isEmpty)
         }
     }
 

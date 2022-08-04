@@ -55,6 +55,11 @@ final class FridgeViewController: UIViewController {
             self?.addIngredientButton.tintColor = !canAddIngredient ? .green : .gray
             self?.addIngredientButton.isEnabled = !canAddIngredient ? true : false
         }
+        
+        fridgeService.canClearIngredientsDidChange = { [weak self] canClear in
+            self?.clearIngredientsButton.isHidden = !canClear ? false : true
+        }
+        
     }
     
     @objc func addIngredient() {
@@ -131,6 +136,7 @@ final class FridgeViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         button.tintColor = .gray
         button.addTarget(self, action: #selector(clearIngredients), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
