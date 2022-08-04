@@ -94,5 +94,9 @@ extension RecipeListViewController: UITableViewDataSource {
 }
 
 extension RecipeListViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recipeDetailsViewController = RecipeDetailsViewController()
+        navigationController?.pushViewController(recipeDetailsViewController, animated: true)
+        navigationItem.backButtonTitle = "Back"
+    }
 }

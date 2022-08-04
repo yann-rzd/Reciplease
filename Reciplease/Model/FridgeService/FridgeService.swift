@@ -112,6 +112,7 @@ final class FridgeService {
                     let recipeUrl = hit.recipe.url
                     let recipeYield = hit.recipe.yield
                     let recipeTotalTime = hit.recipe.totalTime
+                    let recipeIngredients = hit.recipe.ingredientLines
                     var foodList: [String] = []
                     
                     for food in hit.recipe.ingredients {
@@ -125,6 +126,7 @@ final class FridgeService {
                         url: recipeUrl,
                         yield: recipeYield ,
                         ingredients: foodList.joined(separator: ", "),
+                        ingredientsList: recipeIngredients,
                         time: recipeTotalTime
                     )
                     completionHandler(.success(recipe))

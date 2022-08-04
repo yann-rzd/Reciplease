@@ -30,6 +30,8 @@
 		E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */; };
 		E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */; };
 		E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */; };
+		E4F7C089289BC8B7002796AE /* CustomIngredientDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7C088289BC8B7002796AE /* CustomIngredientDetailsTableViewCell.swift */; };
+		E4F7C08B289BC925002796AE /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ../View/TabBarViewController.swift; sourceTree = "<group>"; };
+		E4F7C088289BC8B7002796AE /* CustomIngredientDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,7 @@
 			children = (
 				E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */,
 				E4613DB92898144900A36993 /* CustomRecipeTableViewCell.swift */,
+				E4F7C088289BC8B7002796AE /* CustomIngredientDetailsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			children = (
 				E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */,
 				E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */,
+				E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */,
 				E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */,
 			);
 			path = Controller;
@@ -357,8 +363,10 @@
 				E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */,
 				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
 				E4613DB62898099100A36993 /* RecipeUrlProvider.swift in Sources */,
+				E4F7C08B289BC925002796AE /* RecipeDetailsViewController.swift in Sources */,
 				E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */,
 				E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */,
+				E4F7C089289BC8B7002796AE /* CustomIngredientDetailsTableViewCell.swift in Sources */,
 				E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */,
 				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
 				E4218EBE289A751D00770960 /* CoreDataStack.swift in Sources */,
