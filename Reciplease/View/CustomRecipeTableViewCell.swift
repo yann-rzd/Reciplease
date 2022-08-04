@@ -125,7 +125,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.spacing = 5
         stackView.backgroundColor = UIColor.mainBackgroundColor
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7)
         stackView.layer.borderWidth = 2
         stackView.layer.cornerRadius = 10
         stackView.layer.borderColor = UIColor.white.cgColor
@@ -138,7 +138,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
-        stackView.spacing = 5
+        stackView.spacing = 2
         stackView.backgroundColor = UIColor.white.withAlphaComponent(0)
         return stackView
     }()
