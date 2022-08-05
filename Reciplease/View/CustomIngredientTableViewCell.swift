@@ -40,8 +40,9 @@ final class CustomIngredientTableViewCell: UITableViewCell {
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 16)
-        label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.sizeToFit()
         return label
     }()
     
@@ -52,6 +53,7 @@ final class CustomIngredientTableViewCell: UITableViewCell {
         contentView.addSubview(ingredientLabel)
         
         NSLayoutConstraint.activate([
+            ingredientLabel.topAnchor.constraint(equalTo: self.topAnchor),
             ingredientLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             ingredientLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])

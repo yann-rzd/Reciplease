@@ -344,7 +344,6 @@ extension FridgeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientTableViewCell.identifier, for: indexPath) as? CustomIngredientTableViewCell else {
             return UITableViewCell()
         }
-        
         let addedIngredient = fridgeService.addedIngredients[indexPath.row].capitalized
         cell.ingredientName = addedIngredient
         return cell
@@ -355,6 +354,9 @@ extension FridgeViewController: UITableViewDataSource {
     }
 }
 
+extension FridgeViewController: UITableViewDelegate {
+
+}
 
 extension FridgeViewController: UITextFieldDelegate {
     func textField(
@@ -380,10 +382,6 @@ extension FridgeViewController: UITextFieldDelegate {
         return false
     }
     
-}
-
-extension FridgeViewController: UITableViewDelegate {
-
 }
 
 extension UITextField {
