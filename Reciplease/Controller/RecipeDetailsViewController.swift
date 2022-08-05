@@ -18,6 +18,12 @@ class RecipeDetailsViewController: UIViewController {
         setupViews()
     }
     
+    override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+
+      recipeLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         recipeService.removeSelectedRecipe()
     }
@@ -51,17 +57,17 @@ class RecipeDetailsViewController: UIViewController {
         return image
     }()
     
-    private var recipeLabel: UITextField = {
-        let label = UITextField()
+    private var recipeLabel: UITextView = {
+        let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Pizza"
+        label.textContainerInset = UIEdgeInsets(top: 200, left: 8, bottom: 0, right: 8)
         label.textAlignment = .center
-        label.contentVerticalAlignment = .bottom
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 26)
         label.backgroundColor = UIColor(patternImage: UIImage(named: "defaultRecipeImage")!)
-        label.isEnabled = false
+        label.isEditable = false
         
         return label
     }()
@@ -200,7 +206,7 @@ class RecipeDetailsViewController: UIViewController {
         let imageUrl = recipeService.selectedRecipe.first?.image
         let imageURL = NSURL(string: imageUrl ?? "")
         let imagedData = NSData(contentsOf: imageURL! as URL)!
-        recipeImage.image = UIImage(data: imagedData as Data)
+        recipeLabel.backgroundColor = UIColor(patternImage: UIImage(data: imagedData as Data)!)
     }
     
     private func setupRecipeLabelWithimage() {
