@@ -59,6 +59,17 @@ final class FridgeViewController: UIViewController {
             self?.clearIngredientsButton.isHidden = !canClear ? false : true
         }
         
+        recipeService.isLoadingChanged = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                let buttonTitle = isLoading ? "" : "Search recipes"
+                self?.searchForRecipesButton.setTitle(buttonTitle, for: .normal)
+                self?.activityIndicator.isHidden = !isLoading
+                
+                if !isLoading {
+                    self?.activityIndicator.startAnimating()
+                }
+            }
+        }  
     }
     
     @objc func addIngredient() {
@@ -73,9 +84,9 @@ final class FridgeViewController: UIViewController {
     
     @objc func searchForRecipes() {
         recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
-        let recipeListViewController = RecipeListViewController()
-        navigationController?.pushViewController(recipeListViewController, animated: true)
-        navigationItem.backButtonTitle = "Back"
+//        let recipeListViewController = RecipeListViewController()
+//        navigationController?.pushViewController(recipeListViewController, animated: true)
+//        navigationItem.backButtonTitle = "Back"
     }
     
     
@@ -193,6 +204,16 @@ final class FridgeViewController: UIViewController {
         return tableView
     }()
     
+    private var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     private lazy var searchForRecipesButton: UIButton = {
         let button = UIButton()
         button.setTitle("Search for recipes", for: .normal)
@@ -274,13 +295,16 @@ final class FridgeViewController: UIViewController {
     
     private func setupSearchButton() {
         view.addSubview(searchForRecipesButton)
+        searchForRecipesButton.addSubview(activityIndicator)
 
         NSLayoutConstraint.activate([
             searchForRecipesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             searchForRecipesButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             searchForRecipesButton.topAnchor.constraint(equalTo: mainIngredientsListStackView.bottomAnchor, constant: 20),
             searchForRecipesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            searchForRecipesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            searchForRecipesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: searchForRecipesButton.centerYAnchor)
         ])
     }
 }

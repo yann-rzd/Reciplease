@@ -21,6 +21,7 @@ final class RecipeService {
     
     var didProduceError: ((FridgeServiceError) -> Void)?
     var recipesDidChange: (() -> Void)?
+    var isLoadingChanged: ((Bool) -> Void)?
     
     var recipes: [RecipeElements] = [] {
         didSet {
@@ -28,7 +29,14 @@ final class RecipeService {
         }
     }
     
+    var isLoading = false {
+        didSet {
+            isLoadingChanged?(isLoading)
+        }
+    }
+    
     func fetchRecipes(ingredients: [String]) {
+        currentDownloadCount += 1
         fetchRecipes(ingredients: ingredients) { [weak self] result in
             switch result {
             case .failure(let error):
@@ -36,6 +44,18 @@ final class RecipeService {
             case .success(let recipes):
                 self?.recipes.append(recipes)
             }
+            self?.currentDownloadCount -= 1
+        }
+    }
+    
+    // MARK: - PRIVATE: properties
+    
+    private let networkService: NetworkServiceProtocol
+    private let recipeUrlProvider: RecipeUrlProviderProtocol
+    
+    private var currentDownloadCount = 0 {
+        didSet {
+            isLoadingChanged?(isLoading)
         }
     }
     
@@ -57,7 +77,11 @@ final class RecipeService {
         
         urlRequest.httpMethod = "GET"
         
+        isLoading = true
+        
         networkService.fetch(urlRequest: urlRequest) { [weak self] (result: Result<RecipesResponse, NetworkServiceError>) in
+            self?.isLoading = false
+            
             switch result {
             case .failure:
                 completionHandler(.failure(.failedToFetchRecipes))
@@ -96,10 +120,5 @@ final class RecipeService {
             
         }
     }
-    
-    // MARK: - PRIVATE: properties
-    
-    private let networkService: NetworkServiceProtocol
-    private let recipeUrlProvider: RecipeUrlProviderProtocol
     
 }
