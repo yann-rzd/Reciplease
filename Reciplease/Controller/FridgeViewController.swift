@@ -65,12 +65,14 @@ final class FridgeViewController: UIViewController {
                 self?.searchForRecipesButton.setTitle(buttonTitle, for: .normal)
                 self?.activityIndicator.isHidden = !isLoading
                 
-                if !isLoading {
+                if isLoading {
                     self?.activityIndicator.startAnimating()
                 }
             }
         }  
     }
+    
+    
     
     @objc func addIngredient() {
         guard let ingredient = ingredientAdderTextField.text else { return }
@@ -83,7 +85,30 @@ final class FridgeViewController: UIViewController {
     }
     
     @objc func searchForRecipes() {
-        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
+//        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
+        
+        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    self.alertViewService.displayAlert(on: self, error: error)
+                case .success:
+                    break
+                }
+            }
+        }
+        
+        recipeService.isFetchingRecipesSuccess = { [weak self] isSuccess in
+            DispatchQueue.main.async {
+                if isSuccess {
+                    let recipeListViewController = RecipeListViewController()
+                    self?.navigationController?.pushViewController(recipeListViewController, animated: true)
+                    self?.navigationItem.backButtonTitle = "Back"
+                }
+            }
+        }
+        
 //        let recipeListViewController = RecipeListViewController()
 //        navigationController?.pushViewController(recipeListViewController, animated: true)
 //        navigationItem.backButtonTitle = "Back"
@@ -94,6 +119,7 @@ final class FridgeViewController: UIViewController {
     
     private let fridgeService = FridgeService.shared
     private let recipeService = RecipeService.shared
+    private let alertViewService = AlertViewService.shared
     
     private var whatsInYourFridgeLabel: UILabel = {
         let label = UILabel()

@@ -22,6 +22,7 @@ final class RecipeService {
     var didProduceError: ((FridgeServiceError) -> Void)?
     var recipesDidChange: (() -> Void)?
     var isLoadingChanged: ((Bool) -> Void)?
+    var isFetchingRecipesSuccess: ((Bool) -> Void)?
     
     var recipes: [RecipeElements] = [] {
         didSet {
@@ -35,34 +36,24 @@ final class RecipeService {
         }
     }
     
-    func fetchRecipes(ingredients: [String]) {
-        currentDownloadCount += 1
-        fetchRecipes(ingredients: ingredients) { [weak self] result in
-            switch result {
-            case .failure(let error):
-                self?.didProduceError?(error)
-            case .success(let recipes):
-                self?.recipes.append(recipes)
-            }
-            self?.currentDownloadCount -= 1
-        }
-    }
+
     
-    // MARK: - PRIVATE: properties
+    // MARK: - INTERNAL: functions
     
-    private let networkService: NetworkServiceProtocol
-    private let recipeUrlProvider: RecipeUrlProviderProtocol
+    //    func fetchRecipes(ingredients: [String]) {
+    //        currentDownloadCount += 1
+    //        fetchRecipes(ingredients: ingredients) { [weak self] result in
+    //            switch result {
+    //            case .failure(let error):
+    //                self?.didProduceError?(error)
+    //            case .success(let recipes):
+    //                self?.recipes.append(recipes)
+    //            }
+    //            self?.currentDownloadCount -= 1
+    //        }
+    //    }
     
-    private var currentDownloadCount = 0 {
-        didSet {
-            isLoadingChanged?(isLoading)
-        }
-    }
-    
-    
-    // MARK: - PRIVATE: functions
-    
-    private func fetchRecipes(
+    func fetchRecipes(
         ingredients: [String],
         completionHandler: @escaping (Result<RecipeElements, FridgeServiceError>) -> Void
     ) {
@@ -86,6 +77,7 @@ final class RecipeService {
             case .failure:
                 completionHandler(.failure(.failedToFetchRecipes))
                 self?.didProduceError?(.failedToFetchRecipes)
+                self?.isFetchingRecipesSuccess?(false)
                 return
             case .success(let recipeResponse):
                 
@@ -113,12 +105,24 @@ final class RecipeService {
                         time: recipeTotalTime
                     )
                     completionHandler(.success(recipe))
+                    self?.recipes.append(recipe)
                 }
-                
+                self?.isFetchingRecipesSuccess?(true)
                 return
             }
             
         }
     }
+    
+    // MARK: - PRIVATE: properties
+    
+    private let networkService: NetworkServiceProtocol
+    private let recipeUrlProvider: RecipeUrlProviderProtocol
+    
+    
+    
+    // MARK: - PRIVATE: functions
+    
+    
     
 }
