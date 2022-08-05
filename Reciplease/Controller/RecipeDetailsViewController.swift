@@ -18,6 +18,10 @@ class RecipeDetailsViewController: UIViewController {
         setupViews()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        recipeService.removeSelectedRecipe()
+    }
+    
     // MARK: - INTERNAL: functions
     
     @objc func getDirectionsRecipes() {
@@ -30,7 +34,7 @@ class RecipeDetailsViewController: UIViewController {
     
     // MARK: - PRIVATE: properties
     
-    private let fridgeService = FridgeService.shared
+    private let recipeService = RecipeService.shared
     
     private lazy var addFavoriteBarButton: UIBarButtonItem = {
         let addCityBarButtonImage = UIImage(systemName: "star.fill")
@@ -72,7 +76,7 @@ class RecipeDetailsViewController: UIViewController {
     
     private let ingredientsTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(CustomIngredientDetailsTableViewCell.self, forCellReuseIdentifier: CustomIngredientDetailsTableViewCell.identifier)
+        tableView.register(CustomIngredientTableViewCell.self, forCellReuseIdentifier: CustomIngredientTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -252,13 +256,20 @@ class RecipeDetailsViewController: UIViewController {
 
 extension RecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard let ingredientsNumbre = recipeService.selectedRecipe.first?.ingredientsList else {
+            return 0
+        }
+            return ingredientsNumbre.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientDetailsTableViewCell.identifier, for: indexPath) as? CustomIngredientDetailsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientTableViewCell.identifier, for: indexPath) as? CustomIngredientTableViewCell else {
             return UITableViewCell()
         }
+        
+        let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
+        cell.ingredientName = ingredients
+        
         
         return cell
     }

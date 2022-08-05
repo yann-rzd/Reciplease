@@ -30,6 +30,8 @@ final class RecipeService {
         }
     }
     
+    var selectedRecipe: [RecipeElements] = []
+    
     var isLoading = false {
         didSet {
             isLoadingChanged?(isLoading)
@@ -39,6 +41,10 @@ final class RecipeService {
 
     
     // MARK: - INTERNAL: functions
+    
+    func removeSelectedRecipe() {
+        selectedRecipe.removeAll()
+    }
     
     //    func fetchRecipes(ingredients: [String]) {
     //        currentDownloadCount += 1

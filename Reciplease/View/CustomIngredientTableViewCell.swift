@@ -39,7 +39,9 @@ final class CustomIngredientTableViewCell: UITableViewCell {
         label.text = "- Tomatoes"
         label.textColor = .white
         label.tintColor = .white
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         return label
     }()
     
@@ -50,7 +52,7 @@ final class CustomIngredientTableViewCell: UITableViewCell {
         contentView.addSubview(ingredientLabel)
         
         NSLayoutConstraint.activate([
-            ingredientLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            ingredientLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             ingredientLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
