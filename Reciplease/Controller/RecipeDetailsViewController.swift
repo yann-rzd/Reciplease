@@ -66,8 +66,9 @@ class RecipeDetailsViewController: UIViewController {
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 26)
-        label.backgroundColor = UIColor(patternImage: UIImage(named: "defaultRecipeImage")!)
+//        label.backgroundColor = UIColor(patternImage: UIImage(named: "defaultRecipeImage")!)
         label.isEditable = false
+        label.layer.contents = UIImage(named: "defaultRecipeImage")
         
         return label
     }()
@@ -206,7 +207,7 @@ class RecipeDetailsViewController: UIViewController {
         let imageUrl = recipeService.selectedRecipe.first?.image
         let imageURL = NSURL(string: imageUrl ?? "")
         let imagedData = NSData(contentsOf: imageURL! as URL)!
-        recipeLabel.backgroundColor = UIColor(patternImage: UIImage(data: imagedData as Data)!)
+        recipeLabel.layer.contents = UIImage(data: imagedData as Data)?.cgImage
     }
     
     private func setupRecipeLabelWithimage() {
