@@ -127,6 +127,7 @@ final class FridgeViewController: UIViewController {
         label.text = "What's in your fridge ?"
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
+        label.isEnabled = false
         return label
     }()
     
@@ -160,6 +161,7 @@ final class FridgeViewController: UIViewController {
         label.text = "Your ingredients :"
         label.textColor = .white
         label.font = .systemFont(ofSize: 22)
+        label.isEnabled = false
         return label
     }()
     

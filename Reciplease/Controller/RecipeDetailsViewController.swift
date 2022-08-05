@@ -61,6 +61,7 @@ class RecipeDetailsViewController: UIViewController {
         label.tintColor = .white
         label.font = .systemFont(ofSize: 26)
         label.backgroundColor = UIColor(patternImage: UIImage(named: "defaultRecipeImage")!)
+        label.isEnabled = false
         
         return label
     }()
@@ -187,7 +188,19 @@ class RecipeDetailsViewController: UIViewController {
         setupIngredients()
         setupGetDirectionsButton()
         setupNavigationBar()
+        setupContent()
         
+    }
+    
+    private func setupContent() {
+        recipeLabel.text = recipeService.selectedRecipe.first?.label
+        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield.description
+        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time.description
+        
+        let imageUrl = recipeService.selectedRecipe.first?.image
+        let imageURL = NSURL(string: imageUrl ?? "")
+        let imagedData = NSData(contentsOf: imageURL! as URL)!
+        recipeImage.image = UIImage(data: imagedData as Data)
     }
     
     private func setupRecipeLabelWithimage() {
