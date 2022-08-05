@@ -379,6 +379,7 @@ extension FridgeViewController: UITextFieldDelegate {
         
         return false
     }
+    
 }
 
 extension FridgeViewController: UITableViewDelegate {
