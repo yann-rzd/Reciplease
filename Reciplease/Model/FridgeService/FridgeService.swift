@@ -39,8 +39,7 @@ final class FridgeService {
     
     func add(ingredient: String) {
         let processedIngredient = ingredient.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        
-        
+
         guard !addedIngredients.contains(processedIngredient) else {
             didProduceError?(.failedToAddNewIngredientAlreadyThere)
             return
