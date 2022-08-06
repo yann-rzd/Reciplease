@@ -25,6 +25,7 @@ final class FridgeService {
         didSet {
             ingredientsDidChange?()
             canClearIngredientsDidChange?(addedIngredients.isEmpty)
+            print("🌭 == \(addedIngredients)")
         }
     }
 
