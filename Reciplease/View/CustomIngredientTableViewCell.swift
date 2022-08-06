@@ -29,26 +29,32 @@ final class CustomIngredientTableViewCell: UITableViewCell {
             ingredientLabel.text = "- \(ingredientName ?? "")"
         }
     }
+
+    
+    
+    // MARK: - INTERRNAL: functions
+    
+
     
     
     // MARK: - PRIVATE: properties
     
-    private var ingredientLabel: UILabel = {
-        let label = UILabel()
+    var ingredientLabel: UITextView = {
+        let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "- Tomatoes"
         label.textColor = .white
-        label.tintColor = .white
         label.font = .systemFont(ofSize: 16)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.sizeToFit()
+        label.backgroundColor = .mainBackgroundColor
+        label.isEditable = false
         return label
     }()
+    
     
     // MARK: - PRIVATE: functions
     
     private func commonInit() -> Void {
+        ingredientLabel = UITextView(frame: self.frame)
         contentView.backgroundColor = UIColor.mainBackgroundColor
         contentView.addSubview(ingredientLabel)
         
@@ -59,6 +65,9 @@ final class CustomIngredientTableViewCell: UITableViewCell {
         ])
     }
 }
+
+
+// MARK: - EXTENSIONS
 
 extension UIColor {
     class var ingredientCellBackgroundColor: UIColor {

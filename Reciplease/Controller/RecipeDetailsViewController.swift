@@ -239,6 +239,8 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     private func setupIngredients() {
+        ingredientsTableView.estimatedRowHeight = 3
+        ingredientsTableView.rowHeight = UITableView.automaticDimension
         ingredientsTableView.backgroundColor = UIColor.mainBackgroundColor
         mainIngredientsListStackView.addArrangedSubview(ingredientsLabel)
         mainIngredientsListStackView.addArrangedSubview(ingredientsTableView)
@@ -288,7 +290,9 @@ extension RecipeDetailsViewController: UITableViewDataSource {
         }
         
         let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
+        cell.ingredientLabel.delegate = self
         cell.ingredientName = ingredients
+        cell.ingredientLabel.sizeToFit()
         
         
         return cell
@@ -303,3 +307,17 @@ extension RecipeDetailsViewController: UITableViewDataSource {
 extension RecipeDetailsViewController: UITableViewDelegate {
 
 }
+
+extension RecipeDetailsViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n")
+        {
+
+            self.view.endEditing(true);
+            return false;
+        }
+        return true
+    }
+}
+
+

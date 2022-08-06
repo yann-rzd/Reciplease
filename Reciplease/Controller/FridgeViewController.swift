@@ -346,6 +346,8 @@ extension FridgeViewController: UITableViewDataSource {
         }
         let addedIngredient = fridgeService.addedIngredients[indexPath.row].capitalized
         cell.ingredientName = addedIngredient
+        cell.ingredientLabel.sizeToFit()
+        cell.ingredientLabel.isEditable = false
         return cell
     }
     
