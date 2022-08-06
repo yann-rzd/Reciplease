@@ -19,9 +19,10 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-      super.viewDidLayoutSubviews()
-
-      recipeLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+        super.viewDidLayoutSubviews()
+        
+        ingredientsTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 11
+        recipeLabel.scrollRangeToVisible(NSMakeRange(0, 0))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -187,6 +188,8 @@ class RecipeDetailsViewController: UIViewController {
         return button
     }()
     
+    var textViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK: - PRIVATE: functions
     
     private func setupViews() {
@@ -239,7 +242,8 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     private func setupIngredients() {
-        ingredientsTableView.estimatedRowHeight = 3
+        ingredientsTableView.rowHeight = UITableView.automaticDimension
+        ingredientsTableView.estimatedRowHeight = 44.0
         ingredientsTableView.rowHeight = UITableView.automaticDimension
         ingredientsTableView.backgroundColor = UIColor.mainBackgroundColor
         mainIngredientsListStackView.addArrangedSubview(ingredientsLabel)
@@ -290,9 +294,13 @@ extension RecipeDetailsViewController: UITableViewDataSource {
         }
         
         let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
-        cell.ingredientLabel.delegate = self
+//        cell.ingredientLabel.delegate = self
         cell.ingredientName = ingredients
         cell.ingredientLabel.sizeToFit()
+        cell.ingredientLabel.isEditable = false
+        cell.ingredientLabel.textColor = .white
+        cell.ingredientLabel.font = .systemFont(ofSize: 16)
+        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         
         
         return cell
@@ -301,23 +309,16 @@ extension RecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 44
+        }
+        return 60 //the height of your table view cell, the default value is 44
+    }
 }
 
 
 extension RecipeDetailsViewController: UITableViewDelegate {
 
 }
-
-extension RecipeDetailsViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if (text == "\n")
-        {
-
-            self.view.endEditing(true);
-            return false;
-        }
-        return true
-    }
-}
-
-

@@ -348,11 +348,10 @@ extension FridgeViewController: UITableViewDataSource {
         cell.ingredientName = addedIngredient
         cell.ingredientLabel.sizeToFit()
         cell.ingredientLabel.isEditable = false
+        cell.ingredientLabel.textColor = .white
+        cell.ingredientLabel.font = .systemFont(ofSize: 16)
+        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
 }
 

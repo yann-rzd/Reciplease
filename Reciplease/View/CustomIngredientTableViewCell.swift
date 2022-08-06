@@ -29,8 +29,6 @@ final class CustomIngredientTableViewCell: UITableViewCell {
             ingredientLabel.text = "- \(ingredientName ?? "")"
         }
     }
-
-    
     
     // MARK: - INTERRNAL: functions
     
@@ -45,7 +43,6 @@ final class CustomIngredientTableViewCell: UITableViewCell {
         label.text = "- Tomatoes"
         label.textColor = .white
         label.font = .systemFont(ofSize: 16)
-        label.backgroundColor = .mainBackgroundColor
         label.isEditable = false
         return label
     }()
@@ -54,13 +51,14 @@ final class CustomIngredientTableViewCell: UITableViewCell {
     // MARK: - PRIVATE: functions
     
     private func commonInit() -> Void {
-        ingredientLabel = UITextView(frame: self.frame)
+//        ingredientLabel = UITextView(frame: self.frame)
         contentView.backgroundColor = UIColor.mainBackgroundColor
         contentView.addSubview(ingredientLabel)
         
         NSLayoutConstraint.activate([
             ingredientLabel.topAnchor.constraint(equalTo: self.topAnchor),
             ingredientLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            ingredientLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             ingredientLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
