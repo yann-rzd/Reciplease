@@ -64,7 +64,7 @@ final class RecipeService {
         isLoading = true
         
         networkService.fetch(urlRequest: urlRequest) { [weak self] (result: Result<RecipesResponse, NetworkServiceError>) in
-            self?.isLoading = false
+            
             
             switch result {
             case .failure:
@@ -100,10 +100,11 @@ final class RecipeService {
                     completionHandler(.success(recipe))
                     self?.recipes.append(recipe)
                 }
+                
                 self?.isFetchingRecipesSuccess?(true)
+                self?.isLoading = false
                 return
             }
-            
         }
     }
     
