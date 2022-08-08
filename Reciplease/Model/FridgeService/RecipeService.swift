@@ -37,7 +37,6 @@ final class RecipeService {
             isLoadingChanged?(isLoading)
         }
     }
-    
 
     
     // MARK: - INTERNAL: functions

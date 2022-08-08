@@ -253,6 +253,7 @@ final class FridgeViewController: UIViewController {
         button.setTitle("Search for recipes", for: .normal)
         button.backgroundColor = UIColor.greenButtonColor
         button.frame.size.height = 60
+        button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(searchForRecipes), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
 

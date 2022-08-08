@@ -178,6 +178,7 @@ class RecipeDetailsViewController: UIViewController {
         button.setTitle("Get directions", for: .normal)
         button.backgroundColor = UIColor.greenButtonColor
         button.frame.size.height = 60
+        button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(getDirectionsRecipes), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
 
