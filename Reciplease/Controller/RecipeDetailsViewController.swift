@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RecipeDetailsViewController: UIViewController {
 
@@ -18,6 +19,10 @@ class RecipeDetailsViewController: UIViewController {
         setupViews()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        recipeService.removeSelectedRecipe()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -28,7 +33,15 @@ class RecipeDetailsViewController: UIViewController {
     // MARK: - INTERNAL: functions
     
     @objc func getDirectionsRecipes() {
+        guard let url = recipeService.selectedRecipe.first?.url,
+            let urlString = URL(string: url) else {
+                return
+            }
+
+            let safariVC = SFSafariViewController(url: urlString)
+            present(safariVC, animated: true, completion: nil)
         
+        safariVC.delegate = self
     }
     
     @objc func didTapAddFavoriteButton() {
@@ -58,7 +71,7 @@ class RecipeDetailsViewController: UIViewController {
         let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Pizza"
-        label.textContainerInset = UIEdgeInsets(top: 200, left: 8, bottom: 0, right: 8)
+        label.textContainerInset = UIEdgeInsets(top: 150, left: 8, bottom: 0, right: 8)
         label.textAlignment = .center
         label.textColor = .white
         label.tintColor = .white
@@ -291,15 +304,12 @@ extension RecipeDetailsViewController: UITableViewDataSource {
         }
         
         let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
-//        cell.ingredientLabel.delegate = self
         cell.ingredientName = ingredients
         cell.ingredientLabel.sizeToFit()
         cell.ingredientLabel.isEditable = false
         cell.ingredientLabel.textColor = .white
         cell.ingredientLabel.font = .systemFont(ofSize: 16)
         cell.ingredientLabel.backgroundColor = .mainBackgroundColor
-        
-        
         return cell
     }
     
@@ -318,4 +328,10 @@ extension RecipeDetailsViewController: UITableViewDataSource {
 
 extension RecipeDetailsViewController: UITableViewDelegate {
 
+}
+
+extension RecipeDetailsViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }

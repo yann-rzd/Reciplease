@@ -45,6 +45,10 @@ final class RecipeService {
         recipes.removeAll()
     }
     
+    func removeSelectedRecipe() {
+        selectedRecipe.removeAll()
+    }
+    
     func fetchRecipes(
         ingredients: [String],
         completionHandler: @escaping (Result<RecipeElements, FridgeServiceError>) -> Void
