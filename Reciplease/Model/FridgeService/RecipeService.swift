@@ -32,8 +32,6 @@ final class RecipeService {
     
     var selectedRecipe: [RecipeElements] = []
     
-//    var selectedRecipe: [RecipeElements] = []
-    
     var isLoading = false {
         didSet {
             isLoadingChanged?(isLoading)
@@ -47,19 +45,6 @@ final class RecipeService {
     func removeRecipes() {
         recipes.removeAll()
     }
-    
-    //    func fetchRecipes(ingredients: [String]) {
-    //        currentDownloadCount += 1
-    //        fetchRecipes(ingredients: ingredients) { [weak self] result in
-    //            switch result {
-    //            case .failure(let error):
-    //                self?.didProduceError?(error)
-    //            case .success(let recipes):
-    //                self?.recipes.append(recipes)
-    //            }
-    //            self?.currentDownloadCount -= 1
-    //        }
-    //    }
     
     func fetchRecipes(
         ingredients: [String],

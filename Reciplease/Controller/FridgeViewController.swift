@@ -72,8 +72,6 @@ final class FridgeViewController: UIViewController {
         }  
     }
     
-    
-    
     @objc func addIngredient() {
         guard let ingredient = ingredientAdderTextField.text else { return }
         fridgeService.add(ingredient: ingredient)
@@ -126,6 +124,7 @@ final class FridgeViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "What's in your fridge ?"
+        label.textColor = .blackColor
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
         return label
@@ -133,11 +132,14 @@ final class FridgeViewController: UIViewController {
     
     private var ingredientAdderTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Lemon, Cheese, Sausages..."
         textField.font = .systemFont(ofSize: 18)
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Lemon, Cheese, Sausages...",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)]
+        )
         textField.addUnderLine()
         return textField
     }()
@@ -403,6 +405,20 @@ extension UIColor {
         if let color = UIColor(named: "greenButtonColor") {
             return color
         }
-        fatalError("Could not find weatherCellsBackground color")
+        fatalError("Could not find color")
+    }
+    
+    class var blackColor: UIColor {
+        if let color = UIColor(named: "blackColor") {
+            return color
+        }
+        fatalError("Could not find color")
+    }
+    
+    class var grayColor: UIColor {
+        if let color = UIColor(named: "grayColor") {
+            return color
+        }
+        fatalError("Could not find color")
     }
 }
