@@ -97,10 +97,15 @@ final class FridgeViewController: UIViewController {
                 }
             }
         }
-        
+
         recipeService.isFetchingRecipesSuccess = { [weak self] isSuccess in
             DispatchQueue.main.async {
                 if isSuccess {
+                    guard let recipes = self?.recipeService.recipes,
+                          !recipes.isEmpty  else {
+                        self?.alertViewService.displayAlert(on: self!, error: FridgeServiceError.noRecipeFound)
+                        return
+                    }
                     let recipeListViewController = RecipeListViewController()
                     self?.navigationController?.pushViewController(recipeListViewController, animated: true)
                     self?.navigationItem.backButtonTitle = "Back"

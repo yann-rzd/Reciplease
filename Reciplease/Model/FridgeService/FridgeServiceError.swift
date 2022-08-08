@@ -10,6 +10,7 @@ import Foundation
 enum FridgeServiceError: LocalizedError {
     case failedToFetchRecipes
     case failedToAddNewIngredientAlreadyThere
+    case noRecipeFound
     
     var errorDescription: String? {
         switch self {
@@ -17,6 +18,8 @@ enum FridgeServiceError: LocalizedError {
             return  "Failed to fetch recipes."
         case .failedToAddNewIngredientAlreadyThere:
             return "Failed to add ingredient to selection as it is already present."
+        case .noRecipeFound:
+            return "No recipes have been found."
         }
     }
     
