@@ -25,10 +25,6 @@ class RecipeDetailsViewController: UIViewController {
         recipeLabel.scrollRangeToVisible(NSMakeRange(0, 0))
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        recipeService.removeSelectedRecipe()
-    }
-    
     // MARK: - INTERNAL: functions
     
     @objc func getDirectionsRecipes() {

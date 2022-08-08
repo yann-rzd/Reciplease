@@ -87,6 +87,7 @@ final class FridgeViewController: UIViewController {
     @objc func searchForRecipes() {
 //        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
         
+        recipeService.removeRecipes()
         recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {

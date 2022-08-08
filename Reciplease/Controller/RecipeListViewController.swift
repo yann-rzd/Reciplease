@@ -87,12 +87,10 @@ extension RecipeListViewController: UITableViewDataSource {
         cell.backgroundView?.clipsToBounds = true
         cell.selectionStyle = .none
         
-        
         cell.recipeModel = selectedRecipe
         
         return cell
     }
-
 }
 
 extension RecipeListViewController: UITableViewDelegate {
