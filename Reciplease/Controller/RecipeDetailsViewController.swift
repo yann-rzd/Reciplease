@@ -11,6 +11,7 @@ import SafariServices
 class RecipeDetailsViewController: UIViewController {
 
     // MARK: - VIEW LIFE CYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reciplease"
@@ -34,12 +35,12 @@ class RecipeDetailsViewController: UIViewController {
     
     @objc func getDirectionsRecipes() {
         guard let url = recipeService.selectedRecipe.first?.url,
-            let urlString = URL(string: url) else {
-                return
-            }
-
-            let safariVC = SFSafariViewController(url: urlString)
-            present(safariVC, animated: true, completion: nil)
+              let urlString = URL(string: url) else {
+            return
+        }
+        
+        let safariVC = SFSafariViewController(url: urlString)
+        present(safariVC, animated: true, completion: nil)
         
         safariVC.delegate = self
     }
@@ -76,7 +77,6 @@ class RecipeDetailsViewController: UIViewController {
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 26)
-//        label.backgroundColor = UIColor(patternImage: UIImage(named: "defaultRecipeImage")!)
         label.isEditable = false
         label.layer.contents = UIImage(named: "defaultRecipeImage")
         
@@ -312,23 +312,9 @@ extension RecipeDetailsViewController: UITableViewDataSource {
         cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 44
-        }
-        return 60 //the height of your table view cell, the default value is 44
-    }
 }
 
-
-extension RecipeDetailsViewController: UITableViewDelegate {
-
-}
+extension RecipeDetailsViewController: UITableViewDelegate { }
 
 extension RecipeDetailsViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
