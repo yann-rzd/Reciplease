@@ -1,17 +1,15 @@
 //
-//  RecipeDetailsViewController.swift
+//  FavoriteRecipeDetailsViewControllerTableViewController.swift
 //  Reciplease
 //
-//  Created by Yann Rouzaud on 04/08/2022.
+//  Created by Yann Rouzaud on 09/08/2022.
 //
 
 import UIKit
 import SafariServices
 
-class RecipeDetailsViewController: UIViewController {
+class FavoriteRecipeDetailsViewController: UIViewController {
 
-    // MARK: - VIEW LIFE CYCLE
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reciplease"
@@ -34,7 +32,7 @@ class RecipeDetailsViewController: UIViewController {
     // MARK: - INTERNAL: functions
     
     @objc func getDirectionsRecipes() {
-        guard let url = recipeService.selectedFavoriteRecipe.first?.url,
+        guard let url = recipeService.selectedRecipe.first?.url,
               let urlString = URL(string: url) else {
             return
         }
@@ -45,41 +43,9 @@ class RecipeDetailsViewController: UIViewController {
         safariVC.delegate = self
     }
     
-    @objc func didTapAddFavoriteButton() {
-        guard let title = recipeService.selectedRecipe.first?.label,
-              let ingredients = recipeService.selectedRecipe.first?.ingredients,
-              let ingredientsDetails = recipeService.selectedRecipe.first?.ingredientsList,
-              let imageUrl = recipeService.selectedRecipe.first?.image,
-              let url = recipeService.selectedRecipe.first?.url,
-              let yield = recipeService.selectedRecipe.first?.yield,
-              let recipeTime = recipeService.selectedRecipe.first?.time else {
-            return
-        }
-        
-        recipeService.saveRecipe(
-            title: title,
-            ingredients: ingredients,
-            ingredientsDetails: ingredientsDetails,
-            imageUrl: imageUrl,
-            url: url,
-            yield: yield,
-            recipeTime: recipeTime,
-            callback: { [weak self] in
-                self?.addFavoriteBarButton.tintColor = .greenButtonColor
-            }
-        )
-    }
-    
     // MARK: - PRIVATE: properties
     
     private let recipeService = RecipeService.shared
-    
-    private lazy var addFavoriteBarButton: UIBarButtonItem = {
-        let addCityBarButtonImage = UIImage(systemName: "star.fill")
-        let addCityBarButton = UIBarButtonItem(image: addCityBarButtonImage, style: .plain, target: self, action: #selector(didTapAddFavoriteButton))
-        addCityBarButton.tintColor = .white
-        return addCityBarButton
-    }()
     
     private let recipeImage: UIImageView = {
         let image = UIImageView()
@@ -228,17 +194,16 @@ class RecipeDetailsViewController: UIViewController {
         setupIndicators()
         setupIngredients()
         setupGetDirectionsButton()
-        setupNavigationBar()
         setupContent()
         
     }
     
     private func setupContent() {
-        recipeLabel.text = recipeService.selectedRecipe.first?.label
-        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield.description
-        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time.description
+        recipeLabel.text = recipeService.selectedFavoriteRecipe.first?.title
+        recommendationNumberLabel.text = recipeService.selectedFavoriteRecipe.first?.yield.description
+        recipeDurationLabel.text = recipeService.selectedFavoriteRecipe.first?.recipeTime.description
         
-        let imageUrl = recipeService.selectedRecipe.first?.image
+        let imageUrl = recipeService.selectedFavoriteRecipe.first?.imageUrl
         let imageURL = NSURL(string: imageUrl ?? "")
         guard let data = NSData(contentsOf: imageURL! as URL) else {return}
         let imagedData = data
@@ -302,19 +267,13 @@ class RecipeDetailsViewController: UIViewController {
             getDirectionsButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
-    
-    private func setupNavigationBar() {
-        navigationItem.rightBarButtonItems = [
-            addFavoriteBarButton
-        ]
-    }
 }
 
 // MARK: - EXTENSIONS
 
-extension RecipeDetailsViewController: UITableViewDataSource {
+extension FavoriteRecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ingredientsNumbre = recipeService.selectedRecipe.first?.ingredientsList else {
+        guard let ingredientsNumbre = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails else {
             return 0
         }
             return ingredientsNumbre.count
@@ -325,20 +284,20 @@ extension RecipeDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
-        cell.ingredientName = ingredients
-        cell.ingredientLabel.sizeToFit()
-        cell.ingredientLabel.isEditable = false
-        cell.ingredientLabel.textColor = .white
-        cell.ingredientLabel.font = .systemFont(ofSize: 16)
-        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
+//        let ingredients = recipeService.selectedFavoriteRecipe.first?.ingredientsList?[indexPath.row]
+//        cell.ingredientName = ingredients
+//        cell.ingredientLabel.sizeToFit()
+//        cell.ingredientLabel.isEditable = false
+//        cell.ingredientLabel.textColor = .white
+//        cell.ingredientLabel.font = .systemFont(ofSize: 16)
+//        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         return cell
     }
 }
 
-extension RecipeDetailsViewController: UITableViewDelegate { }
+extension FavoriteRecipeDetailsViewController: UITableViewDelegate { }
 
-extension RecipeDetailsViewController: SFSafariViewControllerDelegate {
+extension FavoriteRecipeDetailsViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
     }

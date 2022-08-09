@@ -145,6 +145,7 @@ final class RecipeService {
     
     func saveRecipe(title: String,
                     ingredients: String,
+                    ingredientsDetails: [String],
                     imageUrl: String,
                     url: String,
                     yield: Double,
@@ -155,6 +156,7 @@ final class RecipeService {
         
         recipe.title = title
         recipe.ingredients = ingredients
+        recipe.ingredientsDetails = ingredientsDetails.description
         recipe.imageUrl = imageUrl
         recipe.url = url
         recipe.yield = yield

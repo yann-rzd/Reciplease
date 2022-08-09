@@ -22,6 +22,10 @@ class FavoriteRecipeViewController: UIViewController {
         getRecipes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        recipeTableView.reloadData()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         recipeTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 5
@@ -102,7 +106,7 @@ extension FavoriteRecipeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRecipe = recipeService.favoriteRecipes[indexPath.row]
         recipeService.selectedFavoriteRecipe.append(selectedRecipe)
-        let recipeDetailsViewController = RecipeDetailsViewController()
+        let recipeDetailsViewController = FavoriteRecipeDetailsViewController()
         navigationController?.pushViewController(recipeDetailsViewController, animated: true)
         navigationItem.backButtonTitle = "Back"
     }
