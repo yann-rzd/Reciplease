@@ -26,6 +26,7 @@ final class RecipeService {
     
     var didProduceError: ((FridgeServiceError) -> Void)?
     var recipesDidChange: (() -> Void)?
+    var favoriteRecipesDidChange: (() -> Void)?
     var isLoadingChanged: ((Bool) -> Void)?
     var isFetchingRecipesSuccess: ((Bool) -> Void)?
     
@@ -36,6 +37,14 @@ final class RecipeService {
     }
     
     var selectedRecipe: [RecipeElements] = []
+    
+    var favoriteRecipes: [RecipeEntity] = [] {
+        didSet {
+            favoriteRecipesDidChange?()
+        }
+    }
+    
+    var selectedFavoriteRecipe: [RecipeEntity] = []
     
     var isLoading = false {
         didSet {
@@ -118,6 +127,15 @@ final class RecipeService {
     
     func getRecipes(callback: @escaping ([RecipeEntity]) -> Void) {
         let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "title", ascending: true),
+            NSSortDescriptor(key: "ingredientsDetails", ascending: true),
+            NSSortDescriptor(key: "ingredients", ascending: true),
+            NSSortDescriptor(key: "imageUrl", ascending: true),
+            NSSortDescriptor(key: "url", ascending: true),
+            NSSortDescriptor(key: "yield", ascending: true),
+            NSSortDescriptor(key: "recipeTime", ascending: true)
+        ]
         guard let recipes = try? coreDataStack.viewContext.fetch(request) else {
             callback([])
             return
@@ -126,7 +144,6 @@ final class RecipeService {
     }
     
     func saveRecipe(title: String,
-                    ingredientsDetails: String,
                     ingredients: String,
                     imageUrl: String,
                     url: String,
@@ -137,7 +154,6 @@ final class RecipeService {
         let recipe = RecipeEntity(context: coreDataStack.viewContext)
         
         recipe.title = title
-        recipe.ingredientsDetails = ingredientsDetails
         recipe.ingredients = ingredients
         recipe.imageUrl = imageUrl
         recipe.url = url
@@ -149,6 +165,19 @@ final class RecipeService {
             callback()
         } catch {
             print("We were unable to save this recipe.")
+        }
+    }
+    
+    func removeRecipe(recipe: RecipeEntity,
+                    callback: @escaping () -> Void) {
+
+        coreDataStack.viewContext.delete(recipe)
+        
+        do {
+            try coreDataStack.viewContext.save()
+            callback()
+        } catch {
+            print("We were unable to remove this recipe.")
         }
     }
     

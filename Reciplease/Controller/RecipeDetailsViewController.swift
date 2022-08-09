@@ -46,7 +46,26 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     @objc func didTapAddFavoriteButton() {
+        guard let title = recipeService.selectedRecipe.first?.label,
+              let ingredients = recipeService.selectedRecipe.first?.ingredients,
+              let imageUrl = recipeService.selectedRecipe.first?.image,
+              let url = recipeService.selectedRecipe.first?.url,
+              let yield = recipeService.selectedRecipe.first?.yield,
+              let recipeTime = recipeService.selectedRecipe.first?.time else {
+            return
+        }
         
+        recipeService.saveRecipe(
+            title: title,
+            ingredients: ingredients,
+            imageUrl: imageUrl,
+            url: url,
+            yield: yield,
+            recipeTime: recipeTime,
+            callback: { [weak self] in
+                self?.addFavoriteBarButton.tintColor = .greenButtonColor
+            }
+        )
     }
     
     // MARK: - PRIVATE: properties
@@ -219,7 +238,8 @@ class RecipeDetailsViewController: UIViewController {
         
         let imageUrl = recipeService.selectedRecipe.first?.image
         let imageURL = NSURL(string: imageUrl ?? "")
-        let imagedData = NSData(contentsOf: imageURL! as URL)!
+        guard let data = NSData(contentsOf: imageURL! as URL) else {return}
+        let imagedData = data
         recipeLabel.layer.contents = UIImage(data: imagedData as Data)?.cgImage
     }
     
