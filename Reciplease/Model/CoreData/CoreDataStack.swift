@@ -12,7 +12,7 @@ final class CoreDataStack {
 
     // MARK: - PUBLIC: properties
     
-    static let sharedInstance = CoreDataStack()
+    static let shared = CoreDataStack()
     
     var viewContext: NSManagedObjectContext {
         return CoreDataStack.sharedInstance.persistentContainer.viewContext

@@ -6,18 +6,23 @@
 //
 
 import Foundation
+import CoreData
 
 
 final class RecipeService {
-    static let shared = RecipeService()
+    
     
     init(
         networkService: NetworkServiceProtocol = NetworkService.shared,
-        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared
+        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared,
+        coreDataStack: CoreDataStack = CoreDataStack.shared
     ) {
         self.networkService = networkService
         self.recipeUrlProvider = recipeUrlProvider
+        self.coreDataStack = coreDataStack
     }
+    
+    static let shared = RecipeService()
     
     var didProduceError: ((FridgeServiceError) -> Void)?
     var recipesDidChange: (() -> Void)?
@@ -111,10 +116,47 @@ final class RecipeService {
         }
     }
     
+    func getRecipes(callback: @escaping ([RecipeEntity]) -> Void) {
+        let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
+        guard let recipes = try? coreDataStack.viewContext.fetch(request) else {
+            callback([])
+            return
+        }
+        callback(recipes)
+    }
+    
+    func saveRecipe(title: String,
+                    ingredientsDetails: String,
+                    ingredients: String,
+                    imageUrl: String,
+                    url: String,
+                    yield: Double,
+                    recipeTime: Double,
+                    callback: @escaping () -> Void) {
+
+        let recipe = RecipeEntity(context: coreDataStack.viewContext)
+        
+        recipe.title = title
+        recipe.ingredientsDetails = ingredientsDetails
+        recipe.ingredients = ingredients
+        recipe.imageUrl = imageUrl
+        recipe.url = url
+        recipe.yield = yield
+        recipe.recipeTime = recipeTime
+        
+        do {
+            try coreDataStack.viewContext.save()
+            callback()
+        } catch {
+            print("We were unable to save this recipe.")
+        }
+    }
+    
     // MARK: - PRIVATE: properties
     
     private let networkService: NetworkServiceProtocol
     private let recipeUrlProvider: RecipeUrlProviderProtocol
+    private let coreDataStack: CoreDataStack
     
     
     
