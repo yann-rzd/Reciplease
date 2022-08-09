@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E4203AD4289C12380093B0AD /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD3289C12380093B0AD /* RecipeService.swift */; };
 		E4203AD7289C28040093B0AD /* AlertViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD6289C28040093B0AD /* AlertViewService.swift */; };
-		E4203AD9289D070E0093B0AD /* FavoriteRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD8289D070E0093B0AD /* FavoriteRecipeViewController.swift */; };
+		E4203AD9289D070E0093B0AD /* FavoriteRecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD8289D070E0093B0AD /* FavoriteRecipeListViewController.swift */; };
 		E4203ADB28A2B87C0093B0AD /* CustomFavoriteRecipeTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203ADA28A2B87C0093B0AD /* CustomFavoriteRecipeTableViewCellTableViewCell.swift */; };
 		E4218EBC289A749600770960 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBA289A749600770960 /* Reciplease.xcdatamodeld */; };
 		E4218EBE289A751D00770960 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBD289A751D00770960 /* CoreDataStack.swift */; };
@@ -58,7 +58,7 @@
 /* Begin PBXFileReference section */
 		E4203AD3289C12380093B0AD /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		E4203AD6289C28040093B0AD /* AlertViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewService.swift; sourceTree = "<group>"; };
-		E4203AD8289D070E0093B0AD /* FavoriteRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeViewController.swift; sourceTree = "<group>"; };
+		E4203AD8289D070E0093B0AD /* FavoriteRecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeListViewController.swift; sourceTree = "<group>"; };
 		E4203ADA28A2B87C0093B0AD /* CustomFavoriteRecipeTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFavoriteRecipeTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		E4218EBB289A749600770960 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		E4218EBD289A751D00770960 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 				E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */,
 				E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */,
 				E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */,
-				E4203AD8289D070E0093B0AD /* FavoriteRecipeViewController.swift */,
+				E4203AD8289D070E0093B0AD /* FavoriteRecipeListViewController.swift */,
 				E45CEE2528A2C04F0065EA93 /* FavoriteRecipeDetailsViewControllerTableViewController.swift */,
 				E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */,
 			);
@@ -390,7 +390,7 @@
 				E4203ADB28A2B87C0093B0AD /* CustomFavoriteRecipeTableViewCellTableViewCell.swift in Sources */,
 				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
 				E4218EBE289A751D00770960 /* CoreDataStack.swift in Sources */,
-				E4203AD9289D070E0093B0AD /* FavoriteRecipeViewController.swift in Sources */,
+				E4203AD9289D070E0093B0AD /* FavoriteRecipeListViewController.swift in Sources */,
 				E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */,
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
 				E4613DB82898113D00A36993 /* RecipesResponse.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteRecipeViewController: UIViewController {
+class FavoriteRecipeListViewController: UIViewController {
 
     // MARK: - View life cycle
     
@@ -19,11 +19,11 @@ class FavoriteRecipeViewController: UIViewController {
         recipeTableView.delegate = self
         setupView()
         setupBindings()
-        getRecipes()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recipeTableView.reloadData()
+        getRecipes()
     }
     
     override func viewDidLayoutSubviews() {
@@ -72,7 +72,7 @@ class FavoriteRecipeViewController: UIViewController {
     }
 }
 
-extension FavoriteRecipeViewController: UITableViewDataSource {
+extension FavoriteRecipeListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
           return 1
        }
@@ -102,7 +102,7 @@ extension FavoriteRecipeViewController: UITableViewDataSource {
     }
 }
 
-extension FavoriteRecipeViewController: UITableViewDelegate {
+extension FavoriteRecipeListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRecipe = recipeService.favoriteRecipes[indexPath.row]
         recipeService.selectedFavoriteRecipe.append(selectedRecipe)

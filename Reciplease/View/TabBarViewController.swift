@@ -34,7 +34,7 @@ class TabBarViewController: UITabBarController {
                 image: UIImage(systemName: "magnifyingglass")!
             ),
             createTabBarRootNavigationController(
-                for: FavoriteRecipeViewController(),
+                for: FavoriteRecipeListViewController(),
                 title: NSLocalizedString("Favorite", comment: ""),
                 image: UIImage(systemName: "star")!
             )
