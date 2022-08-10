@@ -17,7 +17,7 @@ final class RecipeServiceTests: XCTestCase {
         recipeService = RecipeService()
     }
     
-    func testGivenRecipesSearched_WhenRecomveRecipes_ThenRecipesEmpty() {
+    func testGivenRecipesSearched_WhenRemoveRecipes_ThenRecipesEmpty() {
         recipeService.recipes = [
             Reciplease.RecipeElements(
                 label: Optional("Frothy Iced Matcha Green Tea Recipe"),
@@ -33,5 +33,23 @@ final class RecipeServiceTests: XCTestCase {
         recipeService.removeRecipes()
         
         XCTAssertTrue(recipeService.recipes.isEmpty)
+    }
+    
+    func testGivenRecipeSelected_WhenRemoveRecipeSelected_ThenRecipeSelectedEmpty() {
+        recipeService.selectedRecipe = [
+            Reciplease.RecipeElements(
+                label: Optional("Frothy Iced Matcha Green Tea Recipe"),
+                image: Optional("https://fakeUrl.com"),
+                url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
+                yield: 2.0,
+                ingredients: Optional("green tea, water"),
+                ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
+                time: 2.0
+            )
+        ]
+        
+        recipeService.removeSelectedRecipe()
+        
+        XCTAssertTrue(recipeService.selectedRecipe.isEmpty)
     }
 }
