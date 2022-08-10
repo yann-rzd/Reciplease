@@ -279,10 +279,15 @@ class FavoriteRecipeDetailsViewController: UIViewController {
 
 extension FavoriteRecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ingredientsNumbre = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails else {
+        
+        let ingredientsAsString = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails
+        guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
             return 0
+            
         }
-            return ingredientsNumbre.count
+        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData)
+        
+        return ingredientsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -290,20 +295,20 @@ extension FavoriteRecipeDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-//        let ingredientsAsString = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails
-//        guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
-//            return UITableViewCell()
-//            
-//        }
-//        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData)
-//        
-//        let ingredients = ingredientsArray[indexPath.row]
-//        cell.ingredientName = ingredients
-//        cell.ingredientLabel.sizeToFit()
-//        cell.ingredientLabel.isEditable = false
-//        cell.ingredientLabel.textColor = .white
-//        cell.ingredientLabel.font = .systemFont(ofSize: 16)
-//        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
+        let ingredientsAsString = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails
+        guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
+            return UITableViewCell()
+            
+        }
+        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData)
+        
+        let ingredients = ingredientsArray[indexPath.row]
+        cell.ingredientName = ingredients
+        cell.ingredientLabel.sizeToFit()
+        cell.ingredientLabel.isEditable = false
+        cell.ingredientLabel.textColor = .white
+        cell.ingredientLabel.font = .systemFont(ofSize: 16)
+        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         return cell
     }
 }
