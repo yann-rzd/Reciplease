@@ -51,7 +51,12 @@ final class FridgeViewController: UIViewController {
         }
         
         fridgeService.canAddIngredientDidChange = { [weak self] canAddIngredient in
-            self?.addIngredientButton.tintColor = !canAddIngredient ? .greenButtonColor : .grayColor
+            self?.addIngredientButton.backgroundColor = !canAddIngredient ? .greenButtonColor : .lightGrayColor
+            if !canAddIngredient {
+                self?.addIngredientButton.setTitleColor(.darkGreenColor, for: .normal)
+            } else {
+                self?.addIngredientButton.setTitleColor(.grayColor, for: .normal)
+            }
             self?.addIngredientButton.isEnabled = !canAddIngredient ? true : false
         }
         
@@ -145,13 +150,15 @@ final class FridgeViewController: UIViewController {
     }()
     
     private var addIngredientButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.configuration = .tinted()
+        let button = UIButton()
+//        button.configuration = .tinted()
         button.setTitle("Add", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.text = "Add"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
-        button.tintColor = .grayColor
+        button.backgroundColor = .lightGrayColor
+        button.setTitleColor(.grayColor, for: .normal)
+        button.layer.cornerRadius = 5
         button.isEnabled = false
         button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
         return button
@@ -184,7 +191,7 @@ final class FridgeViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         stackView.spacing = 1
         stackView.alignment = .firstBaseline
         return stackView
@@ -425,6 +432,13 @@ extension UIColor {
     
     class var lightGrayColor: UIColor {
         if let color = UIColor(named: "lightGrayColor") {
+            return color
+        }
+        fatalError("Could not find color")
+    }
+    
+    class var darkGreenColor: UIColor {
+        if let color = UIColor(named: "darkGreenColor") {
             return color
         }
         fatalError("Could not find color")
