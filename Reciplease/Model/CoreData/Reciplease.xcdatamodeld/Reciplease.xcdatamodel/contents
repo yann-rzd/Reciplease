@@ -3,7 +3,7 @@
     <entity name="RecipeEntity" representedClassName=".RecipeEntity" syncable="YES" codeGenerationType="category">
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="ingredients" optional="YES" attributeType="String"/>
-        <attribute name="ingredientsDetails" optional="YES" attributeType="String"/>
+        <attribute name="ingredientsDetails" optional="YES" attributeType="String" valueTransformerName=""/>
         <attribute name="recipeTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>

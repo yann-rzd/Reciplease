@@ -16,6 +16,12 @@ class FavoriteRecipeDetailsViewController: UIViewController {
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
         setupViews()
+        
+        let ingredientsAsString = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails
+        let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16)
+        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData!)
+        
+        print("🙃🙃🙃 === \(ingredientsArray)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -284,7 +290,14 @@ extension FavoriteRecipeDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-//        let ingredients = recipeService.selectedFavoriteRecipe.first?.ingredientsList?[indexPath.row]
+//        let ingredientsAsString = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails
+//        guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
+//            return UITableViewCell()
+//            
+//        }
+//        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData)
+//        
+//        let ingredients = ingredientsArray[indexPath.row]
 //        cell.ingredientName = ingredients
 //        cell.ingredientLabel.sizeToFit()
 //        cell.ingredientLabel.isEditable = false
