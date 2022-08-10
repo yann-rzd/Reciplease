@@ -35,6 +35,7 @@
 		E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */; };
 		E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */; };
 		E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */; };
+		E4DD1B0F28A3B8A10073AF8C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E4DD1B0E28A3B8A10073AF8C /* Alamofire */; };
 		E4F7C08B289BC925002796AE /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DD1B0F28A3B8A10073AF8C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +269,9 @@
 			dependencies = (
 			);
 			name = Reciplease;
+			packageProductDependencies = (
+				E4DD1B0E28A3B8A10073AF8C /* Alamofire */,
+			);
 			productName = Reciplease;
 			productReference = E4AF0F222892BA5C009C26F0 /* Reciplease.app */;
 			productType = "com.apple.product-type.application";
@@ -338,6 +343,9 @@
 				Base,
 			);
 			mainGroup = E4AF0F192892BA5C009C26F0;
+			packageReferences = (
+				E4DD1B0D28A3B8A10073AF8C /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = E4AF0F232892BA5C009C26F0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -739,6 +747,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4DD1B0D28A3B8A10073AF8C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4DD1B0E28A3B8A10073AF8C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4DD1B0D28A3B8A10073AF8C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E4218EBA289A749600770960 /* Reciplease.xcdatamodeld */ = {

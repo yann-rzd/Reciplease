@@ -51,7 +51,7 @@ final class FridgeViewController: UIViewController {
         }
         
         fridgeService.canAddIngredientDidChange = { [weak self] canAddIngredient in
-            self?.addIngredientButton.tintColor = !canAddIngredient ? .green : .gray
+            self?.addIngredientButton.tintColor = !canAddIngredient ? .greenButtonColor : .grayColor
             self?.addIngredientButton.isEnabled = !canAddIngredient ? true : false
         }
         
@@ -83,8 +83,6 @@ final class FridgeViewController: UIViewController {
     }
     
     @objc func searchForRecipes() {
-//        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
-        
         recipeService.removeRecipes()
         recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients) { [weak self] result in
             guard let self = self else { return }
@@ -112,10 +110,6 @@ final class FridgeViewController: UIViewController {
                 }
             }
         }
-        
-//        let recipeListViewController = RecipeListViewController()
-//        navigationController?.pushViewController(recipeListViewController, animated: true)
-//        navigationItem.backButtonTitle = "Back"
     }
     
     
@@ -138,6 +132,7 @@ final class FridgeViewController: UIViewController {
     private var ingredientAdderTextField: UITextField = {
         let textField = UITextField()
         textField.font = .systemFont(ofSize: 18)
+        textField.textColor = .blackColor
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
@@ -156,7 +151,7 @@ final class FridgeViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.text = "Add"
         button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
-        button.tintColor = .gray
+        button.tintColor = .grayColor
         button.isEnabled = false
         button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
         return button
@@ -423,6 +418,13 @@ extension UIColor {
     
     class var grayColor: UIColor {
         if let color = UIColor(named: "grayColor") {
+            return color
+        }
+        fatalError("Could not find color")
+    }
+    
+    class var lightGrayColor: UIColor {
+        if let color = UIColor(named: "lightGrayColor") {
             return color
         }
         fatalError("Could not find color")
