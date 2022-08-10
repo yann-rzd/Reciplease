@@ -11,7 +11,6 @@ import CoreData
 
 final class RecipeService {
     
-    
     init(
         networkService: NetworkServiceProtocol = NetworkService.shared,
         recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared,
@@ -33,6 +32,7 @@ final class RecipeService {
     var recipes: [RecipeElements] = [] {
         didSet {
             recipesDidChange?()
+            print("✊✊✊ === \(recipes)")
         }
     }
     
@@ -43,7 +43,7 @@ final class RecipeService {
             favoriteRecipesDidChange?()
         }
     }
-    
+
     var selectedFavoriteRecipe: [RecipeEntity] = []
     
     var isLoading = false {
