@@ -43,7 +43,11 @@ final class RecipeService {
         }
     }
 
-    var selectedFavoriteRecipe: [RecipeEntity] = []
+    var selectedFavoriteRecipe: [RecipeEntity] = [] {
+        didSet {
+            print("🌭🌭🌭 === \(selectedFavoriteRecipe)")
+        }
+    }
     
     var isLoading = false {
         didSet {

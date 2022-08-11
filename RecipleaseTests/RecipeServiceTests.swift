@@ -29,7 +29,6 @@ final class RecipeServiceTests: XCTestCase {
                 time: 2.0
             )
         ]
-        
         recipeService.removeRecipes()
         
         XCTAssertTrue(recipeService.recipes.isEmpty)
@@ -47,7 +46,6 @@ final class RecipeServiceTests: XCTestCase {
                 time: 2.0
             )
         ]
-        
         recipeService.removeSelectedRecipe()
         
         XCTAssertTrue(recipeService.selectedRecipe.isEmpty)
