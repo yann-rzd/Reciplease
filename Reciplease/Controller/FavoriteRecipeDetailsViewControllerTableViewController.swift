@@ -16,16 +16,10 @@ class FavoriteRecipeDetailsViewController: UIViewController {
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
         setupViews()
-        
-        let ingredientsAsString = recipeService.selectedFavoriteRecipe.first?.ingredientsDetails
-        let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16)
-        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData!)
-        
-        print("🙃🙃🙃 === \(ingredientsArray)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        recipeService.removeSelectedRecipe()
+        recipeService.removeSelectedFavoriteRecipe()
     }
     
     override func viewDidLayoutSubviews() {
