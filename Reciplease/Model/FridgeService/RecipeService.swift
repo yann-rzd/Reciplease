@@ -13,12 +13,10 @@ final class RecipeService {
     
     init(
         networkService: NetworkServiceProtocol = NetworkService.shared,
-        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared,
-        coreDataStack: CoreDataStack = CoreDataStack.shared
+        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared
     ) {
         self.networkService = networkService
         self.recipeUrlProvider = recipeUrlProvider
-        self.coreDataStack = coreDataStack
     }
     
     static let shared = RecipeService()
@@ -37,15 +35,9 @@ final class RecipeService {
     
     var selectedRecipe: [RecipeElements] = []
     
-    var favoriteRecipes: [RecipeEntity] = [] {
+    var favoriteRecipes: [RecipeElements] = [] {
         didSet {
             favoriteRecipesDidChange?()
-        }
-    }
-
-    var selectedFavoriteRecipe: [RecipeEntity] = [] {
-        didSet {
-            print("🌭🌭🌭 === \(selectedFavoriteRecipe)")
         }
     }
     
@@ -66,9 +58,6 @@ final class RecipeService {
         selectedRecipe.removeAll()
     }
     
-    func removeSelectedFavoriteRecipe() {
-        selectedFavoriteRecipe.removeAll()
-    }
     
     func fetchRecipes(
         ingredients: [String],
@@ -132,74 +121,8 @@ final class RecipeService {
         }
     }
     
-    func getRecipes(callback: @escaping ([RecipeEntity]) -> Void) {
-        let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "title", ascending: true),
-            NSSortDescriptor(key: "ingredientsDetails", ascending: true),
-            NSSortDescriptor(key: "ingredients", ascending: true),
-            NSSortDescriptor(key: "imageUrl", ascending: true),
-            NSSortDescriptor(key: "url", ascending: true),
-            NSSortDescriptor(key: "yield", ascending: true),
-            NSSortDescriptor(key: "recipeTime", ascending: true)
-        ]
-        guard let recipes = try? coreDataStack.viewContext.fetch(request) else {
-            callback([])
-            return
-        }
-        callback(recipes)
-    }
-    
-    func saveRecipe(title: String,
-                    ingredients: String,
-                    ingredientsDetails: [String],
-                    imageUrl: String,
-                    url: String,
-                    yield: Double,
-                    recipeTime: Double,
-                    callback: @escaping () -> Void) {
-
-        let recipe = RecipeEntity(context: coreDataStack.viewContext)
-        
-        recipe.title = title
-        recipe.ingredients = ingredients
-        recipe.ingredientsDetails = ingredientsDetails.description
-        recipe.imageUrl = imageUrl
-        recipe.url = url
-        recipe.yield = yield
-        recipe.recipeTime = recipeTime
-        
-        do {
-            try coreDataStack.viewContext.save()
-            callback()
-        } catch {
-            print("We were unable to save this recipe.")
-        }
-    }
-    
-    func removeRecipe(recipe: RecipeEntity,
-                    callback: @escaping () -> Void) {
-
-        coreDataStack.viewContext.delete(recipe)
-        
-        do {
-            try coreDataStack.viewContext.save()
-            callback()
-        } catch {
-            print("We were unable to remove this recipe.")
-        }
-    }
-    
     // MARK: - PRIVATE: properties
     
     private let networkService: NetworkServiceProtocol
     private let recipeUrlProvider: RecipeUrlProviderProtocol
-    private let coreDataStack: CoreDataStack
-    
-    
-    
-    // MARK: - PRIVATE: functions
-    
-    
-    
 }

@@ -69,6 +69,7 @@ final class FridgeViewController: UIViewController {
                 let buttonTitle = isLoading ? "" : "Search recipes"
                 self?.searchForRecipesButton.setTitle(buttonTitle, for: .normal)
                 self?.activityIndicator.isHidden = !isLoading
+                self?.searchForRecipesButton.isEnabled = !isLoading
                 
                 if isLoading {
                     self?.activityIndicator.startAnimating()
@@ -110,6 +111,7 @@ final class FridgeViewController: UIViewController {
                         return
                     }
                     let recipeListViewController = RecipeListViewController()
+                    recipeListViewController.shouldDisplayFavoriteRecipes = false
                     self?.navigationController?.pushViewController(recipeListViewController, animated: true)
                     self?.navigationItem.backButtonTitle = "Back"
                 }
@@ -407,6 +409,27 @@ extension FridgeViewController: UITextFieldDelegate {
         return false
     }
     
+}
+
+extension UITableView {
+
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .lightGrayColor
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel
+        self.separatorStyle = .none
+    }
+
+    func restore() {
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
+    }
 }
 
 extension UITextField {

@@ -31,10 +31,15 @@ class RecipeDetailsViewController: UIViewController {
         recipeLabel.scrollRangeToVisible(NSMakeRange(0, 0))
     }
     
+    // MARK: - INTERNAL: properties
+    
+    var shouldDisplayFavoriteRecipeDetails: Bool = true
+    
+    
     // MARK: - INTERNAL: functions
     
     @objc func getDirectionsRecipes() {
-        guard let url = recipeService.selectedFavoriteRecipe.first?.url,
+        guard let url = recipeService.selectedRecipe.first?.url,
               let urlString = URL(string: url) else {
             return
         }
@@ -56,7 +61,7 @@ class RecipeDetailsViewController: UIViewController {
             return
         }
         
-        recipeService.saveRecipe(
+        recipeCoreDateService.saveRecipe(
             title: title,
             ingredients: ingredients,
             ingredientsDetails: ingredientsDetails,
@@ -73,6 +78,7 @@ class RecipeDetailsViewController: UIViewController {
     // MARK: - PRIVATE: properties
     
     private let recipeService = RecipeService.shared
+    private let recipeCoreDateService = RecipeCoreDataService.shared
     
     private lazy var addFavoriteBarButton: UIBarButtonItem = {
         let addCityBarButtonImage = UIImage(systemName: "star.fill")
@@ -92,7 +98,7 @@ class RecipeDetailsViewController: UIViewController {
     private var recipeLabel: UITextView = {
         let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Pizza"
+        label.text = "--"
         label.textContainerInset = UIEdgeInsets(top: 150, left: 8, bottom: 0, right: 8)
         label.textAlignment = .center
         label.textColor = .white
@@ -235,8 +241,8 @@ class RecipeDetailsViewController: UIViewController {
     
     private func setupContent() {
         recipeLabel.text = recipeService.selectedRecipe.first?.label
-        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield.description
-        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time.description
+        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield?.description
+        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time?.description
         
         let imageUrl = recipeService.selectedRecipe.first?.image
         let imageURL = NSURL(string: imageUrl ?? "")
@@ -304,9 +310,14 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.rightBarButtonItems = [
-            addFavoriteBarButton
-        ]
+        if shouldDisplayFavoriteRecipeDetails == false {
+            navigationItem.rightBarButtonItems = [
+                addFavoriteBarButton
+            ]
+        } else {
+            navigationItem.rightBarButtonItems = []
+        }
+        
     }
 }
 
@@ -314,10 +325,10 @@ class RecipeDetailsViewController: UIViewController {
 
 extension RecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ingredientsNumbre = recipeService.selectedRecipe.first?.ingredientsList else {
+        guard let ingredientsNumber = recipeService.selectedRecipe.first?.ingredientsList else {
             return 0
         }
-            return ingredientsNumbre.count
+            return ingredientsNumber.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

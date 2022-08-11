@@ -23,13 +23,13 @@ final class CustomFavoriteRecipeTableViewCell: UITableViewCell {
     
     static let identifier = "CustomFavoriteRecipeTableViewCell"
     
-    var recipeModel: RecipeEntity? {
+    var recipeModel: RecipeElements? {
         didSet {
             guard let recipeModel = recipeModel else { return }
-            recipeLabel.text = recipeModel.title
+            recipeLabel.text = recipeModel.label
             ingredientsLabel.text = recipeModel.ingredients
             recommendationNumberLabel.text = String(describing: recipeModel.yield)
-            recipeDurationLabel.text = String(describing: recipeModel.recipeTime) + "m"
+            recipeDurationLabel.text = String(describing: recipeModel.time) + "m"
         }
     }
     

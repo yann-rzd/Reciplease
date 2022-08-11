@@ -8,6 +8,8 @@
 import UIKit
 
 final class RecipeListViewController: UIViewController {
+    
+    
 
     // MARK: - View life cycle
     
@@ -26,12 +28,24 @@ final class RecipeListViewController: UIViewController {
         recipeTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 5
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getRecipes()
+    }
     
+    // MARK: - INTERNAL: properties
     
+    var shouldDisplayFavoriteRecipes: Bool = true
+
+    var recipesToDisplay: [RecipeElements] {
+        shouldDisplayFavoriteRecipes ? recipeService.favoriteRecipes : recipeService.recipes
+    }
+
     
     // MARK: - PRIVATE: properties
     
     private let recipeService = RecipeService.shared
+    private let recipeCoreDateService = RecipeCoreDataService.shared
     
     private let recipeTableView: UITableView = {
         let tableView = UITableView()
@@ -52,6 +66,14 @@ final class RecipeListViewController: UIViewController {
         ])
     }
     
+    private func getRecipes() {
+        recipeCoreDateService.getRecipes(callback: { [weak self] recipes in
+            self?.recipeService.favoriteRecipes = []
+            self?.recipeService.favoriteRecipes = recipes
+            self?.recipeTableView.reloadData()
+        })
+    }
+        
     private func setupBindings() {
         recipeService.recipesDidChange = { [weak self] in
             DispatchQueue.main.async {
@@ -70,7 +92,7 @@ extension RecipeListViewController: UITableViewDataSource {
        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeService.recipes.count
+        return recipesToDisplay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,7 +100,7 @@ extension RecipeListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let selectedRecipe = recipeService.recipes[indexPath.row]
+        let selectedRecipe = recipesToDisplay[indexPath.row]
         let cellImageName = selectedRecipe.image
         let imageURL = NSURL(string: cellImageName ?? "")
         let imagedData = NSData(contentsOf: imageURL! as URL)!
@@ -95,9 +117,16 @@ extension RecipeListViewController: UITableViewDataSource {
 
 extension RecipeListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedRecipe = recipeService.recipes[indexPath.row]
+        let selectedRecipe = recipesToDisplay[indexPath.row]
         recipeService.selectedRecipe.append(selectedRecipe)
         let recipeDetailsViewController = RecipeDetailsViewController()
+        
+        if shouldDisplayFavoriteRecipes == true {
+            recipeDetailsViewController.shouldDisplayFavoriteRecipeDetails = true
+        } else {
+            recipeDetailsViewController.shouldDisplayFavoriteRecipeDetails = false
+        }
+        
         navigationController?.pushViewController(recipeDetailsViewController, animated: true)
         navigationItem.backButtonTitle = "Back"
     }
