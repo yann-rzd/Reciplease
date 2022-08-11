@@ -279,9 +279,12 @@ extension FavoriteRecipeDetailsViewController: UITableViewDataSource {
             return 0
             
         }
-        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData)
         
-        return ingredientsArray.count
+        if let ingredientsArray: [String] = try? JSONDecoder().decode([String].self, from: ingredientsAsData) {
+            return ingredientsArray.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -294,16 +297,21 @@ extension FavoriteRecipeDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
             
         }
-        let ingredientsArray: [String] = try! JSONDecoder().decode([String].self, from: ingredientsAsData)
         
-        let ingredients = ingredientsArray[indexPath.row]
-        cell.ingredientName = ingredients
-        cell.ingredientLabel.sizeToFit()
-        cell.ingredientLabel.isEditable = false
-        cell.ingredientLabel.textColor = .white
-        cell.ingredientLabel.font = .systemFont(ofSize: 16)
-        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
-        return cell
+        if let ingredientsArray: [String] = try? JSONDecoder().decode([String].self, from: ingredientsAsData) {
+            let ingredients = ingredientsArray[indexPath.row]
+            cell.ingredientName = ingredients
+            cell.ingredientLabel.sizeToFit()
+            cell.ingredientLabel.isEditable = false
+            cell.ingredientLabel.textColor = .white
+            cell.ingredientLabel.font = .systemFont(ofSize: 16)
+            cell.ingredientLabel.backgroundColor = .mainBackgroundColor
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+        
+        
     }
 }
 
