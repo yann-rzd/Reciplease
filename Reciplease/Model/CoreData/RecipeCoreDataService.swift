@@ -73,7 +73,9 @@ final class RecipeCoreDataService {
         guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
             return
         }
+        
         let ingredientsDetails: [String]
+        
         if let ingredientsArray: [String] = try? JSONDecoder().decode([String].self, from: ingredientsAsData) {
             ingredientsDetails = ingredientsArray
         } else {
@@ -84,10 +86,10 @@ final class RecipeCoreDataService {
             label: recipes.first?.title,
             image: recipes.first?.imageUrl,
             url: recipes.first?.url,
-            yield: recipes.first?.yield,
+            yield: recipes.first?.yield ?? 0,
             ingredients: recipes.first?.ingredients,
             ingredientsList: ingredientsDetails,
-            time: recipes.first?.recipeTime
+            time: recipes.first?.recipeTime ?? 0
         )
         
         callback([recipesElements])

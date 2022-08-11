@@ -11,8 +11,8 @@ struct RecipeElements {
     let label: String?
     let image: String?
     let url: String?
-    let yield: Double?
+    let yield: Double
     let ingredients: String?
     let ingredientsList: [String]?
-    let time: Double?
+    let time: Double
 }

@@ -241,8 +241,8 @@ class RecipeDetailsViewController: UIViewController {
     
     private func setupContent() {
         recipeLabel.text = recipeService.selectedRecipe.first?.label
-        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield?.description
-        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time?.description
+        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield.description
+        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time.description
         
         let imageUrl = recipeService.selectedRecipe.first?.image
         let imageURL = NSURL(string: imageUrl ?? "")
