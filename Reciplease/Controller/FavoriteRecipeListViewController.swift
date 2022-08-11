@@ -79,7 +79,7 @@ extension FavoriteRecipeListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if recipeService.favoriteRecipes.count == 0 {
-            self.recipeTableView.setEmptyMessage("You do not have any recipes added to your favorites yet.")
+            self.recipeTableView.setEmptyMessage("You don't have any recipes added to your favorites yet.")
             self.recipeTableView.backgroundColor = .mainBackgroundColor
         } else {
             self.recipeTableView.backgroundColor = .blackColor

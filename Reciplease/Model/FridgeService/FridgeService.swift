@@ -55,10 +55,11 @@ final class FridgeService {
     func emptyIngredientText() {
         ingredientText.removeAll()
     }
-
     
-
-    
+    func removeIngredient(ingredientIndex: Int) {
+        let ingredientToRemove = addedIngredients[ingredientIndex]
+        addedIngredients = addedIngredients.filter(){$0 != ingredientToRemove}
+    }
 }
 
 

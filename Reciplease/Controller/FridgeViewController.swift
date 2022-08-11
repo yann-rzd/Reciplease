@@ -348,6 +348,11 @@ final class FridgeViewController: UIViewController {
 
 extension FridgeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if fridgeService.addedIngredients.count == 0 {
+            self.ingredientTableView.setEmptyMessage("You haven't added any ingredients yet.")
+        } else {
+            self.ingredientTableView.restore()
+        }
         return fridgeService.addedIngredients.count
     }
     
@@ -367,7 +372,15 @@ extension FridgeViewController: UITableViewDataSource {
 }
 
 extension FridgeViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            fridgeService.removeIngredient(ingredientIndex: indexPath.row)
+        }
+    }
 }
 
 extension FridgeViewController: UITextFieldDelegate {
