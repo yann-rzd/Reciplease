@@ -33,11 +33,12 @@ final class RecipeService {
         }
     }
     
-    var selectedRecipe: [RecipeElements] = []
+    var selectedRecipe: [RecipeElements] = [] 
     
     var favoriteRecipes: [RecipeElements] = [] {
         didSet {
             favoriteRecipesDidChange?()
+            print("🔑🔑🔑 === \(favoriteRecipes)")
         }
     }
     

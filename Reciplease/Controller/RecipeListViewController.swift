@@ -31,6 +31,8 @@ final class RecipeListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getRecipes()
+        print("❌❌❌ === \(recipesToDisplay)")
+        print("👀👀👀 === \(recipeService.favoriteRecipes)")
     }
     
     // MARK: - INTERNAL: properties
@@ -92,8 +94,17 @@ extension RecipeListViewController: UITableViewDataSource {
        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if recipesToDisplay.count == 0 {
+            self.recipeTableView.setEmptyMessage("You don't have any recipes added to your favorites yet.")
+            self.recipeTableView.backgroundColor = .mainBackgroundColor
+        } else {
+            self.recipeTableView.backgroundColor = .mainBackgroundColor
+            self.recipeTableView.restore()
+        }
+        
         return recipesToDisplay.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomRecipeTableViewCell.identifier, for: indexPath) as? CustomRecipeTableViewCell else {
@@ -103,8 +114,13 @@ extension RecipeListViewController: UITableViewDataSource {
         let selectedRecipe = recipesToDisplay[indexPath.row]
         let cellImageName = selectedRecipe.image
         let imageURL = NSURL(string: cellImageName ?? "")
-        let imagedData = NSData(contentsOf: imageURL! as URL)!
-        cell.backgroundView = UIImageView(image: UIImage(data: imagedData as Data)!)
+        
+        guard let data = NSData(contentsOf: imageURL! as URL) else {
+            return UITableViewCell()
+            
+        }
+        
+        cell.backgroundView = UIImageView(image: UIImage(data: data as Data))
         cell.backgroundView?.contentMode = .scaleAspectFill
         cell.backgroundView?.clipsToBounds = true
         cell.selectionStyle = .none
