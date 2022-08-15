@@ -69,30 +69,39 @@ final class RecipeCoreDataService {
             return
         }
         
-        let ingredientsAsString = recipes.first?.ingredientsDetails
-        guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
-            return
+        
+        
+        var recipesElementsArray: [RecipeElements] = []
+        
+        for recipe in recipes {
+            
+            let ingredientsAsString = recipe.ingredientsDetails
+            guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
+                return
+            }
+            
+            let ingredientsDetails: [String]
+            
+            if let ingredientsArray: [String] = try? JSONDecoder().decode([String].self, from: ingredientsAsData) {
+                ingredientsDetails = ingredientsArray
+            } else {
+                return
+            }
+            
+            let recipesElements = RecipeElements(
+                label: recipe.title,
+                image: recipe.imageUrl,
+                url: recipe.url,
+                yield: recipe.yield,
+                ingredients: recipe.ingredients,
+                ingredientsList: ingredientsDetails,
+                time: recipe.recipeTime
+            )
+            
+            recipesElementsArray.append(recipesElements)
         }
-        
-        let ingredientsDetails: [String]
-        
-        if let ingredientsArray: [String] = try? JSONDecoder().decode([String].self, from: ingredientsAsData) {
-            ingredientsDetails = ingredientsArray
-        } else {
-            return
-        }
-        
-        let recipesElements = RecipeElements(
-            label: recipes.first?.title,
-            image: recipes.first?.imageUrl,
-            url: recipes.first?.url,
-            yield: recipes.first?.yield ?? 0,
-            ingredients: recipes.first?.ingredients,
-            ingredientsList: ingredientsDetails,
-            time: recipes.first?.recipeTime ?? 0
-        )
-        
-        callback([recipesElements])
+                
+        callback(recipesElementsArray)
     }
     
     func removeRecipe(recipe: RecipeEntity,
