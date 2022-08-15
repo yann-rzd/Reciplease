@@ -68,9 +68,7 @@ final class RecipeCoreDataService {
             callback([])
             return
         }
-        
-        
-        
+
         var recipesElementsArray: [RecipeElements] = []
         
         for recipe in recipes {
@@ -104,10 +102,27 @@ final class RecipeCoreDataService {
         callback(recipesElementsArray)
     }
     
-    func removeRecipe(recipe: RecipeEntity,
+    func removeRecipe(recipeTitle: String,
                     callback: @escaping () -> Void) {
+        let context: NSManagedObjectContext = coreDataStack.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RecipeEntity")
+        fetchRequest.predicate = NSPredicate(format: "title = %@", recipeTitle)
+        
+        if let results = try? context.fetch(fetchRequest) as? [NSManagedObject] {
 
-        coreDataStack.viewContext.delete(recipe)
+            // Delete all objects:
+            for object in results {
+                context.delete(object)
+            }
+
+            // Or delete first object:
+            if results.count > 0 {
+                context.delete(results[0])
+            }
+
+        } else {
+            print("We were unable to remove this recipe.")
+        }
         
         do {
             try coreDataStack.viewContext.save()

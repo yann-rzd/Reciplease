@@ -31,8 +31,6 @@ final class RecipeListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getRecipes()
-        print("❌❌❌ === \(recipesToDisplay)")
-        print("👀👀👀 === \(recipeService.favoriteRecipes)")
     }
     
     // MARK: - INTERNAL: properties
@@ -132,6 +130,25 @@ extension RecipeListViewController: UITableViewDataSource {
 }
 
 extension RecipeListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if shouldDisplayFavoriteRecipes {
+            return .delete
+        } else {
+            return .none
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let recipe = recipesToDisplay[indexPath.row]
+            guard let recipeLabel = recipe.label else { return }
+            recipeCoreDateService.removeRecipe(recipeTitle: recipeLabel, callback: { [weak self] in
+                self?.getRecipes()
+            })
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRecipe = recipesToDisplay[indexPath.row]
         recipeService.selectedRecipe.append(selectedRecipe)
