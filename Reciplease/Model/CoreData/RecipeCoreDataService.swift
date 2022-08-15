@@ -45,12 +45,32 @@ final class RecipeCoreDataService {
         recipe.yield = yield
         recipe.recipeTime = recipeTime
         
+        let context: NSManagedObjectContext = coreDataStack.viewContext
+        
         do {
-            try coreDataStack.viewContext.save()
+            try context.save()
             callback()
         } catch {
             print("We were unable to save this recipe.")
         }
+        
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RecipeEntity")
+//        fetchRequest.predicate = NSPredicate(format: "title == %d", title)
+//
+//        if let results = try? context.fetch(fetchRequest) as? [NSManagedObject] {
+//            if results.count > 0 {
+//                for doubledData in results {
+//                    context.delete(doubledData)
+//                }
+//            }
+//        }
+//
+//        do {
+//            try context.save()
+//            callback()
+//        } catch {
+//            print("We were unable to save this recipe.")
+//        }
     }
     
     func getRecipes(callback: @escaping ([RecipeElements]) -> Void) {
@@ -125,7 +145,7 @@ final class RecipeCoreDataService {
         }
         
         do {
-            try coreDataStack.viewContext.save()
+            try context.save()
             callback()
         } catch {
             print("We were unable to remove this recipe.")
