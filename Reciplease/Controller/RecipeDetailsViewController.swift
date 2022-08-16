@@ -28,7 +28,6 @@ class RecipeDetailsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         ingredientsTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 11
-        recipeLabel.scrollRangeToVisible(NSMakeRange(0, 0))
     }
     
     // MARK: - INTERNAL: properties
@@ -87,25 +86,32 @@ class RecipeDetailsViewController: UIViewController {
         return addCityBarButton
     }()
     
+    private let recipeLabelImageIndicatorsView: UIView = {
+//        let recipeView = UIView(frame: CGRect(x: 10, y: 10, width: 300, height: 200))
+        let recipeView = UIView()
+        recipeView.translatesAutoresizingMaskIntoConstraints = false
+        return recipeView
+    }()
+    
     private let recipeImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "defaultRecipeImage")
-        image.tintColor = .white
+        image.image = UIImage(named: "")
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        
         return image
     }()
     
-    private var recipeLabel: UITextView = {
-        let label = UITextView()
+    private var recipeLabel: UILabel = {
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "--"
-        label.textContainerInset = UIEdgeInsets(top: 150, left: 8, bottom: 0, right: 8)
-        label.textAlignment = .center
         label.textColor = .white
-        label.tintColor = .white
         label.font = .systemFont(ofSize: 26)
-        label.isEditable = false
-        label.layer.contents = UIImage(named: "defaultRecipeImage")
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.sizeToFit()
         
         return label
     }()
@@ -129,7 +135,7 @@ class RecipeDetailsViewController: UIViewController {
     private var recommendationNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "126"
+        label.text = "--"
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 12)
@@ -147,7 +153,7 @@ class RecipeDetailsViewController: UIViewController {
     private var recipeDurationLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "15m"
+        label.text = "--"
         label.textColor = .white
         label.tintColor = .white
         label.font = .systemFont(ofSize: 12)
@@ -230,13 +236,14 @@ class RecipeDetailsViewController: UIViewController {
     // MARK: - PRIVATE: functions
     
     private func setupViews() {
-        setupRecipeLabelWithimage()
+        setupContent()
+        setupRecipeImage()
         setupIndicators()
+        setupRecipeLabel()
+        setupRecipeLabelImageIndicatorsView()
         setupIngredients()
         setupGetDirectionsButton()
         setupNavigationBar()
-        setupContent()
-        
     }
     
     private func setupContent() {
@@ -248,16 +255,18 @@ class RecipeDetailsViewController: UIViewController {
         let imageURL = NSURL(string: imageUrl ?? "")
         guard let data = NSData(contentsOf: imageURL! as URL) else {return}
         let imagedData = data
-        recipeLabel.layer.contents = UIImage(data: imagedData as Data)?.cgImage
+        
+        recipeImage.image = UIImage(data: imagedData as Data)
     }
     
-    private func setupRecipeLabelWithimage() {
-        view.addSubview(recipeLabel)
+    private func setupRecipeImage() {
+        recipeLabelImageIndicatorsView.addSubview(recipeImage)
+        
         NSLayoutConstraint.activate([
-            recipeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            recipeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            recipeLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            recipeLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -400)
+            recipeImage.leadingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.leadingAnchor),
+            recipeImage.topAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.topAnchor),
+            recipeImage.trailingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.trailingAnchor),
+            recipeImage.bottomAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.bottomAnchor)
         ])
     }
     
@@ -270,12 +279,35 @@ class RecipeDetailsViewController: UIViewController {
 
         indicatorsRecipeStackView.addArrangedSubview(recommendationRecipeStackView)
         indicatorsRecipeStackView.addArrangedSubview(durationRecipeStackView)
+
+        recipeLabelImageIndicatorsView.addSubview(indicatorsRecipeStackView)
+
+        NSLayoutConstraint.activate([
+            indicatorsRecipeStackView.topAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.topAnchor, constant: 10),
+            indicatorsRecipeStackView.trailingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.trailingAnchor, constant: -10)
+        ])
+    }
+    
+    private func setupRecipeLabel() {
+        recipeLabelImageIndicatorsView.addSubview(recipeLabel)
+        recipeLabelImageIndicatorsView.backgroundColor = .clear
         
-        view.addSubview(indicatorsRecipeStackView)
         
         NSLayoutConstraint.activate([
-            indicatorsRecipeStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            indicatorsRecipeStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            recipeLabel.leadingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.leadingAnchor, constant: 10),
+            recipeLabel.trailingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.trailingAnchor, constant: -10),
+            recipeLabel.bottomAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.bottomAnchor, constant: -5)
+        ])
+    }
+
+    private func setupRecipeLabelImageIndicatorsView() {
+        view.addSubview(recipeLabelImageIndicatorsView)
+        
+        NSLayoutConstraint.activate([
+            recipeLabelImageIndicatorsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            recipeLabelImageIndicatorsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            recipeLabelImageIndicatorsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            recipeLabelImageIndicatorsView.bottomAnchor.constraint(equalTo: recipeImage.bottomAnchor)
         ])
     }
     
@@ -290,7 +322,7 @@ class RecipeDetailsViewController: UIViewController {
         view.addSubview(mainIngredientsListStackView)
         
         NSLayoutConstraint.activate([
-            mainIngredientsListStackView.topAnchor.constraint(equalTo: recipeLabel.bottomAnchor),
+            mainIngredientsListStackView.topAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.bottomAnchor),
             mainIngredientsListStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mainIngredientsListStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mainIngredientsListStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
