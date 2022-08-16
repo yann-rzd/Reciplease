@@ -27,7 +27,7 @@ class RecipeDetailsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        ingredientsTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 11
+//        ingredientsTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 11
     }
     
     // MARK: - INTERNAL: properties
@@ -296,7 +296,7 @@ class RecipeDetailsViewController: UIViewController {
         NSLayoutConstraint.activate([
             recipeLabel.leadingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.leadingAnchor, constant: 10),
             recipeLabel.trailingAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.trailingAnchor, constant: -10),
-            recipeLabel.bottomAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.bottomAnchor, constant: -5)
+            recipeLabel.bottomAnchor.constraint(equalTo: recipeLabelImageIndicatorsView.bottomAnchor, constant: -10)
         ])
     }
 
@@ -370,11 +370,6 @@ extension RecipeDetailsViewController: UITableViewDataSource {
         
         let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
         cell.ingredientName = ingredients
-        cell.ingredientLabel.sizeToFit()
-        cell.ingredientLabel.isEditable = false
-        cell.ingredientLabel.textColor = .white
-        cell.ingredientLabel.font = .systemFont(ofSize: 16)
-        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         return cell
     }
 }

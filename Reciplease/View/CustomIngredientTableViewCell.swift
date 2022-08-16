@@ -37,13 +37,16 @@ final class CustomIngredientTableViewCell: UITableViewCell {
     
     // MARK: - PRIVATE: properties
     
-    var ingredientLabel: UITextView = {
-        let label = UITextView()
+    var ingredientLabel: UILabel = {
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "- Tomatoes"
+        label.text = "--"
         label.textColor = .white
         label.font = .systemFont(ofSize: 16)
-        label.isEditable = false
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.sizeToFit()
         return label
     }()
     

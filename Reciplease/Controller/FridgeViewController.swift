@@ -364,11 +364,6 @@ extension FridgeViewController: UITableViewDataSource {
         }
         let addedIngredient = fridgeService.addedIngredients[indexPath.row].capitalized
         cell.ingredientName = addedIngredient
-        cell.ingredientLabel.sizeToFit()
-        cell.ingredientLabel.isEditable = false
-        cell.ingredientLabel.textColor = .white
-        cell.ingredientLabel.font = .systemFont(ofSize: 16)
-        cell.ingredientLabel.backgroundColor = .mainBackgroundColor
         return cell
     }
 }
