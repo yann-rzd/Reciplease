@@ -156,5 +156,5 @@ final class RecipeCoreDataService {
     // MARK: - PRIVATE: properties
     
     private let coreDataStack: CoreDataStack
-    private let recipeService = RecipeService.shared
+    //private let recipeService = RecipeService.shared
 }

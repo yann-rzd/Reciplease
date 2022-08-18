@@ -10,13 +10,16 @@ import CoreData
 
 
 final class RecipeService {
+
     
     init(
         networkService: NetworkServiceProtocol = NetworkService.shared,
-        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared
+        recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared,
+        recipeCoreDataService: RecipeCoreDataService = RecipeCoreDataService.shared
     ) {
         self.networkService = networkService
         self.recipeUrlProvider = recipeUrlProvider
+        self.recipeCoreDataService = recipeCoreDataService
     }
     
     static let shared = RecipeService()
@@ -33,7 +36,7 @@ final class RecipeService {
         }
     }
     
-    var selectedRecipe: [RecipeElements] = [] 
+    var selectedRecipe: RecipeElements? 
     
     var favoriteRecipes: [RecipeElements] = [] {
         didSet {
@@ -51,12 +54,43 @@ final class RecipeService {
     
     // MARK: - INTERNAL: functions
     
+    func toggleSelectedFavoriteRecipe() {
+        guard
+            let selectedRecipe = selectedRecipe,
+            let title = selectedRecipe.label,
+            let ingredients = selectedRecipe.ingredients,
+            let ingredientsDetails = selectedRecipe.ingredientsList,
+            let imageUrl = selectedRecipe.image,
+            let url = selectedRecipe.url
+        else {
+            return
+        }
+        
+        let yield = selectedRecipe.yield
+        let recipeTime = selectedRecipe.time
+        
+        recipeCoreDataService.saveRecipe(
+            title: title,
+            ingredients: ingredients,
+            ingredientsDetails: ingredientsDetails,
+            imageUrl: imageUrl,
+            url: url,
+            yield: yield,
+            recipeTime: recipeTime,
+            callback: { [weak self] in
+                
+                //TODO should
+                //self?.addFavoriteBarButton.tintColor = .greenButtonColor
+            }
+        )
+    }
+    
     func removeRecipes() {
         recipes.removeAll()
     }
     
     func removeSelectedRecipe() {
-        selectedRecipe.removeAll()
+        selectedRecipe = nil
     }
     
     
@@ -126,4 +160,5 @@ final class RecipeService {
     
     private let networkService: NetworkServiceProtocol
     private let recipeUrlProvider: RecipeUrlProviderProtocol
+    private let recipeCoreDataService: RecipeCoreDataService
 }

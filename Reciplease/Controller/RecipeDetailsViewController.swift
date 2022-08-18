@@ -38,7 +38,7 @@ class RecipeDetailsViewController: UIViewController {
     // MARK: - INTERNAL: functions
     
     @objc func getDirectionsRecipes() {
-        guard let url = recipeService.selectedRecipe.first?.url,
+        guard let url = recipeService.selectedRecipe?.url,
               let urlString = URL(string: url) else {
             return
         }
@@ -50,46 +50,25 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     @objc func didTapAddFavoriteButton() {
-        guard let title = recipeService.selectedRecipe.first?.label,
-              let ingredients = recipeService.selectedRecipe.first?.ingredients,
-              let ingredientsDetails = recipeService.selectedRecipe.first?.ingredientsList,
-              let imageUrl = recipeService.selectedRecipe.first?.image,
-              let url = recipeService.selectedRecipe.first?.url,
-              let yield = recipeService.selectedRecipe.first?.yield,
-              let recipeTime = recipeService.selectedRecipe.first?.time else {
-            return
-        }
-        
-        recipeCoreDateService.saveRecipe(
-            title: title,
-            ingredients: ingredients,
-            ingredientsDetails: ingredientsDetails,
-            imageUrl: imageUrl,
-            url: url,
-            yield: yield,
-            recipeTime: recipeTime,
-            callback: { [weak self] in
-                self?.addFavoriteBarButton.tintColor = .greenButtonColor
-            }
-        )
+        recipeService.toggleSelectedFavoriteRecipe()
     }
     
     // MARK: - PRIVATE: properties
     
     private let recipeService = RecipeService.shared
-    private let recipeCoreDateService = RecipeCoreDataService.shared
     
     private lazy var addFavoriteBarButton: UIBarButtonItem = {
-        let addCityBarButtonImage = UIImage(systemName: "star.fill")
-        let addCityBarButton = UIBarButtonItem(image: addCityBarButtonImage, style: .plain, target: self, action: #selector(didTapAddFavoriteButton))
-        addCityBarButton.tintColor = .white
-        return addCityBarButton
+        let addFavoriteBarButtonImage = UIImage(systemName: "star.fill")
+        let addFavoriteBarButton = UIBarButtonItem(image: addFavoriteBarButtonImage, style: .plain, target: self, action: #selector(didTapAddFavoriteButton))
+        addFavoriteBarButton.tintColor = .white
+        return addFavoriteBarButton
     }()
     
     private let recipeLabelImageIndicatorsView: UIView = {
 //        let recipeView = UIView(frame: CGRect(x: 10, y: 10, width: 300, height: 200))
         let recipeView = UIView()
         recipeView.translatesAutoresizingMaskIntoConstraints = false
+        
         return recipeView
     }()
     
@@ -99,6 +78,8 @@ class RecipeDetailsViewController: UIViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         
+        
+
         return image
     }()
     
@@ -247,17 +228,28 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     private func setupContent() {
-        recipeLabel.text = recipeService.selectedRecipe.first?.label
-        recommendationNumberLabel.text = recipeService.selectedRecipe.first?.yield.description
-        recipeDurationLabel.text = recipeService.selectedRecipe.first?.time.description
+        recipeLabel.text = recipeService.selectedRecipe?.label
+        recommendationNumberLabel.text = recipeService.selectedRecipe?.yield.description
+        recipeDurationLabel.text = recipeService.selectedRecipe?.time.description
         
-        let imageUrl = recipeService.selectedRecipe.first?.image
+        let imageUrl = recipeService.selectedRecipe?.image
         let imageURL = NSURL(string: imageUrl ?? "")
         guard let data = NSData(contentsOf: imageURL! as URL) else {return}
         let imagedData = data
         
         recipeImage.image = UIImage(data: imagedData as Data)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !isGradientAlreadyAdded {
+            recipeImage.addGradient()
+            isGradientAlreadyAdded = true
+        }
+    }
+    
+
     
     private func setupRecipeImage() {
         recipeLabelImageIndicatorsView.addSubview(recipeImage)
@@ -329,6 +321,8 @@ class RecipeDetailsViewController: UIViewController {
         ])
     }
     
+    private var isGradientAlreadyAdded = false
+    
     private func setupGetDirectionsButton() {
         view.addSubview(getDirectionsButton)
 
@@ -357,7 +351,7 @@ class RecipeDetailsViewController: UIViewController {
 
 extension RecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ingredientsNumber = recipeService.selectedRecipe.first?.ingredientsList else {
+        guard let ingredientsNumber = recipeService.selectedRecipe?.ingredientsList else {
             return 0
         }
             return ingredientsNumber.count
@@ -368,7 +362,7 @@ extension RecipeDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let ingredients = recipeService.selectedRecipe.first?.ingredientsList?[indexPath.row]
+        let ingredients = recipeService.selectedRecipe?.ingredientsList?[indexPath.row]
         cell.ingredientName = ingredients
         return cell
     }
@@ -379,5 +373,19 @@ extension RecipeDetailsViewController: UITableViewDelegate { }
 extension RecipeDetailsViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UIView {
+    func addGradient() {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        
+        print("❌❌  \(self.bounds)")
+        let startColor = UIColor.clear.cgColor
+        let endColor = UIColor.black.cgColor
+        gradient.colors = [startColor, endColor]
+        gradient.locations = [0.0, 1.0]
+        self.layer.insertSublayer(gradient, at: 10)
     }
 }

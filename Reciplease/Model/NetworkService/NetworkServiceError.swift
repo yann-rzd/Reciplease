@@ -11,4 +11,5 @@ enum NetworkServiceError: Error {
     case failedToFetchUnknownError
     case failedToFetchBadStatusCode
     case failedToFetchCouldNoDecode
+    case badUrlRequest
 }

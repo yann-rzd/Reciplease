@@ -151,7 +151,7 @@ extension RecipeListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRecipe = recipesToDisplay[indexPath.row]
-        recipeService.selectedRecipe.append(selectedRecipe)
+        recipeService.selectedRecipe = selectedRecipe
         let recipeDetailsViewController = RecipeDetailsViewController()
         
         if shouldDisplayFavoriteRecipes == true {
