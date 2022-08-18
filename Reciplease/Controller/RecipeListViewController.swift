@@ -30,7 +30,8 @@ final class RecipeListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getRecipes()
+        recipeService.getRecipes()
+        self.recipeTableView.reloadData()
     }
     
     // MARK: - INTERNAL: properties
@@ -66,13 +67,7 @@ final class RecipeListViewController: UIViewController {
         ])
     }
     
-    private func getRecipes() {
-        recipeCoreDateService.getRecipes(callback: { [weak self] recipes in
-//            self?.recipeService.favoriteRecipes = []
-            self?.recipeService.favoriteRecipes = recipes
-            self?.recipeTableView.reloadData()
-        })
-    }
+    
         
     private func setupBindings() {
         recipeService.recipesDidChange = { [weak self] in
@@ -143,9 +138,8 @@ extension RecipeListViewController: UITableViewDelegate {
         if editingStyle == .delete {
             let recipe = recipesToDisplay[indexPath.row]
             guard let recipeLabel = recipe.label else { return }
-            recipeCoreDateService.removeRecipe(recipeTitle: recipeLabel, callback: { [weak self] in
-                self?.getRecipes()
-            })
+            recipeService.removeFavoriteRecipe(recipeTitle: recipeLabel)
+            self.recipeTableView.reloadData()
         }
     }
     

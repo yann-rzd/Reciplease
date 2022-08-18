@@ -83,6 +83,19 @@ final class RecipeService {
         )
     }
     
+    func getRecipes() {
+        recipeCoreDataService.getRecipes(callback: { [weak self] recipes in
+//            favoriteRecipes = []
+            self?.favoriteRecipes = recipes
+        })
+    }
+    
+    func removeFavoriteRecipe(recipeTitle: String) {
+        recipeCoreDataService.removeRecipe(recipeTitle: recipeTitle, callback: { [weak self] in
+            self?.getRecipes()
+        })
+    }
+    
     func removeRecipes() {
         recipes.removeAll()
     }
@@ -156,7 +169,11 @@ final class RecipeService {
     
     // MARK: - PRIVATE: properties
     
+    
+    
     private let networkService: NetworkServiceProtocol
     private let recipeUrlProvider: RecipeUrlProviderProtocol
     private let recipeCoreDataService: RecipeCoreDataService
+    
+    
 }
