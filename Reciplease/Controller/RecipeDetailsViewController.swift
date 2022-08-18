@@ -18,6 +18,7 @@ class RecipeDetailsViewController: UIViewController {
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
         setupViews()
+        setupBindinds()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -36,6 +37,14 @@ class RecipeDetailsViewController: UIViewController {
     
     
     // MARK: - INTERNAL: functions
+    
+    func setupBindinds() {
+        recipeService.isRecipeAddedToFavorite = { [weak self] in
+            DispatchQueue.main.async {
+                self?.addFavoriteBarButton.tintColor = .greenButtonColor
+            }
+        }
+    }
     
     @objc func getDirectionsRecipes() {
         guard let url = recipeService.selectedRecipe?.url,
@@ -340,6 +349,10 @@ class RecipeDetailsViewController: UIViewController {
             navigationItem.rightBarButtonItems = [
                 addFavoriteBarButton
             ]
+//        } else if recipeService.favoriteRecipes.contains(recipeService.selectedRecipe){
+//
+//        } else if {
+//
         } else {
             navigationItem.rightBarButtonItems = []
         }

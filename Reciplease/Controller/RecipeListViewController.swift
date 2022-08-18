@@ -68,7 +68,7 @@ final class RecipeListViewController: UIViewController {
     
     private func getRecipes() {
         recipeCoreDateService.getRecipes(callback: { [weak self] recipes in
-            self?.recipeService.favoriteRecipes = []
+//            self?.recipeService.favoriteRecipes = []
             self?.recipeService.favoriteRecipes = recipes
             self?.recipeTableView.reloadData()
         })

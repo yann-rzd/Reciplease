@@ -29,6 +29,7 @@ final class RecipeService {
     var favoriteRecipesDidChange: (() -> Void)?
     var isLoadingChanged: ((Bool) -> Void)?
     var isFetchingRecipesSuccess: ((Bool) -> Void)?
+    var isRecipeAddedToFavorite: (() -> Void)?
     
     var recipes: [RecipeElements] = [] {
         didSet {
@@ -36,12 +37,11 @@ final class RecipeService {
         }
     }
     
-    var selectedRecipe: RecipeElements? 
+    var selectedRecipe: RecipeElements?
     
     var favoriteRecipes: [RecipeElements] = [] {
         didSet {
             favoriteRecipesDidChange?()
-            print("🔑🔑🔑 === \(favoriteRecipes)")
         }
     }
     
@@ -78,9 +78,7 @@ final class RecipeService {
             yield: yield,
             recipeTime: recipeTime,
             callback: { [weak self] in
-                
-                //TODO should
-                //self?.addFavoriteBarButton.tintColor = .greenButtonColor
+                self?.isRecipeAddedToFavorite?()
             }
         )
     }
