@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeElements {
+struct RecipeElements: Equatable {
     let label: String?
     let image: String?
     let url: String?

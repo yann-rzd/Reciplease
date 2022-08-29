@@ -112,7 +112,6 @@ extension RecipeListViewController: UITableViewDataSource {
             return UITableViewCell()
             
         }
-        
         cell.backgroundView = UIImageView(image: UIImage(data: data as Data))
         cell.backgroundView?.contentMode = .scaleAspectFill
         cell.backgroundView?.clipsToBounds = true

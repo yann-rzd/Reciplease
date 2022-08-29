@@ -19,6 +19,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         commonInit()
     }
     
+    
     // MARK: - INTERNAL: properties
     
     static let identifier = "CustomRecipeTableViewCell"
@@ -157,21 +158,17 @@ final class CustomRecipeTableViewCell: UITableViewCell {
         indicatorsRecipeStackView.addArrangedSubview(recommendationRecipeStackView)
         indicatorsRecipeStackView.addArrangedSubview(durationRecipeStackView)
 
-        //Recipe name and ingredient container
         nameAndDescriptionRecipeStackView.addArrangedSubview(recipeLabel)
         nameAndDescriptionRecipeStackView.addArrangedSubview(ingredientsLabel)
 
         contentView.addSubview(indicatorsRecipeStackView)
         contentView.addSubview(nameAndDescriptionRecipeStackView)
-//
+
         NSLayoutConstraint.activate([
             indicatorsRecipeStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             indicatorsRecipeStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             nameAndDescriptionRecipeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             nameAndDescriptionRecipeStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-
-            
-
         ])
     }
 

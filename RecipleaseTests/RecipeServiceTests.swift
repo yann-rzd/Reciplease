@@ -35,7 +35,7 @@ final class RecipeServiceTests: XCTestCase {
     }
     
     func testGivenRecipeSelected_WhenRemoveRecipeSelected_ThenRecipeSelectedEmpty() {
-        recipeService.selectedRecipe = [
+        recipeService.selectedRecipe =
             Reciplease.RecipeElements(
                 label: Optional("Frothy Iced Matcha Green Tea Recipe"),
                 image: Optional("https://fakeUrl.com"),
@@ -45,9 +45,9 @@ final class RecipeServiceTests: XCTestCase {
                 ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
                 time: 2.0
             )
-        ]
+        
         recipeService.removeSelectedRecipe()
         
-        XCTAssertTrue(recipeService.selectedRecipe.isEmpty)
+        XCTAssertEqual(recipeService.selectedRecipe, nil)
     }
 }
