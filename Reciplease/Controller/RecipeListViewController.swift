@@ -20,7 +20,6 @@ final class RecipeListViewController: UIViewController {
         recipeTableView.dataSource = self
         recipeTableView.delegate = self
         setupView()
-        setupBindings()
     }
     
     override func viewDidLayoutSubviews() {
@@ -30,6 +29,7 @@ final class RecipeListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupBindings()
         recipeService.getRecipes()
         self.recipeTableView.reloadData()
     }

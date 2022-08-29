@@ -17,12 +17,23 @@ class RecipeDetailsViewController: UIViewController {
         self.title = "Reciplease"
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
+        recipeService.didProduceError = { [weak self] error in
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                let alertController = UIAlertController(title: "Error", message: error.errorDescription, preferredStyle: .alert)
+                let okAlertAcion = UIAlertAction(title: "OK", style: .default)
+                alertController.addAction(okAlertAcion)
+                self.present(self, animated: true, completion: nil)
+            }
+
+        }
         setupViews()
         setupBindinds()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        recipeService.removeSelectedRecipe()
+        //recipeService.removeSelectedRecipe()
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,9 +50,9 @@ class RecipeDetailsViewController: UIViewController {
     // MARK: - INTERNAL: functions
     
     func setupBindinds() {
-        recipeService.isRecipeAddedToFavorite = { [weak self] in
+        recipeService.isRecipeAddedToFavorite = { [weak self] isFavorited in
             DispatchQueue.main.async {
-                self?.addFavoriteBarButton.tintColor = .greenButtonColor
+                self?.addFavoriteBarButton.tintColor = isFavorited ? .greenButtonColor : .white
             }
         }
     }
@@ -258,8 +269,6 @@ class RecipeDetailsViewController: UIViewController {
         }
     }
     
-
-    
     private func setupRecipeImage() {
         recipeLabelImageIndicatorsView.addSubview(recipeImage)
         
@@ -345,17 +354,9 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        if shouldDisplayFavoriteRecipeDetails == false {
-            navigationItem.rightBarButtonItems = [
-                addFavoriteBarButton
-            ]
-//        } else if recipeService.favoriteRecipes.contains(recipeService.selectedRecipe){
-//
-//        } else if {
-//
-        } else {
-            navigationItem.rightBarButtonItems = []
-        }
+        navigationItem.rightBarButtonItems = [
+            addFavoriteBarButton
+        ]
         
     }
 }

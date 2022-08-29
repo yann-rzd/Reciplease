@@ -19,7 +19,7 @@
 		E440AD3128AE306E001FEB92 /* NetworkServiceAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = E440AD3028AE306E001FEB92 /* NetworkServiceAlamofire.swift */; };
 		E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */; };
 		E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB02897E0AE00A36993 /* FridgeService.swift */; };
-		E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB22897E34200A36993 /* FridgeServiceError.swift */; };
+		E4613DB32897E34200A36993 /* RecipeServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB22897E34200A36993 /* RecipeServiceError.swift */; };
 		E4613DB62898099100A36993 /* RecipeUrlProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB52898099100A36993 /* RecipeUrlProvider.swift */; };
 		E4613DB82898113D00A36993 /* RecipesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB72898113D00A36993 /* RecipesResponse.swift */; };
 		E4613DBA2898144900A36993 /* CustomRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB92898144900A36993 /* CustomRecipeTableViewCell.swift */; };
@@ -61,7 +61,7 @@
 		E440AD3028AE306E001FEB92 /* NetworkServiceAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceAlamofire.swift; sourceTree = "<group>"; };
 		E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		E4613DB02897E0AE00A36993 /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
-		E4613DB22897E34200A36993 /* FridgeServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceError.swift; sourceTree = "<group>"; };
+		E4613DB22897E34200A36993 /* RecipeServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceError.swift; sourceTree = "<group>"; };
 		E4613DB52898099100A36993 /* RecipeUrlProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeUrlProvider.swift; sourceTree = "<group>"; };
 		E4613DB72898113D00A36993 /* RecipesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesResponse.swift; sourceTree = "<group>"; };
 		E4613DB92898144900A36993 /* CustomRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecipeTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 			children = (
 				E4203AD3289C12380093B0AD /* RecipeService.swift */,
 				E4613DB02897E0AE00A36993 /* FridgeService.swift */,
-				E4613DB22897E34200A36993 /* FridgeServiceError.swift */,
+				E4613DB22897E34200A36993 /* RecipeServiceError.swift */,
 				E4613DB52898099100A36993 /* RecipeUrlProvider.swift */,
 				E4218EC1289AAD9500770960 /* RecipeElements.swift */,
 				E4613DB72898113D00A36993 /* RecipesResponse.swift */,
@@ -342,7 +342,7 @@
 				E4203ADB28A2B87C0093B0AD /* CustomFavoriteRecipeTableViewCell.swift in Sources */,
 				E4AF0F5E2892BC7E009C26F0 /* NetworkServiceProtocol.swift in Sources */,
 				E4218EBE289A751D00770960 /* CoreDataStack.swift in Sources */,
-				E4613DB32897E34200A36993 /* FridgeServiceError.swift in Sources */,
+				E4613DB32897E34200A36993 /* RecipeServiceError.swift in Sources */,
 				E4AF0F262892BA5C009C26F0 /* AppDelegate.swift in Sources */,
 				E4613DB82898113D00A36993 /* RecipesResponse.swift in Sources */,
 				E4613DBA2898144900A36993 /* CustomRecipeTableViewCell.swift in Sources */,

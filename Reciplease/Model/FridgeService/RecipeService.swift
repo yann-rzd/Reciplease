@@ -24,12 +24,12 @@ final class RecipeService {
     
     static let shared = RecipeService()
     
-    var didProduceError: ((FridgeServiceError) -> Void)?
+    var didProduceError: ((RecipeServiceError) -> Void)?
     var recipesDidChange: (() -> Void)?
     var favoriteRecipesDidChange: (() -> Void)?
     var isLoadingChanged: ((Bool) -> Void)?
     var isFetchingRecipesSuccess: ((Bool) -> Void)?
-    var isRecipeAddedToFavorite: (() -> Void)?
+    var isRecipeAddedToFavorite: ((Bool) -> Void)?
     
     var recipes: [RecipeElements] = [] {
         didSet {
@@ -69,45 +69,103 @@ final class RecipeService {
         let yield = selectedRecipe.yield
         let recipeTime = selectedRecipe.time
         
-        recipeCoreDataService.saveRecipe(
-            title: title,
-            ingredients: ingredients,
-            ingredientsDetails: ingredientsDetails,
-            imageUrl: imageUrl,
-            url: url,
-            yield: yield,
-            recipeTime: recipeTime,
-            callback: { [weak self] in
-                self?.isRecipeAddedToFavorite?()
+        
+        //TODO: SHOULD NOT SAVE RECIPE IF ALREADY SAVEC BUT INSTEAD =>>> REMOVE IT
+        
+        recipeCoreDataService.isRecipeAlreadySaved(recipeTitle: title) { [weak self] result in
+            switch result {
+            case .failure:
+                self?.didProduceError?(.failedToToggleRecipeFavoriteState)
+                return
+            case .success(let isRecipeAlreadySaved):
+                if isRecipeAlreadySaved {
+                    self?.recipeCoreDataService.removeRecipe(recipeTitle: title, callback: { result in
+                        switch result {
+                        case .failure:
+                            self?.didProduceError?(.failedToToggleRecipeFavoriteState)
+                            return
+                        case .success:
+                            self?.updateAndNotifyFavoritedState(recipeTitle: title)
+                            return
+                        }
+                    })
+                } else {
+                    self?.recipeCoreDataService.saveRecipe(
+                        title: title,
+                        ingredients: ingredients,
+                        ingredientsDetails: ingredientsDetails,
+                        imageUrl: imageUrl,
+                        url: url,
+                        yield: yield,
+                        recipeTime: recipeTime,
+                        callback: { [weak self] result in
+                            switch result {
+                            case .failure:
+                                self?.didProduceError?(.failedToSaveRecipe)
+                                return
+                            case .success:
+                                self?.updateAndNotifyFavoritedState(recipeTitle: title)
+                                return
+                            }
+                        }
+                    )
+                }
             }
-        )
+        }
+    }
+    
+    
+    private func updateAndNotifyFavoritedState(recipeTitle: String) {
+        recipeCoreDataService.isRecipeAlreadySaved(recipeTitle: recipeTitle) { [weak self] result in
+            switch result {
+            case .failure:
+                self?.didProduceError?(.failedToUpdateIsFavoritedState)
+                return
+            case .success(let isFavorited):
+                self?.isRecipeAddedToFavorite?(isFavorited)
+                return
+            }
+        }
     }
     
     func getRecipes() {
-        recipeCoreDataService.getRecipes(callback: { [weak self] recipes in
-//            favoriteRecipes = []
-            self?.favoriteRecipes = recipes
+        recipeCoreDataService.getRecipes(callback: { [weak self] result in
+            switch result {
+            case .failure:
+                self?.didProduceError?(.failedToGetRecipe)
+                return
+            case .success(let recipes):
+                self?.favoriteRecipes = recipes
+            }
         })
     }
     
     func removeFavoriteRecipe(recipeTitle: String) {
-        recipeCoreDataService.removeRecipe(recipeTitle: recipeTitle, callback: { [weak self] in
-            self?.getRecipes()
-        })
+        recipeCoreDataService.removeRecipe(recipeTitle: recipeTitle) { [weak self] result in
+            switch result {
+            case .failure:
+                self?.didProduceError?(.failedToRemoveRecipe)
+                return
+            case .success:
+                self?.getRecipes()
+                return
+            }
+            
+        }
     }
     
     func removeRecipes() {
         recipes.removeAll()
     }
     
-    func removeSelectedRecipe() {
-        selectedRecipe = nil
-    }
-    
+    //func removeSelectedRecipe() {
+    //    selectedRecipe = nil
+    //}
+    //
     
     func fetchRecipes(
         ingredients: [String],
-        completionHandler: @escaping (Result<RecipeElements, FridgeServiceError>) -> Void
+        completionHandler: @escaping (Result<RecipeElements, RecipeServiceError>) -> Void
     ) {
         
         guard let url = recipeUrlProvider.getRecipeUrl(ingredients: ingredients) else {
@@ -169,11 +227,7 @@ final class RecipeService {
     
     // MARK: - PRIVATE: properties
     
-    
-    
     private let networkService: NetworkServiceProtocol
     private let recipeUrlProvider: RecipeUrlProviderProtocol
     private let recipeCoreDataService: RecipeCoreDataService
-    
-    
 }

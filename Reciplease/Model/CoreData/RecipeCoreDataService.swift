@@ -8,6 +8,16 @@
 import Foundation
 import CoreData
 
+enum RecipeCoreDataServiceError: Error {
+    case failedToSaveRecipeBecauseAlreadyStored
+    case contextFailedToSaveRecipe
+    case failedToGetRecipesFromContext
+    case failedToGetRecipesDueToDecodingFailure
+    case failedDueToMissingReference
+    case failedToRemoveRecipeFromContext
+    case failedToRemoveRecipeBecauseInexisting
+}
+
 final class RecipeCoreDataService {
     
     // MARK: - INITIALIZER
@@ -33,26 +43,50 @@ final class RecipeCoreDataService {
                     url: String,
                     yield: Double,
                     recipeTime: Double,
-                    callback: @escaping () -> Void) {
-
-        let recipe = RecipeEntity(context: coreDataStack.viewContext)
+                    callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void) {
         
-        recipe.title = title
-        recipe.ingredients = ingredients
-        recipe.ingredientsDetails = ingredientsDetails.description
-        recipe.imageUrl = imageUrl
-        recipe.url = url
-        recipe.yield = yield
-        recipe.recipeTime = recipeTime
         
-        let context: NSManagedObjectContext = coreDataStack.viewContext
-        
-        do {
-            try context.save()
-            callback()
-        } catch {
-            print("We were unable to save this recipe.")
+        isRecipeAlreadySaved(recipeTitle: title) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                callback(.failure(error))
+            case .success(let recipeIsAlreadyStored):
+                guard !recipeIsAlreadyStored else {
+                    callback(.failure(.failedToSaveRecipeBecauseAlreadyStored))
+                    return
+                }
+                
+                guard let self = self else {
+                    callback(.failure(.failedDueToMissingReference))
+                    return
+                }
+                
+                
+                let recipe = RecipeEntity(context: self.coreDataStack.viewContext)
+                
+                recipe.title = title
+                recipe.ingredients = ingredients
+                recipe.ingredientsDetails = ingredientsDetails.description
+                recipe.imageUrl = imageUrl
+                recipe.url = url
+                recipe.yield = yield
+                recipe.recipeTime = recipeTime
+                
+                let context: NSManagedObjectContext = self.coreDataStack.viewContext
+                
+                do {
+                    try context.save()
+                    callback(.success(()))
+                } catch {
+                    print("We were unable to save this recipe.")
+                    callback(.failure(.contextFailedToSaveRecipe))
+                }
+                
+            }
         }
+        
+        
+
         
 //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RecipeEntity")
 //        fetchRequest.predicate = NSPredicate(format: "title == %d", title)
@@ -73,7 +107,22 @@ final class RecipeCoreDataService {
 //        }
     }
     
-    func getRecipes(callback: @escaping ([RecipeElements]) -> Void) {
+    func isRecipeAlreadySaved(recipeTitle: String, callback: @escaping (Result<Bool, RecipeCoreDataServiceError>) -> Void) {
+        getRecipes { result in
+            switch result {
+            case .failure(let error):
+                callback(.failure(error))
+            case .success(let recipes):
+                let recipeIsAlreadyStored = recipes.contains { recipe in
+                    recipe.label == recipeTitle
+                }
+                
+                callback(.success(recipeIsAlreadyStored))
+            }
+        }
+    }
+    
+    func getRecipes(callback: @escaping (Result<[RecipeElements], RecipeCoreDataServiceError>) -> Void) {
         let request: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
         request.sortDescriptors = [
             NSSortDescriptor(key: "title", ascending: true),
@@ -85,7 +134,7 @@ final class RecipeCoreDataService {
             NSSortDescriptor(key: "recipeTime", ascending: true)
         ]
         guard let recipes = try? coreDataStack.viewContext.fetch(request) else {
-            callback([])
+            callback(.failure(.failedToGetRecipesFromContext))
             return
         }
 
@@ -95,6 +144,7 @@ final class RecipeCoreDataService {
             
             let ingredientsAsString = recipe.ingredientsDetails
             guard let ingredientsAsData = ingredientsAsString?.data(using: String.Encoding.utf16) else {
+                callback(.failure(.failedToGetRecipesDueToDecodingFailure))
                 return
             }
             
@@ -103,6 +153,7 @@ final class RecipeCoreDataService {
             if let ingredientsArray: [String] = try? JSONDecoder().decode([String].self, from: ingredientsAsData) {
                 ingredientsDetails = ingredientsArray
             } else {
+                callback(.failure(.failedToGetRecipesDueToDecodingFailure))
                 return
             }
             
@@ -119,11 +170,11 @@ final class RecipeCoreDataService {
             recipesElementsArray.append(recipesElements)
         }
                 
-        callback(recipesElementsArray)
+        callback(.success(recipesElementsArray))
     }
     
     func removeRecipe(recipeTitle: String,
-                    callback: @escaping () -> Void) {
+                    callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void) {
         let context: NSManagedObjectContext = coreDataStack.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RecipeEntity")
         fetchRequest.predicate = NSPredicate(format: "title = %@", recipeTitle)
@@ -142,13 +193,18 @@ final class RecipeCoreDataService {
 
         } else {
             print("We were unable to remove this recipe.")
+            callback(.failure(.failedToRemoveRecipeBecauseInexisting))
+            return
         }
         
         do {
             try context.save()
-            callback()
+            callback(.success(()))
+            return
         } catch {
             print("We were unable to remove this recipe.")
+            callback(.failure(.failedToRemoveRecipeFromContext))
+            return
         }
     }
     

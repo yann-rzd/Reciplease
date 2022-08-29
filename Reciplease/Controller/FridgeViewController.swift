@@ -17,6 +17,11 @@ final class FridgeViewController: UIViewController {
         ingredientAdderTextField.delegate = self
         setupViews()
         setupToolBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         setupBindinds()
     }
     
@@ -107,7 +112,7 @@ final class FridgeViewController: UIViewController {
                 if isSuccess {
                     guard let recipes = self?.recipeService.recipes,
                           !recipes.isEmpty  else {
-                        self?.alertViewService.displayAlert(on: self!, error: FridgeServiceError.noRecipeFound)
+                        self?.alertViewService.displayAlert(on: self!, error: RecipeServiceError.noRecipeFound)
                         return
                     }
                     let recipeListViewController = RecipeListViewController()

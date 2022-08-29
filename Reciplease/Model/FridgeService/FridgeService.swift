@@ -16,7 +16,7 @@ final class FridgeService {
     
     var canAddIngredientDidChange: ((Bool) -> Void)?
     var canClearIngredientsDidChange: ((Bool) -> Void)?
-    var didProduceError: ((FridgeServiceError) -> Void)?
+    var didProduceError: ((RecipeServiceError) -> Void)?
     var ingredientsDidChange: (() -> Void)?
     var ingredientTextDidChange: ((String) -> Void)?
   
