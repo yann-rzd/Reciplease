@@ -12,6 +12,8 @@ class RecipeDetailsViewController: UIViewController {
 
     // MARK: - VIEW LIFE CYCLE
     
+    var selectedRecipe: RecipeElements?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reciplease"
@@ -29,7 +31,14 @@ class RecipeDetailsViewController: UIViewController {
 
         }
         setupViews()
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupBindinds()
+        recipeService.updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: selectedRecipe)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -58,7 +67,7 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     @objc func getDirectionsRecipes() {
-        guard let url = recipeService.selectedRecipe?.url,
+        guard let url = selectedRecipe?.url,
               let urlString = URL(string: url) else {
             return
         }
@@ -70,7 +79,7 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     @objc func didTapAddFavoriteButton() {
-        recipeService.toggleSelectedFavoriteRecipe()
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
     }
     
     // MARK: - PRIVATE: properties
@@ -248,11 +257,11 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     private func setupContent() {
-        recipeLabel.text = recipeService.selectedRecipe?.label
-        recommendationNumberLabel.text = recipeService.selectedRecipe?.yield.description
-        recipeDurationLabel.text = recipeService.selectedRecipe?.time.description
+        recipeLabel.text = selectedRecipe?.label
+        recommendationNumberLabel.text = selectedRecipe?.yield.description
+        recipeDurationLabel.text = selectedRecipe?.time.description
         
-        let imageUrl = recipeService.selectedRecipe?.image
+        let imageUrl = selectedRecipe?.image
         let imageURL = NSURL(string: imageUrl ?? "")
         guard let data = NSData(contentsOf: imageURL! as URL) else {return}
         let imagedData = data
@@ -365,7 +374,7 @@ class RecipeDetailsViewController: UIViewController {
 
 extension RecipeDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ingredientsNumber = recipeService.selectedRecipe?.ingredientsList else {
+        guard let ingredientsNumber = selectedRecipe?.ingredientsList else {
             return 0
         }
             return ingredientsNumber.count
@@ -376,7 +385,7 @@ extension RecipeDetailsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let ingredients = recipeService.selectedRecipe?.ingredientsList?[indexPath.row]
+        let ingredients = selectedRecipe?.ingredientsList?[indexPath.row]
         cell.ingredientName = ingredients
         return cell
     }

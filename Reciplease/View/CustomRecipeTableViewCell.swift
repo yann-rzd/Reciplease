@@ -148,6 +148,9 @@ final class CustomRecipeTableViewCell: UITableViewCell {
     // MARK: - PRIVATE: functions
     
     private func commonInit() -> Void {
+
+        selectionStyle = .none
+        
         //Recipe indicators container
         recommendationRecipeStackView.addArrangedSubview(recommendationNumberLabel)
         recommendationRecipeStackView.addArrangedSubview(thumbUpImage)

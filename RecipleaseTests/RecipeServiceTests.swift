@@ -35,8 +35,10 @@ final class RecipeServiceTests: XCTestCase {
     }
     
     func testGivenRecipeSelected_WhenRemoveRecipeSelected_ThenRecipeSelectedEmpty() {
-        recipeService.selectedRecipe =
-            Reciplease.RecipeElements(
+        XCTAssertEqual(recipeService.favoriteRecipes.count, 0)
+        
+        let selectedRecipe =
+            RecipeElements(
                 label: Optional("Frothy Iced Matcha Green Tea Recipe"),
                 image: Optional("https://fakeUrl.com"),
                 url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
@@ -45,9 +47,26 @@ final class RecipeServiceTests: XCTestCase {
                 ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
                 time: 2.0
             )
+       
         
-        recipeService.removeSelectedRecipe()
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
         
-        XCTAssertEqual(recipeService.selectedRecipe, nil)
+        
+        recipeService.removeFavoriteRecipe(recipeTitle: "Frothy Iced Matcha Green Tea Recipe")
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        
+        recipeService.isRecipeAddedToFavorite = { isFavorited in
+            XCTAssertFalse(isFavorited)
+            
+            expectation.fulfill()
+
+        }
+        
+        recipeService.updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: selectedRecipe)
+        
+        wait(for: [expectation], timeout: 0.1)
+
     }
 }

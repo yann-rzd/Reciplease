@@ -37,7 +37,6 @@ final class RecipeService {
         }
     }
     
-    var selectedRecipe: RecipeElements?
     
     var favoriteRecipes: [RecipeElements] = [] {
         didSet {
@@ -54,7 +53,7 @@ final class RecipeService {
     
     // MARK: - INTERNAL: functions
     
-    func toggleSelectedFavoriteRecipe() {
+    func toggleSelectedFavoriteRecipe(selectedRecipe: RecipeElements?) {
         guard
             let selectedRecipe = selectedRecipe,
             let title = selectedRecipe.label,
@@ -69,8 +68,6 @@ final class RecipeService {
         let yield = selectedRecipe.yield
         let recipeTime = selectedRecipe.time
         
-        
-        //TODO: SHOULD NOT SAVE RECIPE IF ALREADY SAVEC BUT INSTEAD =>>> REMOVE IT
         
         recipeCoreDataService.isRecipeAlreadySaved(recipeTitle: title) { [weak self] result in
             switch result {
@@ -114,6 +111,17 @@ final class RecipeService {
         }
     }
     
+    
+    func updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: RecipeElements?) {
+        guard let selectedRecipe = selectedRecipe,
+              let selectedRecipeTitle = selectedRecipe.label
+        else {
+            didProduceError?(.failedToUpdateIsFavoritedState)
+            return
+        }
+        
+        updateAndNotifyFavoritedState(recipeTitle: selectedRecipeTitle)
+    }
     
     private func updateAndNotifyFavoritedState(recipeTitle: String) {
         recipeCoreDataService.isRecipeAlreadySaved(recipeTitle: recipeTitle) { [weak self] result in
