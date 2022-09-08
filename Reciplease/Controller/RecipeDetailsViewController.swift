@@ -26,7 +26,7 @@ class RecipeDetailsViewController: UIViewController {
                 let alertController = UIAlertController(title: "Error", message: error.errorDescription, preferredStyle: .alert)
                 let okAlertAcion = UIAlertAction(title: "OK", style: .default)
                 alertController.addAction(okAlertAcion)
-                self.present(self, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
             }
 
         }

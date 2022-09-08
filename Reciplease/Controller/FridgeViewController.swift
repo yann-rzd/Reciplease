@@ -66,7 +66,9 @@ final class FridgeViewController: UIViewController {
         }
         
         fridgeService.canClearIngredientsDidChange = { [weak self] canClear in
-            self?.clearIngredientsButton.isHidden = !canClear ? false : true
+            DispatchQueue.main.async {
+                self?.clearIngredientsButton.isHidden = !canClear ? false : true
+            }
         }
         
         recipeService.isLoadingChanged = { [weak self] isLoading in
@@ -80,7 +82,13 @@ final class FridgeViewController: UIViewController {
                     self?.activityIndicator.startAnimating()
                 }
             }
-        }  
+        }
+        
+        fridgeService.isSearchEnabled = { [weak self] isSearchEnabled in
+            DispatchQueue.main.async {
+                self?.searchForRecipesButton.isHidden = !isSearchEnabled
+            }
+        }
     }
     
     @objc func addIngredient() {
@@ -265,6 +273,7 @@ final class FridgeViewController: UIViewController {
         button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(searchForRecipes), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
 
         return button
     }()

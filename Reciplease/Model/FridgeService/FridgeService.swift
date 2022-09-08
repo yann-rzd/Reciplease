@@ -19,12 +19,14 @@ final class FridgeService {
     var didProduceError: ((RecipeServiceError) -> Void)?
     var ingredientsDidChange: (() -> Void)?
     var ingredientTextDidChange: ((String) -> Void)?
+    var isSearchEnabled: ((Bool) -> Void)?
   
     
     var addedIngredients: [String] = [] {
         didSet {
             ingredientsDidChange?()
             canClearIngredientsDidChange?(addedIngredients.isEmpty)
+            isSearchEnabled?(!addedIngredients.isEmpty)
         }
     }
 
