@@ -105,29 +105,8 @@ extension RecipeListViewController: UITableViewDataSource {
         }
 
         let selectedRecipe = recipesToDisplay[indexPath.row]
-        let cellImageName = selectedRecipe.image
         
-        
-        DispatchQueue.global(qos: .background).async {
-            if
-                let imageURL = URL(string: cellImageName ?? ""),
-                let data = try? Data(contentsOf: imageURL)
-             {
-                DispatchQueue.main.async {
-                    let imageView = UIImageView(image: UIImage(data: data))
-                    imageView.contentMode = .scaleAspectFill
-                    imageView.clipsToBounds = true
-                    
-                    cell.backgroundView = imageView
-                    
-                }
-            }
-        }
-       
-        
-        
-        
-        
+
         cell.recipeModel = selectedRecipe
         
         return cell

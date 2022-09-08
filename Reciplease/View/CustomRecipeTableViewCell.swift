@@ -31,6 +31,7 @@ final class CustomRecipeTableViewCell: UITableViewCell {
             ingredientsLabel.text = recipeModel.ingredients
             recommendationNumberLabel.text = String(describing: recipeModel.yield)
             recipeDurationLabel.text = String(describing: recipeModel.time) + "m"
+            triggerBackgroundRecipeImageAssignmentProcess(imageUrlString: recipeModel.image)
         }
     }
     
@@ -173,6 +174,61 @@ final class CustomRecipeTableViewCell: UITableViewCell {
             nameAndDescriptionRecipeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             nameAndDescriptionRecipeStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
+    }
+    
+    private func triggerBackgroundRecipeImageAssignmentProcess(imageUrlString: String?) {
+        
+        changeBackgroundImage(to: nil)
+        
+        guard let imageUrlString = imageUrlString else {
+            return
+        }
+        
+        getImageData(imageUrlString: imageUrlString) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success((let fetchImageUrlString, let backgroundImageData)):
+                    guard
+                        let currentRecipeImageUrlString = self?.recipeModel?.image,
+                        currentRecipeImageUrlString == fetchImageUrlString else { return }
+                    let image = UIImage(data: backgroundImageData)
+                    self?.changeBackgroundImage(to: image)
+                case .failure:
+                    self?.changeBackgroundImage(to: nil)
+                    return
+                }
+               
+            }
+        }
+    }
+    
+    private let defaultImage = UIImage(named: "default_image")
+    
+    
+    private func changeBackgroundImage(to image: UIImage?) {
+        let imageView = UIImageView(image: image ?? defaultImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        backgroundView = imageView
+    }
+
+    
+    private func getImageData(
+        imageUrlString: String,
+        completionHandler: @escaping (Result<(String, Data), NetworkServiceError>) -> Void
+    ) {
+        DispatchQueue.global(qos: .background).async {
+            if
+                let imageURL = URL(string: imageUrlString),
+                let backgroundImageData = try? Data(contentsOf: imageURL)
+             {
+                completionHandler(
+                    .success(
+                        (imageUrlString, backgroundImageData)
+                    )
+                )
+            }
+        }
     }
 
 }
