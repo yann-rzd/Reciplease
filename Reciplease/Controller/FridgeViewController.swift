@@ -58,7 +58,7 @@ final class FridgeViewController: UIViewController {
         fridgeService.canAddIngredientDidChange = { [weak self] canAddIngredient in
             self?.addIngredientButton.backgroundColor = !canAddIngredient ? .greenButtonColor : .lightGrayColor
             if !canAddIngredient {
-                self?.addIngredientButton.setTitleColor(.darkGreenColor, for: .normal)
+                self?.addIngredientButton.setTitleColor(.white, for: .normal)
             } else {
                 self?.addIngredientButton.setTitleColor(.grayColor, for: .normal)
             }
