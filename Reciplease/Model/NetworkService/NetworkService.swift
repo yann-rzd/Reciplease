@@ -40,6 +40,14 @@ class NetworkService: NetworkServiceProtocol {
 }
 
 
+final class NetworkServiceAlamofireMock: NetworkServiceAlamofireProtocol {
+    func fetch<T>(urlRequest request: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
+        completionHandler(.failure(.badUrlRequest))
+    }
+    
+    
+}
+
 
 //final class NetworkService: NetworkServiceProtocol {
 //

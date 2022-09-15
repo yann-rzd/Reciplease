@@ -15,7 +15,7 @@ final class RecipeService {
     init(
         networkService: NetworkServiceProtocol = NetworkService.shared,
         recipeUrlProvider: RecipeUrlProviderProtocol = RecipeUrlProvider.shared,
-        recipeCoreDataService: RecipeCoreDataService = RecipeCoreDataService.shared
+        recipeCoreDataService: RecipeCoreDataServiceProtocol = RecipeCoreDataService.shared
     ) {
         self.networkService = networkService
         self.recipeUrlProvider = recipeUrlProvider
@@ -62,6 +62,7 @@ final class RecipeService {
             let imageUrl = selectedRecipe.image,
             let url = selectedRecipe.url
         else {
+            didProduceError?(.failedToToggleRecipeFavoriteState)
             return
         }
         
@@ -172,13 +173,11 @@ final class RecipeService {
     //
     
     func fetchRecipes(
-        ingredients: [String],
-        completionHandler: @escaping (Result<RecipeElements, RecipeServiceError>) -> Void
+        ingredients: [String]
     ) {
         
         guard let url = recipeUrlProvider.getRecipeUrl(ingredients: ingredients) else {
             self.didProduceError?(.failedToFetchRecipes)
-            completionHandler(.failure(.failedToFetchRecipes))
             return
         }
 
@@ -193,7 +192,6 @@ final class RecipeService {
             
             switch result {
             case .failure:
-                completionHandler(.failure(.failedToFetchRecipes))
                 self?.didProduceError?(.failedToFetchRecipes)
                 self?.isFetchingRecipesSuccess?(false)
                 return
@@ -222,7 +220,6 @@ final class RecipeService {
                         ingredientsList: recipeIngredients,
                         time: recipeTotalTime
                     )
-                    completionHandler(.success(recipe))
                     self?.recipes.append(recipe)
                 }
                 
@@ -237,5 +234,5 @@ final class RecipeService {
     
     private let networkService: NetworkServiceProtocol
     private let recipeUrlProvider: RecipeUrlProviderProtocol
-    private let recipeCoreDataService: RecipeCoreDataService
+    private let recipeCoreDataService: RecipeCoreDataServiceProtocol
 }

@@ -69,4 +69,363 @@ final class RecipeServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
 
     }
+    
+    
+    
+    func test_givenNoRecipe_whenToggleRecipeToFavorite_thenDoesProduceFailedToToggleError() {
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToToggleRecipeFavoriteState)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: nil)
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    func test_givenNonfonctionalCoreDataService_whenToggleRecipeToFavorite_thenFailedToToggleError() {
+
+        let recipeService = RecipeService(recipeCoreDataService: RecipeCoreDataServiceMock())
+        
+        let selectedRecipe =
+            RecipeElements(
+                label: Optional("Frothy Iced Matcha Green Tea Recipe"),
+                image: Optional("https://fakeUrl.com"),
+                url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
+                yield: 2.0,
+                ingredients: Optional("green tea, water"),
+                ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
+                time: 2.0
+            )
+        
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToToggleRecipeFavoriteState)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
+        
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    func test_givenAlreadySavecRecipe_whenToggleRecipeToFavorite_thenFavoritedStateChangedToFalse() {
+
+        
+        // given
+        
+        let selectedRecipe =
+            RecipeElements(
+                label: Optional("Frothy Iced Matcha Green Tea Recipe"),
+                image: Optional("https://fakeUrl.com"),
+                url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
+                yield: 2.0,
+                ingredients: Optional("green tea, water"),
+                ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
+                time: 2.0
+            )
+        
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
+        
+        
+        
+        
+        // when
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.isRecipeAddedToFavorite = { isFavorited in
+            XCTAssertFalse(isFavorited)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
+        
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    func test_givenRecipeCoreDataServiceAlreadySavedRemoveFail_whenToggleRecipeToFavorite_thenFailedToToggleError() {
+
+        let recipeService = RecipeService(recipeCoreDataService: RecipeCoreDataServiceAlreadySavedRemoveFailMock())
+        
+        let selectedRecipe =
+            RecipeElements(
+                label: Optional("Frothy Iced Matcha Green Tea Recipe"),
+                image: Optional("https://fakeUrl.com"),
+                url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
+                yield: 2.0,
+                ingredients: Optional("green tea, water"),
+                ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
+                time: 2.0
+            )
+        
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToToggleRecipeFavoriteState)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
+        
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    func test_givenRecipeCoreDataServiceIsNotAlreadySavedSaveFail_whenToggleRecipeToFavorite_thenFailedToToggleError() {
+
+        let recipeService = RecipeService(recipeCoreDataService: RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock())
+        
+        let selectedRecipe =
+            RecipeElements(
+                label: Optional("Frothy Iced Matcha Green Tea Recipe"),
+                image: Optional("https://fakeUrl.com"),
+                url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
+                yield: 2.0,
+                ingredients: Optional("green tea, water"),
+                ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
+                time: 2.0
+            )
+        
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToSaveRecipe)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.toggleSelectedFavoriteRecipe(selectedRecipe: selectedRecipe)
+        
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    
+    
+    func test_givenNoRecipe_whenUpdateAndNotifyFavoritedStateWithSelectedRecipe_thenFailedToUpdateIsFavoritedState() {
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToUpdateIsFavoritedState)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: nil)
+        
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func test_givenRecipeAndFailingCoreDataServiceToRemove_whenUpdateAndNotifyFavoritedStateWithSelectedRecipe_thenFailedToUpdateIsFavoritedState() {
+        
+        
+        let recipeService = RecipeService(recipeCoreDataService: RecipeCoreDataServiceMock())
+        
+        let selectedRecipe =
+            RecipeElements(
+                label: Optional("Frothy Iced Matcha Green Tea Recipe"),
+                image: Optional("https://fakeUrl.com"),
+                url: Optional("http://www.seriouseats.com/recipes/2016/08/iced-matcha-green-tea-recipe.html"),
+                yield: 2.0,
+                ingredients: Optional("green tea, water"),
+                ingredientsList: Optional(["2 teaspoons (6g) Japanese matcha green tea (see note above)", "8 ounces (235ml) cold water"]),
+                time: 2.0
+            )
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToUpdateIsFavoritedState)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: selectedRecipe)
+        
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    
+    
+    
+    func test_givenFailingCoreDataGetRecipes_whenGetRecipes_thenFailedToGetRecipe()
+    {
+        let recipeService = RecipeService(recipeCoreDataService: RecipeCoreDataServiceMock())
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToGetRecipe)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.getRecipes()
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    func test_givenNotStoreRecipeTitle_whenRemvoeFavoriteRecipe_thenFailedToRemoveRecipe()
+    {
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToRemoveRecipe)
+            
+            expectation.fulfill()
+        }
+        
+        recipeService.removeFavoriteRecipe(recipeTitle: "asdasd")
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    
+    
+    func test_givenNetworkFailure_whenFetchRecipes_thenFailedToFetchRecipes()
+    {
+        
+        let recipeService = RecipeService(networkService: NetworkServiceFailureMock())
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToFetchRecipes)
+            expectation.fulfill()
+        }
+        
+        recipeService.fetchRecipes(ingredients: [])
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    
+    func test_givenUrlProviderFailure_whenFetchRecipes_thenFailedToFetchRecipes()
+    {
+        
+        let recipeService = RecipeService(recipeUrlProvider: RecipeUrlProviderFailureMock())
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.didProduceError = { error in
+            XCTAssertEqual(error, .failedToFetchRecipes)
+            expectation.fulfill()
+        }
+        
+        recipeService.fetchRecipes(ingredients: [])
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    
+    func test_givenNetworkServiceProvidingHits_whenFetchRecipes_thenGetRecipes()
+    {
+        
+        let recipeService = RecipeService(networkService: NetworkServiceSuccessMock())
+        
+        let expectation = XCTestExpectation(description: "Wait for callback")
+        
+        recipeService.recipesDidChange = {
+            XCTAssertFalse(recipeService.recipes.isEmpty)
+            expectation.fulfill()
+        }
+        
+        recipeService.fetchRecipes(ingredients: [])
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+}
+
+
+final class NetworkServiceFailureMock: NetworkServiceProtocol {
+    func fetch<T>(urlRequest: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
+        completionHandler(.failure(.badUrlRequest))
+    }
+    
+    func fetch<T>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
+        completionHandler(.failure(.badUrlRequest))
+    }
+    
+    
+}
+
+
+final class NetworkServiceSuccessMock: NetworkServiceProtocol {
+    func fetch<T>(urlRequest: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
+        let response = RecipesResponse(hits: [
+            Hit(
+                recipe: Recipe(
+                    label: "Pizza",
+                    image: nil,
+                    url: "www.google.com",
+                    yield: 10,
+                    ingredientLines: [],
+                    ingredients: [
+                        RecipeDetails(food: "Salad")
+                    ],
+                    totalTime: 10
+                )
+            )
+        ])
+        let result: Result<RecipesResponse, NetworkServiceError> = .success(response)
+        completionHandler(result as! Result<T, NetworkServiceError>)
+    }
+    
+    func fetch<T>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
+        let response = RecipesResponse(hits: [
+            Hit(
+                recipe: Recipe(
+                    label: "Pizza",
+                    image: nil,
+                    url: "www.google.com",
+                    yield: 10,
+                    ingredientLines: [],
+                    ingredients: [],
+                    totalTime: 10
+                )
+            )
+        ])
+        let result: Result<RecipesResponse, NetworkServiceError> = .success(response)
+        completionHandler(result as! Result<T, NetworkServiceError>)
+    }
+    
+    
+}
+
+
+
+
+final class RecipeUrlProviderFailureMock: RecipeUrlProviderProtocol {
+    func getRecipeUrl(ingredients: [String]) -> URL? {
+        return nil
+    }
+    
+    
 }

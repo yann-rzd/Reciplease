@@ -18,7 +18,26 @@ enum RecipeCoreDataServiceError: Error {
     case failedToRemoveRecipeBecauseInexisting
 }
 
-final class RecipeCoreDataService {
+protocol RecipeCoreDataServiceProtocol {
+    func saveRecipe(title: String,
+                    ingredients: String,
+                    ingredientsDetails: [String],
+                    imageUrl: String,
+                    url: String,
+                    yield: Double,
+                    recipeTime: Double,
+                    callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void)
+    
+    func isRecipeAlreadySaved(recipeTitle: String, callback: @escaping (Result<Bool, RecipeCoreDataServiceError>) -> Void)
+    
+    func getRecipes(callback: @escaping (Result<[RecipeElements], RecipeCoreDataServiceError>) -> Void)
+    
+    func removeRecipe(recipeTitle: String,
+                    callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void)
+}
+
+
+final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
     
     // MARK: - INITIALIZER
     
@@ -181,7 +200,7 @@ final class RecipeCoreDataService {
         
         if let results = try? context.fetch(fetchRequest) as? [NSManagedObject] {
 
-            // Delete all objects:
+        // Delete all objects:
             for object in results {
                 context.delete(object)
             }
@@ -189,6 +208,9 @@ final class RecipeCoreDataService {
             // Or delete first object:
             if results.count > 0 {
                 context.delete(results[0])
+            } else {
+                callback(.failure(.failedToRemoveRecipeBecauseInexisting))
+                return
             }
 
         } else {

@@ -72,10 +72,10 @@ class RecipeDetailsViewController: UIViewController {
             return
         }
         
-        let safariVC = SFSafariViewController(url: urlString)
-        present(safariVC, animated: true, completion: nil)
+        let safariViewController = SFSafariViewController(url: urlString)
+        present(safariViewController, animated: true, completion: nil)
         
-        safariVC.delegate = self
+        safariViewController.delegate = self
     }
     
     @objc func didTapAddFavoriteButton() {

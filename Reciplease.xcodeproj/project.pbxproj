@@ -18,6 +18,8 @@
 		E4218EC2289AAD9500770960 /* RecipeElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4218EC1289AAD9500770960 /* RecipeElements.swift */; };
 		E431345828A529F200FC4EFF /* FridgeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431345728A529F200FC4EFF /* FridgeServiceTests.swift */; };
 		E431345A28A5560F00FC4EFF /* RecipeCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431345928A5560F00FC4EFF /* RecipeCoreDataService.swift */; };
+		E4355C8328D36EF800A43B83 /* RecipeCoreDataServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4355C8228D36EF800A43B83 /* RecipeCoreDataServiceMock.swift */; };
+		E4355C8528D37B8200A43B83 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4355C8428D37B8200A43B83 /* NetworkServiceTests.swift */; };
 		E440AD3128AE306E001FEB92 /* NetworkServiceAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = E440AD3028AE306E001FEB92 /* NetworkServiceAlamofire.swift */; };
 		E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */; };
 		E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4613DB02897E0AE00A36993 /* FridgeService.swift */; };
@@ -64,6 +66,8 @@
 		E4218EC1289AAD9500770960 /* RecipeElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeElements.swift; sourceTree = "<group>"; };
 		E431345728A529F200FC4EFF /* FridgeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeServiceTests.swift; sourceTree = "<group>"; };
 		E431345928A5560F00FC4EFF /* RecipeCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataService.swift; sourceTree = "<group>"; };
+		E4355C8228D36EF800A43B83 /* RecipeCoreDataServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataServiceMock.swift; sourceTree = "<group>"; };
+		E4355C8428D37B8200A43B83 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		E440AD3028AE306E001FEB92 /* NetworkServiceAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceAlamofire.swift; sourceTree = "<group>"; };
 		E4613DAC2893DB3D00A36993 /* CustomIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		E4613DB02897E0AE00A36993 /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
@@ -158,6 +162,14 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		E4355C8128D36EE900A43B83 /* StubsMocks */ = {
+			isa = PBXGroup;
+			children = (
+				E4355C8228D36EF800A43B83 /* RecipeCoreDataServiceMock.swift */,
+			);
+			path = StubsMocks;
+			sourceTree = "<group>";
+		};
 		E4613DB42897E34900A36993 /* FridgeService */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,8 +219,10 @@
 		E4AF0F3E2892BA5E009C26F0 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				E4355C8128D36EE900A43B83 /* StubsMocks */,
 				E4AF0F3F2892BA5E009C26F0 /* RecipeServiceTests.swift */,
 				E431345728A529F200FC4EFF /* FridgeServiceTests.swift */,
+				E4355C8428D37B8200A43B83 /* NetworkServiceTests.swift */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -460,6 +474,8 @@
 			files = (
 				E431345828A529F200FC4EFF /* FridgeServiceTests.swift in Sources */,
 				E4AF0F402892BA5E009C26F0 /* RecipeServiceTests.swift in Sources */,
+				E4355C8528D37B8200A43B83 /* NetworkServiceTests.swift in Sources */,
+				E4355C8328D36EF800A43B83 /* RecipeCoreDataServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

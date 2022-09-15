@@ -103,17 +103,7 @@ final class FridgeViewController: UIViewController {
     
     @objc func searchForRecipes() {
         recipeService.removeRecipes()
-        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    self.alertViewService.displayAlert(on: self, error: error)
-                case .success:
-                    break
-                }
-            }
-        }
+        recipeService.fetchRecipes(ingredients: fridgeService.addedIngredients)
 
         recipeService.isFetchingRecipesSuccess = { [weak self] isSuccess in
             DispatchQueue.main.async {
