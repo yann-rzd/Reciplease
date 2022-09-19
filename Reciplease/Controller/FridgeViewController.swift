@@ -21,7 +21,6 @@ final class FridgeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setupBindinds()
     }
     
@@ -273,7 +272,7 @@ final class FridgeViewController: UIViewController {
     
     private func setupViews() {
         setupIngredientAdderContainer()
-        setupingredientsLabelAndClearButton()
+        setupingredientsLabelClearButtonAndIngredientsList()
         setupSearchButton()
         
     }
@@ -297,7 +296,6 @@ final class FridgeViewController: UIViewController {
             clearButton,
             .flexibleSpace(),
             doneButton
-           
         ]
         
         toolBar.sizeToFit()
@@ -319,7 +317,7 @@ final class FridgeViewController: UIViewController {
         ])
     }
     
-    private func setupingredientsLabelAndClearButton() {
+    private func setupingredientsLabelClearButtonAndIngredientsList() {
         ingredientTableView.backgroundColor = UIColor.mainBackgroundColor
         ingredientsLabelAndClearButtonStackView.addArrangedSubview(yourIngredientsLabel)
         ingredientsLabelAndClearButtonStackView.addArrangedSubview(clearIngredientsButton)

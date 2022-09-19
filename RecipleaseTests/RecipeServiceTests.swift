@@ -364,68 +364,11 @@ final class RecipeServiceTests: XCTestCase {
 }
 
 
-final class NetworkServiceFailureMock: NetworkServiceProtocol {
-    func fetch<T>(urlRequest: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
-        completionHandler(.failure(.badUrlRequest))
-    }
-    
-    func fetch<T>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
-        completionHandler(.failure(.badUrlRequest))
-    }
-    
-    
-}
-
-
-final class NetworkServiceSuccessMock: NetworkServiceProtocol {
-    func fetch<T>(urlRequest: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
-        let response = RecipesResponse(hits: [
-            Hit(
-                recipe: Recipe(
-                    label: "Pizza",
-                    image: nil,
-                    url: "www.google.com",
-                    yield: 10,
-                    ingredientLines: [],
-                    ingredients: [
-                        RecipeDetails(food: "Salad")
-                    ],
-                    totalTime: 10
-                )
-            )
-        ])
-        let result: Result<RecipesResponse, NetworkServiceError> = .success(response)
-        completionHandler(result as! Result<T, NetworkServiceError>)
-    }
-    
-    func fetch<T>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) where T : Decodable, T : Encodable {
-        let response = RecipesResponse(hits: [
-            Hit(
-                recipe: Recipe(
-                    label: "Pizza",
-                    image: nil,
-                    url: "www.google.com",
-                    yield: 10,
-                    ingredientLines: [],
-                    ingredients: [],
-                    totalTime: 10
-                )
-            )
-        ])
-        let result: Result<RecipesResponse, NetworkServiceError> = .success(response)
-        completionHandler(result as! Result<T, NetworkServiceError>)
-    }
-    
-    
-}
 
 
 
 
-final class RecipeUrlProviderFailureMock: RecipeUrlProviderProtocol {
-    func getRecipeUrl(ingredients: [String]) -> URL? {
-        return nil
-    }
-    
-    
-}
+
+
+
+

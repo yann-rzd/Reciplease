@@ -46,7 +46,7 @@ final class RecipeListViewController: UIViewController {
     // MARK: - PRIVATE: properties
     
     private let recipeService = RecipeService.shared
-    private let recipeCoreDateService = RecipeCoreDataService.shared
+//    private let recipeCoreDateService = RecipeCoreDataService.shared
     
     private let recipeTableView: UITableView = {
         let tableView = UITableView()

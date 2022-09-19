@@ -54,7 +54,6 @@ final class CustomIngredientTableViewCell: UITableViewCell {
     // MARK: - PRIVATE: functions
     
     private func commonInit() -> Void {
-//        ingredientLabel = UITextView(frame: self.frame)
         contentView.backgroundColor = UIColor.mainBackgroundColor
         contentView.addSubview(ingredientLabel)
         
