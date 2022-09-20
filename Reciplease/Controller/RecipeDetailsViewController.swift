@@ -20,7 +20,6 @@ class RecipeDetailsViewController: UIViewController {
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
         recipeService.didProduceError = { [weak self] error in
-            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 let alertController = UIAlertController(title: "Error", message: error.errorDescription, preferredStyle: .alert)
@@ -28,11 +27,18 @@ class RecipeDetailsViewController: UIViewController {
                 alertController.addAction(okAlertAcion)
                 self.present(alertController, animated: true, completion: nil)
             }
-
         }
         setupViews()
-
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if !isGradientAlreadyAdded {
+            recipeImage.addGradient()
+            isGradientAlreadyAdded = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,10 +111,8 @@ class RecipeDetailsViewController: UIViewController {
         let image = UIImageView()
         image.image = UIImage(named: "")
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleToFill
         
-        
-
         return image
     }()
     
@@ -269,14 +273,7 @@ class RecipeDetailsViewController: UIViewController {
         recipeImage.image = UIImage(data: imagedData as Data)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if !isGradientAlreadyAdded {
-            recipeImage.addGradient()
-            isGradientAlreadyAdded = true
-        }
-    }
+    
     
     private func setupRecipeImage() {
         recipeLabelImageIndicatorsView.addSubview(recipeImage)
