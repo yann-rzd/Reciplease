@@ -105,7 +105,6 @@ extension RecipeListViewController: UITableViewDataSource {
         }
 
         let selectedRecipe = recipesToDisplay[indexPath.row]
-        
 
         cell.recipeModel = selectedRecipe
         
