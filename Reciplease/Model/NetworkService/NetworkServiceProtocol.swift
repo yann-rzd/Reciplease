@@ -9,7 +9,7 @@ import Foundation
 
 protocol NetworkServiceProtocol {
     func fetch<T: Codable>(urlRequest: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void)
-    func fetch<T: Codable>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void)
+//    func fetch<T: Codable>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void)
 }
 
 //protocol NetworkServiceProtocol {

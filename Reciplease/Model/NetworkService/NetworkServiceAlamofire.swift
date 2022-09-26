@@ -8,12 +8,7 @@
 import Foundation
 import Alamofire
 
-
-protocol NetworkServiceAlamofireProtocol {
-    func fetch<T: Codable>(urlRequest request: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void)
-}
-
-class NetworkServiceAlamofire: NetworkServiceAlamofireProtocol {
+final class NetworkServiceAlamofire: NetworkServiceAlamofireProtocol {
 
     func fetch<T: Codable>(urlRequest request: URLRequest, completionHandler: @escaping (Result<T, NetworkServiceError>) -> Void) {
         AF.request(request).validate().responseDecodable(of: T.self) { response in

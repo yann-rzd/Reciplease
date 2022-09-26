@@ -400,8 +400,7 @@ extension UIView {
     func addGradient() {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
-        
-        print("❌❌  \(self.bounds)")
+
         let startColor = UIColor.clear.cgColor
         let endColor = UIColor.black.cgColor
         gradient.colors = [startColor, endColor]

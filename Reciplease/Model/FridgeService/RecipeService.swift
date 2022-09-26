@@ -167,15 +167,9 @@ final class RecipeService {
         recipes.removeAll()
     }
     
-    //func removeSelectedRecipe() {
-    //    selectedRecipe = nil
-    //}
-    //
-    
     func fetchRecipes(
         ingredients: [String]
     ) {
-        
         guard let url = recipeUrlProvider.getRecipeUrl(ingredients: ingredients) else {
             self.didProduceError?(.failedToFetchRecipes)
             return

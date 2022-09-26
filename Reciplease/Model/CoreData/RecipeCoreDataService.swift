@@ -35,7 +35,6 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
                     recipeTime: Double,
                     callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void) {
         
-        
         isRecipeAlreadySaved(recipeTitle: title) { [weak self] result in
             switch result {
             case .failure(let error):
@@ -47,13 +46,10 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
                     callback(.failure(.failedToSaveRecipeBecauseAlreadyStored))
                     return
                 }
-                
+                print("👀 == \(self)")
                 let recipe = RecipeEntity(context: self.coreDataStack.wrappedContext)
                 
-
-                
                 recipe.title = title
-                
                 recipe.ingredients = ingredients
                 recipe.ingredientsDetails = ingredientsDetails.description
                 recipe.imageUrl = imageUrl
@@ -70,7 +66,6 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
                     print("We were unable to save this recipe.")
                     callback(.failure(.contextFailedToSaveRecipe))
                 }
-                
             }
         }
     }
@@ -101,6 +96,7 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
             NSSortDescriptor(key: "yield", ascending: true),
             NSSortDescriptor(key: "recipeTime", ascending: true)
         ]
+        
         guard let recipes = try? coreDataStack.operationsContext.fetch(request) else {
             callback(.failure(.failedToGetRecipesFromContext))
             return
@@ -151,20 +147,20 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
         fetchRequest.predicate = NSPredicate(format: "title = %@", recipeTitle)
         
         if let results = try? context.fetch(fetchRequest) as? [NSManagedObject] {
-
-        // Delete all objects:
+            
+            // Delete all objects:
             for object in results {
                 context.delete(object)
             }
-
+            
             // Or delete first object:
-            if results.count > 0 {
-                context.delete(results[0])
-            } else {
-                callback(.failure(.failedToRemoveRecipeBecauseInexisting))
-                return
-            }
-
+//            if results.count > 0 {
+//                context.delete(results[0])
+//            } else {
+//                callback(.failure(.failedToRemoveRecipeBecauseInexisting))
+//                return
+//            }
+            
         } else {
             print("We were unable to remove this recipe.")
             callback(.failure(.failedToRemoveRecipeBecauseInexisting))

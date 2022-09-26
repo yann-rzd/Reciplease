@@ -274,7 +274,6 @@ final class FridgeViewController: UIViewController {
         setupIngredientAdderContainer()
         setupingredientsLabelClearButtonAndIngredientsList()
         setupSearchButton()
-        
     }
     
     private func setupToolBar() {
