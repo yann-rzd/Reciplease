@@ -59,8 +59,6 @@ class RecipeDetailsViewController: UIViewController {
     
     var selectedRecipe: RecipeElements?
     
-    var shouldDisplayFavoriteRecipeDetails: Bool = true
-    
     
     // MARK: - INTERNAL: functions
     

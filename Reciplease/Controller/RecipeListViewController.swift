@@ -132,12 +132,6 @@ extension RecipeListViewController: UITableViewDelegate {
         let recipeDetailsViewController = RecipeDetailsViewController()
         recipeDetailsViewController.selectedRecipe = selectedRecipe
         
-        if shouldDisplayFavoriteRecipes == true {
-            recipeDetailsViewController.shouldDisplayFavoriteRecipeDetails = true
-        } else {
-            recipeDetailsViewController.shouldDisplayFavoriteRecipeDetails = false
-        }
-        
         navigationController?.pushViewController(recipeDetailsViewController, animated: true)
         navigationItem.backButtonTitle = "Back"
     }
