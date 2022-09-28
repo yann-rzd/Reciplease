@@ -112,7 +112,6 @@ final class RecipeService {
         }
     }
     
-    
     func updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: RecipeElements?) {
         guard let selectedRecipe = selectedRecipe,
               let selectedRecipeTitle = selectedRecipe.label
@@ -167,9 +166,7 @@ final class RecipeService {
         recipes.removeAll()
     }
     
-    func fetchRecipes(
-        ingredients: [String]
-    ) {
+    func fetchRecipes(ingredients: [String]) {
         guard let url = recipeUrlProvider.getRecipeUrl(ingredients: ingredients) else {
             self.didProduceError?(.failedToFetchRecipes)
             return
@@ -182,8 +179,6 @@ final class RecipeService {
         isLoading = true
         
         networkService.fetch(urlRequest: urlRequest) { [weak self] (result: Result<RecipesResponse, NetworkServiceError>) in
-            
-            
             switch result {
             case .failure:
                 self?.didProduceError?(.failedToFetchRecipes)

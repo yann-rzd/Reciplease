@@ -16,18 +16,18 @@ class NetworkServiceTests: XCTestCase {
         self.networkService = NetworkService(NetworkServiceAlamofireMock())
     }
     
-    func testGivenUrl_whenFetch_thenError() {
-        let url = URL(string: "www.google.com")!
-        networkService.fetch(url: url) { (result: Result<RecipesResponse, NetworkServiceError>) in
-            switch result {
-            case .failure(let error):
-                XCTAssertEqual(error, .badUrlRequest)
-            case .success:
-                XCTFail()
-                return
-            }
-        }
-    }
+//    func testGivenUrl_whenFetch_thenError() {
+//        let url = URL(string: "www.google.com")!
+//        networkService.fetch(url: url) { (result: Result<RecipesResponse, NetworkServiceError>) in
+//            switch result {
+//            case .failure(let error):
+//                XCTAssertEqual(error, .badUrlRequest)
+//            case .success:
+//                XCTFail()
+//                return
+//            }
+//        }
+//    }
     
     
     func testGivenUrlRequest_whenFetch_thenError() {

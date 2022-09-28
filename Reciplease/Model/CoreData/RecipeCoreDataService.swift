@@ -148,21 +148,11 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
         
         if let results = try? context.fetch(fetchRequest) as? [NSManagedObject] {
             
-            // Delete all objects:
             for object in results {
                 context.delete(object)
             }
             
-            // Or delete first object:
-//            if results.count > 0 {
-//                context.delete(results[0])
-//            } else {
-//                callback(.failure(.failedToRemoveRecipeBecauseInexisting))
-//                return
-//            }
-            
         } else {
-            print("We were unable to remove this recipe.")
             callback(.failure(.failedToRemoveRecipeBecauseInexisting))
             return
         }
@@ -172,7 +162,6 @@ final class RecipeCoreDataService: RecipeCoreDataServiceProtocol {
             callback(.success(()))
             return
         } catch {
-            print("We were unable to remove this recipe.")
             callback(.failure(.failedToRemoveRecipeFromContext))
             return
         }

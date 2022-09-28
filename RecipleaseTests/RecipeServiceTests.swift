@@ -288,21 +288,21 @@ final class RecipeServiceTests: XCTestCase {
     }
     
     
-    func test_givenNotStoreRecipeTitle_whenRemvoeFavoriteRecipe_thenFailedToRemoveRecipe()
-    {
-        
-        let expectation = XCTestExpectation(description: "Wait for callback")
-        
-        recipeService.didProduceError = { error in
-            XCTAssertEqual(error, .failedToRemoveRecipe)
-            
-            expectation.fulfill()
-        }
-        
-        recipeService.removeFavoriteRecipe(recipeTitle: "asdasd")
-        
-        wait(for: [expectation], timeout: 0.1)
-    }
+//    func test_givenNotStoreRecipeTitle_whenRemvoeFavoriteRecipe_thenFailedToRemoveRecipe()
+//    {
+//        
+//        let expectation = XCTestExpectation(description: "Wait for callback")
+//        
+//        recipeService.didProduceError = { error in
+//            XCTAssertEqual(error, .failedToRemoveRecipe)
+//            
+//            expectation.fulfill()
+//        }
+//        
+//        recipeService.removeFavoriteRecipe(recipeTitle: "asdasd")
+//        
+//        wait(for: [expectation], timeout: 0.1)
+//    }
     
     
     

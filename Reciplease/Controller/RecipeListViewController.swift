@@ -8,8 +8,6 @@
 import UIKit
 
 final class RecipeListViewController: UIViewController {
-    
-    
 
     // MARK: - View life cycle
     
@@ -66,8 +64,6 @@ final class RecipeListViewController: UIViewController {
             recipeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    
         
     private func setupBindings() {
         recipeService.recipesDidChange = { [weak self] in
@@ -105,7 +101,6 @@ extension RecipeListViewController: UITableViewDataSource {
         }
 
         let selectedRecipe = recipesToDisplay[indexPath.row]
-
         cell.recipeModel = selectedRecipe
         
         return cell
@@ -146,15 +141,4 @@ extension RecipeListViewController: UITableViewDelegate {
         navigationController?.pushViewController(recipeDetailsViewController, animated: true)
         navigationItem.backButtonTitle = "Back"
     }
-    
-    // TODO: Should handle pagination in Reciplease 2.0
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let position = scrollView.contentOffset.y
-//        if position > recipeTableView.contentSize.height - 100 - scrollView.frame.size.height {
-//            // fetch more data
-//            print("Fetch more data here")
-//        }
-//    }
-    
-    
 }

@@ -12,8 +12,6 @@ class RecipeDetailsViewController: UIViewController {
 
     // MARK: - VIEW LIFE CYCLE
     
-    var selectedRecipe: RecipeElements?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Reciplease"
@@ -59,6 +57,8 @@ class RecipeDetailsViewController: UIViewController {
     
     // MARK: - INTERNAL: properties
     
+    var selectedRecipe: RecipeElements?
+    
     var shouldDisplayFavoriteRecipeDetails: Bool = true
     
     
@@ -100,7 +100,6 @@ class RecipeDetailsViewController: UIViewController {
     }()
     
     private let recipeLabelImageIndicatorsView: UIView = {
-//        let recipeView = UIView(frame: CGRect(x: 10, y: 10, width: 300, height: 200))
         let recipeView = UIView()
         recipeView.translatesAutoresizingMaskIntoConstraints = false
         
