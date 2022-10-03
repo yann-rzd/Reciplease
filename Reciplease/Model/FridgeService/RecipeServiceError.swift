@@ -28,7 +28,7 @@ enum RecipeServiceError: LocalizedError {
         case .failedToSaveRecipe:
             return "Failed to save recipe."
         case .failedToGetRecipe:
-            return "Failed to get recipes from stoage."
+            return "Failed to get recipes from storage."
         case .failedToToggleRecipeFavoriteState:
             return "Failed to toggle recipe favorite state."
         case .failedToRemoveRecipe:
