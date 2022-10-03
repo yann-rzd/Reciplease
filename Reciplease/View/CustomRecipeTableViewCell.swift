@@ -12,11 +12,13 @@ final class CustomRecipeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
+        applyAccessibility()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
+        applyAccessibility()
     }
     
     
@@ -147,6 +149,14 @@ final class CustomRecipeTableViewCell: UITableViewCell {
 
     
     // MARK: - PRIVATE: functions
+    
+    private func applyAccessibility() {
+        recipeLabel.accessibilityLabel = "Recipe label"
+        recipeLabel.accessibilityTraits = .staticText
+        
+        ingredientsLabel.accessibilityLabel = "Recipe ingredients"
+        ingredientsLabel.accessibilityTraits = .staticText
+    }
     
     private func commonInit() -> Void {
 

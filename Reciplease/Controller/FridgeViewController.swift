@@ -16,6 +16,7 @@ final class FridgeViewController: UIViewController {
         ingredientTableView.delegate = self
         ingredientAdderTextField.delegate = self
         setupViews()
+        apllyAccessibility()
         setupToolBar()
     }
     
@@ -274,6 +275,25 @@ final class FridgeViewController: UIViewController {
         setupIngredientAdderContainer()
         setupingredientsLabelClearButtonAndIngredientsList()
         setupSearchButton()
+    }
+    
+    private func apllyAccessibility() {
+        ingredientAdderTextField.accessibilityLabel = "Please write here your ingredients"
+        ingredientAdderTextField.isAccessibilityElement = true
+        ingredientAdderTextField.font = .preferredFont(forTextStyle: .body)
+        ingredientAdderTextField.adjustsFontForContentSizeCategory = true
+        
+        addIngredientButton.accessibilityLabel = "Validate your ingredient"
+        addIngredientButton.accessibilityTraits = .button
+        
+        clearIngredientsButton.accessibilityLabel = "Delete all"
+        clearIngredientsButton.accessibilityTraits = .button
+        
+        activityIndicator.accessibilityLabel = "Loading recipes indicator"
+        activityIndicator.isAccessibilityElement = true
+        
+        searchForRecipesButton.accessibilityLabel = "Search for recipes"
+        searchForRecipesButton.accessibilityTraits = .button
     }
     
     private func setupToolBar() {

@@ -27,7 +27,7 @@ class RecipeDetailsViewController: UIViewController {
             }
         }
         setupViews()
-        
+        applyAccessibility()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -248,6 +248,20 @@ class RecipeDetailsViewController: UIViewController {
         setupNavigationBar()
     }
     
+    private func applyAccessibility() {
+        recipeLabel.accessibilityLabel = "Recipe title"
+        recipeLabel.accessibilityTraits = .staticText
+        
+        recipeImage.accessibilityLabel = "Recipe image"
+        recipeImage.accessibilityTraits = .image
+        
+        addFavoriteBarButton.accessibilityLabel = "Add this recipe in your favorites"
+        addFavoriteBarButton.accessibilityTraits = .button
+        
+        getDirectionsButton.accessibilityLabel = "Get direction to recicpe web page"
+        getDirectionsButton.accessibilityTraits = .button
+    }
+    
     private func setupContent() {
         recipeLabel.text = selectedRecipe?.label
         recommendationNumberLabel.text = selectedRecipe?.yield.description
@@ -349,7 +363,6 @@ class RecipeDetailsViewController: UIViewController {
         navigationItem.rightBarButtonItems = [
             addFavoriteBarButton
         ]
-        
     }
 }
 
