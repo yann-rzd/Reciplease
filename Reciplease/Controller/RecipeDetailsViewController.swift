@@ -41,19 +41,10 @@ class RecipeDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupBindinds()
+        setupBindings()
         recipeService.updateAndNotifyFavoritedStateWithSelectedRecipe(selectedRecipe: selectedRecipe)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        //recipeService.removeSelectedRecipe()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        ingredientsTableView.rowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height / 11
-    }
     
     // MARK: - INTERNAL: properties
     
@@ -62,7 +53,7 @@ class RecipeDetailsViewController: UIViewController {
     
     // MARK: - INTERNAL: functions
     
-    func setupBindinds() {
+    func setupBindings() {
         recipeService.isRecipeAddedToFavorite = { [weak self] isFavorited in
             DispatchQueue.main.async {
                 self?.addFavoriteBarButton.tintColor = isFavorited ? .greenButtonColor : .white
@@ -269,9 +260,7 @@ class RecipeDetailsViewController: UIViewController {
         
         recipeImage.image = UIImage(data: imagedData as Data)
     }
-    
-    
-    
+
     private func setupRecipeImage() {
         recipeLabelImageIndicatorsView.addSubview(recipeImage)
         
