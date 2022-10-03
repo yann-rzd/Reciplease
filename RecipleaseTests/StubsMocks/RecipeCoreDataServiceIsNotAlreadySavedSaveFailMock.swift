@@ -1,14 +1,14 @@
 //
-//  RecipeCoreDataServiceMock.swift
+//  RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift
 //  RecipleaseTests
 //
-//  Created by Yann Rouzaud on 15/09/2022.
+//  Created by Yann Rouzaud on 03/10/2022.
 //
 
 import Foundation
 @testable import Reciplease
 
-final class RecipeCoreDataServiceMock: RecipeCoreDataServiceProtocol {
+final class RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock: RecipeCoreDataServiceProtocol {
     
     
     func saveRecipe(
@@ -21,20 +21,20 @@ final class RecipeCoreDataServiceMock: RecipeCoreDataServiceProtocol {
         recipeTime: Double,
         callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void
     ) {
-        
+        callback(.failure(.contextFailedToSaveRecipe))
         
     }
     
     func isRecipeAlreadySaved(recipeTitle: String, callback: @escaping (Result<Bool, RecipeCoreDataServiceError>) -> Void) {
-        callback(.failure(.failedToGetRecipesFromContext))
+        callback(.success(false))
     }
     
     func getRecipes(callback: @escaping (Result<[RecipeElements], RecipeCoreDataServiceError>) -> Void) {
-        callback(.failure(.failedToGetRecipesFromContext))
+        
     }
     
     func removeRecipe(recipeTitle: String, callback: @escaping (Result<Void, RecipeCoreDataServiceError>) -> Void) {
-        
+    
     }
     
 }

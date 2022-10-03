@@ -47,6 +47,8 @@
 		E4AF0F632892BE8D009C26F0 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */; };
 		E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */; };
 		E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */; };
+		E4ECA14128EB20200011BCE5 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ECA14028EB20200011BCE5 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift */; };
+		E4ECA14328EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ECA14228EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift */; };
 		E4F7C08B289BC925002796AE /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */; };
 		E4FB7D5C28E1E2630006E84E /* CoreDataContextFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FB7D5B28E1E2630006E84E /* CoreDataContextFailureMock.swift */; };
 		E4FB7D5E28E1E2D30006E84E /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FB7D5D28E1E2D30006E84E /* MockError.swift */; };
@@ -109,6 +111,8 @@
 		E4AF0F622892BE8D009C26F0 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ../View/TabBarViewController.swift; sourceTree = "<group>"; };
+		E4ECA14028EB20200011BCE5 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift; sourceTree = "<group>"; };
+		E4ECA14228EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift; sourceTree = "<group>"; };
 		E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		E4FB7D5B28E1E2630006E84E /* CoreDataContextFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContextFailureMock.swift; sourceTree = "<group>"; };
 		E4FB7D5D28E1E2D30006E84E /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				E4355C8228D36EF800A43B83 /* RecipeCoreDataServiceMock.swift */,
+				E4ECA14028EB20200011BCE5 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift */,
+				E4ECA14228EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift */,
 				E46A921628D8B0FC00CCAA19 /* RecipeUrlProviderFailureMock.swift */,
 				E46A921428D8B08700CCAA19 /* NetworkServiceAlamofireMock.swift */,
 				E46A921C28D8B24200CCAA19 /* NetworkServiceFailureMock.swift */,
@@ -512,6 +518,7 @@
 			files = (
 				E4FB7D5C28E1E2630006E84E /* CoreDataContextFailureMock.swift in Sources */,
 				E46A921F28D8B25C00CCAA19 /* NetworkServiceSuccessMock.swift in Sources */,
+				E4ECA14328EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift in Sources */,
 				E431345828A529F200FC4EFF /* FridgeServiceTests.swift in Sources */,
 				E4AF0F402892BA5E009C26F0 /* RecipeServiceTests.swift in Sources */,
 				E46A922528D8D5DF00CCAA19 /* RecipeCoreDataServiceTests.swift in Sources */,
@@ -520,6 +527,7 @@
 				E46A921528D8B08700CCAA19 /* NetworkServiceAlamofireMock.swift in Sources */,
 				E46A921D28D8B24200CCAA19 /* NetworkServiceFailureMock.swift in Sources */,
 				E4355C8328D36EF800A43B83 /* RecipeCoreDataServiceMock.swift in Sources */,
+				E4ECA14128EB20200011BCE5 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
