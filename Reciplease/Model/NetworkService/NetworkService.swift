@@ -27,13 +27,6 @@ final class NetworkService: NetworkServiceProtocol {
     }
     
     
-//    func fetch<T: Codable>(url: URL, completionHandler: @escaping (Result<T, NetworkServiceError>)  -> Void) {
-//        let urlRequest = URLRequest(url: url)
-//        network.fetch(urlRequest: urlRequest) { (result) in
-//            completionHandler(result)
-//        }
-//    }
-    
     // MARK: - PRIVATE: properties
     
     private let network: NetworkServiceAlamofireProtocol

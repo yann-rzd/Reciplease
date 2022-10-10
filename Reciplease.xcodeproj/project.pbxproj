@@ -10,6 +10,7 @@
 		1EBC0C8302D45D0035187765 /* Pods_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2BCE2A050F97F452C1D0AB /* Pods_RecipleaseTests.framework */; };
 		C792A8C3D9F0B984B1646E6E /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF48DD259C2F2A29DD4B9C8 /* Pods_Reciplease.framework */; };
 		E4007FA228DB4BB600579916 /* NetworkServiceAlamofireProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4007FA128DB4BB600579916 /* NetworkServiceAlamofireProtocol.swift */; };
+		E410074F28F458B400AC5A8B /* CoreDataPersistentContainerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E410074E28F458B400AC5A8B /* CoreDataPersistentContainerProvider.swift */; };
 		E4203AD4289C12380093B0AD /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD3289C12380093B0AD /* RecipeService.swift */; };
 		E4203AD7289C28040093B0AD /* AlertViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4203AD6289C28040093B0AD /* AlertViewService.swift */; };
 		E4218EBC289A749600770960 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4218EBA289A749600770960 /* Reciplease.xcdatamodeld */; };
@@ -71,6 +72,7 @@
 		ADF48DD259C2F2A29DD4B9C8 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09178C46E52D2101939A09C /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
 		E4007FA128DB4BB600579916 /* NetworkServiceAlamofireProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceAlamofireProtocol.swift; sourceTree = "<group>"; };
+		E410074E28F458B400AC5A8B /* CoreDataPersistentContainerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistentContainerProvider.swift; sourceTree = "<group>"; };
 		E4203AD3289C12380093B0AD /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		E4203AD6289C28040093B0AD /* AlertViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewService.swift; sourceTree = "<group>"; };
 		E4218EBB289A749600770960 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				E4218EBA289A749600770960 /* Reciplease.xcdatamodeld */,
 				E4218EBF289A764300770960 /* RecipeEntity.swift */,
 				E4218EBD289A751D00770960 /* CoreDataStack.swift */,
+				E410074E28F458B400AC5A8B /* CoreDataPersistentContainerProvider.swift */,
 				E431345928A5560F00FC4EFF /* RecipeCoreDataService.swift */,
 				E46A921828D8B17000CCAA19 /* RecipeCoreDataServiceProtocol.swift */,
 				E46A921A28D8B19000CCAA19 /* RecipeCoreDataServiceError.swift */,
@@ -484,6 +487,7 @@
 				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
 				E46A921B28D8B19000CCAA19 /* RecipeCoreDataServiceError.swift in Sources */,
 				E4613DB62898099100A36993 /* RecipeUrlProvider.swift in Sources */,
+				E410074F28F458B400AC5A8B /* CoreDataPersistentContainerProvider.swift in Sources */,
 				E4F7C08B289BC925002796AE /* RecipeDetailsViewController.swift in Sources */,
 				E4613DB12897E0AE00A36993 /* FridgeService.swift in Sources */,
 				E4613DAD2893DB3D00A36993 /* CustomIngredientTableViewCell.swift in Sources */,

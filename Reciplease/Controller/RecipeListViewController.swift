@@ -13,7 +13,7 @@ final class RecipeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Reciplease"
+//        self.title = "Reciplease"
         
         recipeTableView.dataSource = self
         recipeTableView.delegate = self

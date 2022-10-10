@@ -8,7 +8,6 @@
 
 import CoreData
 
-
 protocol RecipleaseCoreDataContextProtocol {
     func save() throws
     func delete(_ object: NSManagedObject)
