@@ -37,4 +37,12 @@ Run `pod install`
 
 Open `Reciplease.xcworkspace`
 
+### Add your [Edamam](https://www.edamam.com/) API key
+
+Create a file `APIKeys.swift`
+
+Add this code `struct APIKeys {
+    static let recipeKey = "yourAPIKey"
+}` and replace yourAPIKey with your key. 
+
 Build & Run 🔥
