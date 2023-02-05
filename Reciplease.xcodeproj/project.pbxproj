@@ -49,6 +49,7 @@
 		E4AF0F652892BEA0009C26F0 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */; };
 		E4AF0F692892BF68009C26F0 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */; };
 		E4DDBBCC28EB3C91004EC7C8 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DDBBCB28EB3C91004EC7C8 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift */; };
+		E4DF01C6299029F7004E1CC6 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DF01C5299029F7004E1CC6 /* APIKeys.swift */; };
 		E4ECA14328EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ECA14228EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift */; };
 		E4F7C08B289BC925002796AE /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */; };
 		E4FB7D5C28E1E2630006E84E /* CoreDataContextFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FB7D5B28E1E2630006E84E /* CoreDataContextFailureMock.swift */; };
@@ -114,6 +115,7 @@
 		E4AF0F642892BEA0009C26F0 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		E4AF0F682892BF68009C26F0 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ../View/TabBarViewController.swift; sourceTree = "<group>"; };
 		E4DDBBCB28EB3C91004EC7C8 /* RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataServiceAlreadySavedRemoveFailMock.swift; sourceTree = "<group>"; };
+		E4DF01C5299029F7004E1CC6 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		E4ECA14228EB20520011BCE5 /* RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCoreDataServiceIsNotAlreadySavedSaveFailMock.swift; sourceTree = "<group>"; };
 		E4F7C08A289BC925002796AE /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		E4FB7D5B28E1E2630006E84E /* CoreDataContextFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContextFailureMock.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			children = (
 				E4AF0F252892BA5C009C26F0 /* AppDelegate.swift */,
 				E4AF0F272892BA5C009C26F0 /* SceneDelegate.swift */,
+				E4DF01C5299029F7004E1CC6 /* APIKeys.swift */,
 				E4218EB8289A73B200770960 /* Supporting Files */,
 				E4AF0F582892BB8E009C26F0 /* View */,
 				E4AF0F5A2892BBA5009C26F0 /* Controller */,
@@ -484,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4AF0F602892BC93009C26F0 /* NetworkServiceError.swift in Sources */,
+				E4DF01C6299029F7004E1CC6 /* APIKeys.swift in Sources */,
 				E4AF0F5C2892BC3F009C26F0 /* NetworkService.swift in Sources */,
 				E46A921B28D8B19000CCAA19 /* RecipeCoreDataServiceError.swift in Sources */,
 				E4613DB62898099100A36993 /* RecipeUrlProvider.swift in Sources */,
@@ -561,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -621,6 +626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
