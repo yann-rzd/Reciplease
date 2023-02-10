@@ -16,7 +16,7 @@ Reciplease is the app thats will help you cook nice plats in your everyday life.
 Reciplease is written in Swift 5 and supports iOS 13.0+. Built with Xcode 13.
 
 ## 🍀 Architecture
-I decided to deal with this app with a [MVC](https://medium.com/@joespinelli_6190/mvc-model-view-controller-ef878e2fd6f5) architectural pattern.
+This application is developed according to the [MVC](https://medium.com/@joespinelli_6190/mvc-model-view-controller-ef878e2fd6f5) architecture.
 
 ## 🛠 Dependencies
 To save recipe for offline use [CoreData](https://developer.apple.com/documentation/coredata) and [Alamofire](https://github.com/Alamofire/Alamofire) for an elegant HTTP Networking in Swift.
