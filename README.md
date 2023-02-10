@@ -12,10 +12,8 @@
 ## 🍕 About
 Reciplease is the app thats will help you cook nice plats in your everyday life. It will let you enter your ingredients left in your fridge and search for recipes. Recipes that you can save in your app favorite page and have access offline.
 
-I had to build an app with two pages for [Openclassrooms](https://openclassrooms.com/).
-
 ## 💻 Requirements
-Reciplease is written in Swift 5 and supports iOS 13.0+. Built with Xcode 11.
+Reciplease is written in Swift 5 and supports iOS 13.0+. Built with Xcode 13.
 
 ## 🍀 Architecture
 I decided to deal with this app with a [MVC](https://medium.com/@joespinelli_6190/mvc-model-view-controller-ef878e2fd6f5) architectural pattern.
