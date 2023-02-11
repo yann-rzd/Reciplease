@@ -22,7 +22,7 @@ This application is developed according to the [MVC](https://medium.com/@joespin
 To save recipe for offline use [CoreData](https://developer.apple.com/documentation/coredata) and [Alamofire](https://github.com/Alamofire/Alamofire) for an elegant HTTP Networking in Swift.
 I use [CocoaPods](https://cocoapods.org) as dependency manager.
 
-## 🕵️‍♂️ How to test 
+## 🕵️ How to test 
 ### Clone the project
 
 Run `git@github.com:github.com/yann-rzd/Reciplease.git`
